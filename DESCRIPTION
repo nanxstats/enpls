@@ -1,0 +1,9 @@
+Package: enpls
+Type: Package
+Title: Ensemble Partial Least Squares (EnPLS) Regression
+Version: 1.0
+Date: 2014-02-23
+Author: Nan Xiao <road2stat@gmail.com>, Dongsheng Cao <oriental-cds@163.com>, Qingsong Xu <dasongxu@gmail.com>
+Maintainer: Nan Xiao <road2stat@gmail.com>
+Description: This package provides functions for running the ensemble partial least squares (EnPLS) regression. The enpls web server is located at: http://cbdd.csu.edu.cn:8080/enplsweb/ . The enpls package is developed by Computational Biology and Drug Design (CBDD) Group, Central South University.
+License: GPL (>= 2)
