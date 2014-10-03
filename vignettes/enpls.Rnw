@@ -1,0 +1,200 @@
+\documentclass{article}
+\RequirePackage{url}
+\RequirePackage{amsmath}
+\RequirePackage{natbib}
+\RequirePackage[a4paper,lmargin={1.25in},rmargin={1.25in},tmargin={1in},bmargin={1in}]{geometry}
+
+\makeatletter
+% \VignetteIndexEntry{enpls: R Package for Ensemble Partial Least Squares Regression}
+%\VignetteKeywords{ensemble, partial least squares, pls, regression}
+%\VignettePackage{enpls}
+% \VignetteEngine{knitr::knitr}
+\makeatother
+
+\begin{document}
+%\SweaveOpts{concordance=TRUE}
+
+<<knitropts,echo=FALSE,message=FALSE>>=
+if (require('knitr')) opts_chunk$set(fig.width = 5, fig.height = 5, fig.align = 'center', tidy = FALSE, warning = FALSE, cache = TRUE)
+@
+
+%
+<<prelim,echo=FALSE>>=
+enpls.version = '1.0'
+@
+%
+
+    \begin{center}
+    \vspace*{6\baselineskip}
+    \rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
+    \rule{\textwidth}{0.4pt}\\[2\baselineskip]
+    {\LARGE \textbf{enpls: R Package for Ensemble Partial Least Squares Regression}}\\[1.2\baselineskip]
+    \rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt}
+    \rule{\textwidth}{1.6pt}\\[2\baselineskip]
+    {\Large Nan Xiao, Dong-Sheng Cao, Qing-Song Xu}\\[\baselineskip]
+    {\large Package Version: \Sexpr{enpls.version}}\\[\baselineskip]
+    {\large \today}\par
+    \vfill
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{fig/logo-panel-text.pdf}
+    \end{figure}
+    \end{center}
+
+\thispagestyle{empty}
+
+\clearpage
+
+\setcounter{page}{1}
+
+\section{Introduction}
+
+It is difficult and complicated to construct an accurate model in QSAR (Quantitative Structure-Activity Relationship) modeling. The process usually involves feature selection, outlier detection, non-linearship, and model stability problems. Such modeling procedures is pretty tedious for the users who do not have a comprehensive knowledge of related methods. Not to mention that there exists far too many customized algorithms that can solve such problems, which are often not easy to understand and implement.
+
+For the most frequently used model in QSAR studies, i.e. the partial least squares, we present a simple, easy-to-understand unified framework to solve such problems, users can do feature selection, outlier detection, and ensemble prediction under our framework. Also, a ``clean'' dataset can be generated using our method before modeling. We present the R package \verb|enpls| here as the implementation.
+
+Theoretically, statistical distribution can provide abundant information about random variables. Most approaches of statistical inference are based on such a statistical distribution. In our previous studies \citep{cao2010new, cao2011toward}, we made use of such a strategy to construct the statistical distribution of model features, such as prediction errors and variable coefficients, and subsequently made statistical inference. The statistic of these distributions, namely mean value and standard deviation, are then used to quantitatively describe various model features. Monte-Carlo or bootstrap approaches are constantly employed to extract the information and used for statistical inference. In general, Monte-Carlo or bootstrap approaches can be used to generate a distribution of some statistic of interest by repeatedly calculating that statistic randomly selected portions of the data because of its good asymptotic properties. For each of the functions, two resampling methods were considered, i.e. Monte-Carlo resampling (default method) or bootstrap resampling. In general, the Monte-Carlo resampling method randomly samples from the original dataset for many times, each time by a tunable sampling ratio $< 1$. The bootstrap resampling method, in the other hand, randomly samples the same size of the original dataset from the dataset with replacement.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{fig/ensemble-learning.pdf}
+\caption{Ensemble methods for increasing prediction accuracy} \label{fig:ensemble_learning}
+\end{figure}
+
+
+In QSAR/QSPR study, if we model a given QSAR/QSPR dataset by a single training/validation set division, we can obtain predictive errors of this validation set and all variable coefficients, characterizing the behavior of model features (i.e., prediction errors and variable coefficients) within these two sets. However, these model features highly depend on the way in which we split the data into the training set and validation set. Different training/validation data division should yield different model features. Thus, by changing the training/validation data division by Monte-Carlo or bootstrap methods, we can obtain a large number of QSAR/QSPR models and corresponding model features so as to gain some insight of the data structure statistically.
+
+What kind of information about these model features can be obtained from their distribution? Generally speaking, some parameters of interest can be acquired as a function of the probability density function or of the empirical cumulative distribution function of a random variable (e.g., model features), which will make statistical inference about model features easier. Suppose that $z_1$, $\ldots$, $z_m$ will be used to estimate a population parameter $\theta$. A function of a population distribution function, defining the parameter $\theta$, can usually be expressed as:
+
+$$\theta = \int g(z)\,dP_m(z)$$
+
+Here $g(z)$ is the statistic used to estimate $\theta$, whose expectations we might be interested in. $P_m(z)$ is the probability density of $z$. Thus, by constructing different $g(z)$, one can obtain different statistics $\theta$ describing specific information (e.g., mean value or standard deviation) of a population distribution.
+
+In \cite{cao2010new, cao2011toward}, we addressed feature selection, outlier detection and model reliability problems simultaneously by constructing a unified framework, based on the idea of the statistical distribution. Our approach exploits the fact that the distribution of linear model coefficients provides a mechanism for ranking and interpreting the effects of variable, while the distribution of the prediction errors provides a mechanism for differentiating the outliers from normal samples. By combination of multiple models, we construct ensemble partial least squares model to improve prediction performance.
+
+We will use the \verb|alkanes| data throughout this manual for demonstration. The dataset has a predictor matrix \texttt{x} with 207 samples and 21 variables, with a continuous response \texttt{y}. The dataset is extracted from \cite{liang2008modeling}. See \verb|?alkanes| for details.
+
+<<load-package>>=
+require(enpls)
+data(alkanes)
+x = alkanes$x
+y = alkanes$y
+@
+
+\section{Ensemble PLS for Feature Selection}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig/diagram-enpls-fs.pdf}
+\caption{Feature Selection} \label{fig:diagram_enpls_fs}
+\end{figure}
+
+Monte-Carlo uninformative variable elimination \citep{centner1996elimination} methods have been successfully employed in variable selection \citep{cai2008variable,han2008ensemble}. The important variables should be the ones that possess both large mean value and small standard deviation. We construct the following measure of variable importance:
+
+$$c = \frac{\text{mean}(s)}{\text{sd}(s)}$$
+
+where $s$ is the coefficient vector for the $i$-th variable, generated by Monte-Carlo or bootstrap. $\text{mean}(s)$ and $\text{sd}(s)$ represent the mean value and standard deviation, respectively. Thus, the variable with the largest $c_i$ value should be the most important one in the pool of variables. These variables with the smaller $c_i$ value should be removed due to their small contribution to models.
+
+The function \verb|enpls.fs()| is made for ensemble PLS feature selection:
+
+<<enpls.fs,fig.cap='Top ten important variables of the \\texttt{alkanes} dataset'>>=
+set.seed(42)
+varimp = enpls.fs(x, y)
+print(varimp, nvar = 10L)
+plot(varimp, nvar = 10L)
+@
+
+The top ten important varibles are printed, and plotted in Figure \ref{fig:enpls.fs}, by using \verb|nvar = 10| in \verb|print()| and \verb|plot()|. See \verb|?plot.enpls.fs| and \verb|?print.enpls.fs| for more available options.
+
+% Add more intro about the bootstrap or MC resampling here
+
+By changing the default parameters in \verb|enpls.fs()| and other functions in the \verb|enpls| package, we could control the maximum components included in each model, resampling method (Monte-Carlo or Boostrap). By setting the \verb|parallel| parameter to an ($>1$) integer, the model fitting will be done in parallel, which will increase the computation speed significantly.
+
+\section{Ensemble PLS for Outlier Detection}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig/diagram-enpls-od.pdf}
+\caption{Outlier Detection} \label{fig:diagram_enpls_od}
+\end{figure}
+
+The distribution of prediction errors generated by a large number of models can contain more sample information (i.e., whether this sample is an outlier or not). Likewise, the mean value $\text{mean}(j)$ and the standard deviation $\text{sd}(j)$ of the prediction error distribution for the $j$-th sample are employed to describe this distribution.
+
+$$\text{mean}(j) = \frac{1}{k}\sum_{i=1}^{k}\text{error}(i)$$
+
+$$\text{sd}(j) = \bigg(\frac{1}{k-1}\sum_{i=1}^{k}(\text{error}(i) - \text{mean}(j))^2\bigg)^{\frac{1}{2}}$$
+
+where $k$ is the total times of which the $j$-th sample is found in the validation set. The $\text{error}(i)$ is the prediction error of the $j$-th sample in the $i$-th cycle. Thus, a large mean value of prediction errors for some sample indicates that we can always obtain large prediction errors no matter how the training datasets are perturbated.
+
+We can define two types of outliers, i.e. the $y$ outlier and the $X$ outlier. For the $y$ outliers, the cross-prediction can provide information on potentially outliers. For example, if only one outlier molecule has many chlorine atoms and chlorine is an important variable, then the full dataset may be able to calibrate the effect of chlorine and make good predictions, but the dataset with the molecule excluded will likely lead to a large prediction residual on that molecule. So, the prediction errors obtained by cross-prediction allow us to easily detect such outliers compared to the fitted residuals.
+
+In the other hand, in linear models, if an external data point $x_i$ is being predicted and has a leverage of $h = x_i^t (X^t X)^{-1} x_i$, its prediction error has the variance $s^2 \{ e_i \} = \text{MSE}(1+h)$. We see that the variability of the sampling distribution of $e_i$ is affected by how far $x_i$ is from the centroid $\bar{X}$ through the term $h$. The further $x_i$ is from $\bar{X}$, the greater the quantity is, and the larger the variance of $e_i$ is. Thus, the variation of $e_i$ obtained from different observations will be greater when $x_i$ is far from the mean value than the ones near the mean value. We can therefore detect the $X$ outliers by standard deviation of prediction errors.
+
+The function \verb|enpls.od()| is provided for outlier detection:
+
+<<enpls.od,fig.cap='Outlier detection result of the \\texttt{alkanes} dataset'>>=
+od = enpls.od(x, y)
+plot(od, criterion = 'sd')
+@
+
+% Add more intro about the bootstrap or MC resampling here
+
+Figure \ref{fig:enpls.od} reveals the outliers with \verb|criterion = 'sd'|. This means samples that lie in $n$ (default is $3$) times out of the standard deviation of the mean \emph{Error Mean} and mean \emph{Error SD} are considered to be outliers. The black points are normal samples, the samples with red lables are $y$ outliers (lower right), the blue ones are $X$ outliers (upper left), the purple ones (may appear in the upper right part) will be the abnormal samples, as defined in \cite{cao2011toward}. Use \verb|criterion = 'quantile'| to get the outliers by quantile information. See \verb|?enpls.od| for details.
+
+\section{Ensemble PLS Modeling and Prediction}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig/diagram-enpls-en.pdf}
+\caption{Ensemble Modeling} \label{fig:diagram_enpls_en}
+\end{figure}
+
+Ensemble methods, like bagging \citep{breiman1996bagging} and boosting \citep{friedman2000special}, are usually used to improve model performance. Naturally, in \texttt{enpls}, we ensemble predictions from multiple PLS models generated by Monte-Carlo or bootstrap resampling methods to improve prediction performance.
+
+For fitting ensemble partial least squares regression models, use \verb|enpls.en()|:
+
+<<enpls.en>>=
+enpls.fit = enpls.en(x, y)
+@
+
+% Add more intro about the bootstrap or MC resampling here
+
+With the fitted object \verb|enpls.fit|, we could predict new $X$ with \verb|predict()|, and visualize the predicted result:
+
+<<predict.enpls.en,fig.cap='Experimental values vs. predicted values'>>=
+y.pred = predict(enpls.fit, newx = x)
+plot(y, y.pred, xlim = range(y), ylim = range(y), 
+     xlab = 'Experimental', ylab = 'Predicted')
+abline(a = 0L, b = 1L)
+@
+
+Figure \ref{fig:predict.enpls.en} shows the experimental values and predicted values.
+
+\section{Model Evaluation with $k$-fold Cross Validation}
+
+For ensemble partial least squares, \verb|cv.enpls()| is used for $k$-fold cross validation:
+
+<<cv.enpls,eval=FALSE>>=
+cv.enplsfit = cv.enpls(x, y)
+print(cv.enpls.fit)
+
+## Cross Validation Result for Ensemble Partial Least Squares
+## ---
+## RMSE = 3.2935, R2 = 0.999968
+
+plot(cv.enpls.fit)
+@
+
+Then we printed the cross validation result: RMSE and $R^2$. The argument \verb|nfolds| controls the fold number (default is $5$). See \verb|?cv.enpls| for details. Figure \ref{fig:plot.cv.enpls} shows the experimental values and the predicted values of the cross validation result.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{fig/plot-cv-enpls.pdf}
+\caption{Cross validation result: experimental values vs. predicted values} \label{fig:plot.cv.enpls}
+\end{figure}
+
+\bibliographystyle{jss}
+\nocite{*} % list uncited bibs
+\bibliography{enpls}
+
+\end{document}
