@@ -1,0 +1,14 @@
+1.0 (2014-10-03)
+------------------------------------------------------------------------------
+
+  NEW FEATURES
+
+  * initial release
+
+1.1 (2014-10-04)
+------------------------------------------------------------------------------
+
+  BUG FIXES
+
+  * Fixed the bugs in automatic component number selection which could make
+    the intercept-only model rank best. Thanks for Max Kuhn's test and patch.

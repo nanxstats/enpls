@@ -121,7 +121,7 @@ enpls.fs.core = function(plsdf, maxcomp) {
                     validation = 'CV', segments = 5L)
 
   # choose best component number using adjusted CV
-  cv.bestcomp = which.min(RMSEP(plsr.cvfit)[['val']][2L, 1L, ]) - 1L
+  cv.bestcomp = which.min(RMSEP(plsr.cvfit)[['val']][2L, 1L, -1L])
 
   plsr.fit = plsr(y ~ ., data = plsdf, 
                   ncomp  = cv.bestcomp, 
