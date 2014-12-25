@@ -12,6 +12,7 @@
 \makeatother
 
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 %\SweaveOpts{concordance=TRUE}
 
 <<knitropts,echo=FALSE,message=FALSE>>=
@@ -20,7 +21,7 @@ if (require('knitr')) opts_chunk$set(fig.width = 5, fig.height = 5, fig.align = 
 
 %
 <<prelim,echo=FALSE>>=
-enpls.version = '1.0'
+enpls.version = '1.1'
 @
 %
 
@@ -108,7 +109,7 @@ The top ten important varibles are printed, and plotted in Figure \ref{fig:enpls
 
 % Add more intro about the bootstrap or MC resampling here
 
-By changing the default parameters in \verb|enpls.fs()| and other functions in the \verb|enpls| package, we could control the maximum components included in each model, resampling method (Monte-Carlo or Boostrap). By setting the \verb|parallel| parameter to an ($>1$) integer, the model fitting will be done in parallel, which will increase the computation speed significantly.
+By changing the default parameters in \verb|enpls.fs()| and other functions in the \verb|enpls| package, we could control the maximum components included in each model, resampling method (Monte-Carlo or Bootstrap). By setting the \verb|parallel| parameter to an ($>1$) integer, the model fitting will be done in parallel, which will increase the computation speed significantly.
 
 \section{Ensemble PLS for Outlier Detection}
 
@@ -175,7 +176,7 @@ Figure \ref{fig:predict.enpls.en} shows the experimental values and predicted va
 For ensemble partial least squares, \verb|cv.enpls()| is used for $k$-fold cross validation:
 
 <<cv.enpls,eval=FALSE>>=
-cv.enplsfit = cv.enpls(x, y)
+cv.enpls.fit = cv.enpls(x, y)
 print(cv.enpls.fit)
 
 ## Cross Validation Result for Ensemble Partial Least Squares
