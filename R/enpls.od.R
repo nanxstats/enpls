@@ -43,15 +43,15 @@
 #' \emph{Journal of computer-aided molecular design} 25, no. 1 (2011): 67--80.
 #'
 #' @examples
-#' \donttest{data(alkanes)
+#' data(alkanes)
 #' x = alkanes$x
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' od = enpls.od(x, y)
+#' od = enpls.od(x, y, MCtimes = 100)
 #' print(od)
 #' plot(od)
-#' plot(od, criterion = 'sd')}
+#' plot(od, criterion = 'sd')
 
 enpls.od = function(x, y, 
                     maxcomp = NULL, 

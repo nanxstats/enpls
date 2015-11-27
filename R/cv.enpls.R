@@ -33,16 +33,14 @@
 #' \emph{Journal of computer-aided molecular design} 25, no. 1 (2011): 67--80.
 #'
 #' @examples
-#' \donttest{
 #' data(alkanes)
 #' x = alkanes$x
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' cv.enpls.fit = cv.enpls(x, y)
+#' cv.enpls.fit = cv.enpls(x, y, MCtimes = 20)
 #' print(cv.enpls.fit)
 #' plot(cv.enpls.fit)
-#' }
 
 cv.enpls = function(x, y, nfolds = 5L, verbose = TRUE, ...) {
 

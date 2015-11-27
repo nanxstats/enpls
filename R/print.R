@@ -16,14 +16,13 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
 #' data(alkanes)
 #' x = alkanes$x
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' cv.enpls.fit = cv.enpls(x, y)
-#' print(cv.enpls.fit)}
+#' cv.enpls.fit = cv.enpls(x, y, MCtimes = 20)
+#' print(cv.enpls.fit)
 
 print.cv.enpls = function(x, ...) {
 
@@ -56,14 +55,13 @@ print.cv.enpls = function(x, ...) {
 #' @export
 #'
 #' @examples
-#' \donttest{
 #' data(alkanes)
 #' x = alkanes$x
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' enpls.fit = enpls.en(x, y)
-#' print(enpls.fit)}
+#' enpls.fit = enpls.en(x, y, MCtimes = 100)
+#' print(enpls.fit)
 
 print.enpls.en = function(x, ...) {
 
@@ -103,15 +101,14 @@ print.enpls.en = function(x, ...) {
 #' @export
 #'
 #' @examples
-#' \donttest{
 #' data(alkanes)
 #' x = alkanes$x
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' varimp = enpls.fs(x, y)
+#' varimp = enpls.fs(x, y, MCtimes = 100)
 #' print(varimp)
-#' print(varimp, nvar = 10L)}
+#' print(varimp, nvar = 10L)
 
 print.enpls.fs = function(x, sort = TRUE, nvar = NULL, ...) {
 
@@ -149,14 +146,13 @@ print.enpls.fs = function(x, sort = TRUE, nvar = NULL, ...) {
 #' @export
 #'
 #' @examples
-#' \donttest{
 #' data(alkanes)
 #' x = alkanes$x
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' od = enpls.od(x, y)
-#' print(od)}
+#' od = enpls.od(x, y, MCtimes = 100)
+#' print(od)
 
 print.enpls.od = function(x, ...) {
 

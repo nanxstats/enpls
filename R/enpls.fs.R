@@ -37,14 +37,14 @@
 #' \emph{Journal of computer-aided molecular design} 25, no. 1 (2011): 67--80.
 #'
 #' @examples
-#' \donttest{data(alkanes)
+#' data(alkanes)
 #' x = alkanes$x
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' varimp = enpls.fs(x, y)
+#' varimp = enpls.fs(x, y, MCtimes = 100)
 #' print(varimp)
-#' plot(varimp)}
+#' plot(varimp)
 
 enpls.fs = function(x, y, 
                     maxcomp = NULL, 

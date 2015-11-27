@@ -5,10 +5,11 @@
 
   * initial release
 
-1.1 (2014-10-05)
+1.1 (2015-11-26)
 ------------------------------------------------------------------------------
 
   BUG FIXES
 
   * Fixed the bugs in automatic component number selection which could make
-    the intercept-only model rank best. Thanks for Max Kuhn's test and patch.
+    the intercept-only model rank best. Thanks for the test and patch
+    from Max Kuhn <Max.Kuhn@pfizer.com>.

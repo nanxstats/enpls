@@ -17,14 +17,13 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
 #' data(alkanes)
 #' x = alkanes$x
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' cv.enpls.fit = cv.enpls(x, y)
-#' plot(cv.enpls.fit)}
+#' cv.enpls.fit = cv.enpls(x, y, MCtimes = 20)
+#' plot(cv.enpls.fit)
 
 plot.cv.enpls = function(x, main = NULL, ...) {
 
@@ -64,15 +63,14 @@ plot.cv.enpls = function(x, main = NULL, ...) {
 #' @export
 #'
 #' @examples
-#' \donttest{
 #' data(alkanes)
 #' x = alkanes$x
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' varimp = enpls.fs(x, y)
+#' varimp = enpls.fs(x, y, MCtimes = 100)
 #' plot(varimp)
-#' plot(varimp, nvar = 10L)}
+#' plot(varimp, nvar = 10L)
 
 plot.enpls.fs = function(x, 
                          sort = TRUE, nvar = NULL, 
@@ -115,15 +113,14 @@ plot.enpls.fs = function(x,
 #' @export
 #'
 #' @examples
-#' \donttest{
 #' data(alkanes)
 #' x = alkanes$x
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' od = enpls.od(x, y)
+#' od = enpls.od(x, y, MCtimes = 100)
 #' plot(od, criterion = 'quantile')
-#' plot(od, criterion = 'sd')}
+#' plot(od, criterion = 'sd')
 
 plot.enpls.od = function(x, 
                          criterion = c('quantile', 'sd'), 
