@@ -20,7 +20,7 @@
 #' \item \code{R2} - R2
 #' }
 #'
-#' @author Nan Xiao <\email{road2stat@@gmail.com}>
+#' @author Nan Xiao <\url{http://nanx.me}>
 #'
 #' @seealso See \code{\link{enpls.en}} for ensemble PLS regression.
 #'
@@ -43,12 +43,12 @@
 #' plot(cv.enpls.fit)
 
 cv.enpls = function(x, y, nfolds = 5L, verbose = TRUE, ...) {
-
+  
   x.row = nrow(x)
   index = rep_len(1L:nfolds, x.row)
-
+  
   ypred = matrix(NA, ncol = 2L, nrow = x.row)
-
+  
   for (i in 1L:nfolds) {
     if (verbose) cat('Beginning fold', i, '\n')
     xtrain = x[index != i, ]
@@ -60,18 +60,18 @@ cv.enpls = function(x, y, nfolds = 5L, verbose = TRUE, ...) {
     ypred[index == i, 1L] = ytest
     ypred[index == i, 2L] = ypredvec
   }
-
+  
   colnames(ypred) = c('y.real', 'y.pred')
-
+  
   residual = ypred[, 1L] - ypred[, 2L]
   RMSE = sqrt(sum((residual)^2)/x.row)
   R2 = 1L - (sum((residual)^2)/sum((y - mean(y))^2))
-
+  
   object = list('ypred' = ypred, 
                 'residual' = residual, 
                 'RMSE' = RMSE, 
                 'R2' = R2)
   class(object) = 'cv.enpls'
   return(object)
-
+  
 }

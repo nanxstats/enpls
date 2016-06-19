@@ -27,7 +27,7 @@ od = enpls.od(x, y, MCtimes = 100)
 print(od)
 }
 \author{
-Nan Xiao <\email{road2stat@gmail.com}>
+Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
 See \code{\link{enpls.od}} for outlier detection with ensemble PLS.

@@ -27,7 +27,7 @@ enpls.fit = enpls.en(x, y, MCtimes = 100)
 print(enpls.fit)
 }
 \author{
-Nan Xiao <\email{road2stat@gmail.com}>
+Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
 See \code{\link{enpls.en}} for performing ensemble PLS regression.

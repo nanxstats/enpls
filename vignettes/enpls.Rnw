@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 \RequirePackage{url}
 \RequirePackage{amsmath}
 \RequirePackage{natbib}
@@ -18,12 +18,6 @@
 if (require('knitr')) opts_chunk$set(fig.width = 5, fig.height = 5, fig.align = 'center', tidy = FALSE, warning = FALSE, cache = TRUE)
 @
 
-%
-<<prelim,echo=FALSE>>=
-enpls.version = '1.1'
-@
-%
-
     \begin{center}
     \vspace*{6\baselineskip}
     \rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
@@ -32,7 +26,6 @@ enpls.version = '1.1'
     \rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt}
     \rule{\textwidth}{1.6pt}\\[2\baselineskip]
     {\Large Nan Xiao, Dong-Sheng Cao, Qing-Song Xu}\\[\baselineskip]
-    {\large Package Version: \Sexpr{enpls.version}}\\[\baselineskip]
     {\large \today}\par
     \vfill
     \begin{figure}[h]
@@ -49,11 +42,11 @@ enpls.version = '1.1'
 
 \section{Introduction}
 
-It is difficult and complicated to construct an accurate model in QSAR (Quantitative Structure-Activity Relationship) modeling. The process usually involves feature selection, outlier detection, non-linearship, and model stability problems. Such modeling procedures is pretty tedious for the users who do not have a comprehensive knowledge of related methods. Not to mention that there exists far too many customized algorithms that can solve such problems, which are often not easy to understand and implement.
+It is usually a difficult and time-consuming task to construct an accurate predictive model in QSAR (Quantitative Structure-Activity Relationship) studies. The process often involves feature selection, outlier detection, non-linearship, and model stability problems. Such modeling procedures is quite tedious for the non-expert users who do not have comprehensive knowledge or in-depth understanding of the related methods. Not to mention that there exists far too many customized algorithms that can solve such problems, which are often not easy to understand and implement.
 
 For the most frequently used model in QSAR studies, i.e. the partial least squares, we present a simple, easy-to-understand unified framework to solve such problems, users can do feature selection, outlier detection, and ensemble prediction under our framework. Also, a ``clean'' dataset can be generated using our method before modeling. We present the R package \verb|enpls| here as the implementation.
 
-Theoretically, statistical distribution can provide abundant information about random variables. Most approaches of statistical inference are based on such a statistical distribution. In our previous studies \citep{cao2010new, cao2011toward}, we made use of such a strategy to construct the statistical distribution of model features, such as prediction errors and variable coefficients, and subsequently made statistical inference. The statistic of these distributions, namely mean value and standard deviation, are then used to quantitatively describe various model features. Monte-Carlo or bootstrap approaches are constantly employed to extract the information and used for statistical inference. In general, Monte-Carlo or bootstrap approaches can be used to generate a distribution of some statistic of interest by repeatedly calculating that statistic randomly selected portions of the data because of its good asymptotic properties. For each of the functions, two resampling methods were considered, i.e. Monte-Carlo resampling (default method) or bootstrap resampling. In general, the Monte-Carlo resampling method randomly samples from the original dataset for many times, each time by a tunable sampling ratio $< 1$. The bootstrap resampling method, in the other hand, randomly samples the same size of the original dataset from the dataset with replacement.
+In theory, statistical distribution can provide abundant information about random variables. Most approaches of statistical inference are based on such a statistical distribution. In our previous studies \citep{cao2010new, cao2011toward}, we made use of such a strategy to construct the statistical distribution of model features, such as prediction errors and variable coefficients, and subsequently made statistical inference. The statistic of these distributions, namely mean value and standard deviation, are then used to quantitatively describe various model features. Monte-Carlo or bootstrap approaches are constantly employed to extract the information and used for statistical inference. In general, Monte-Carlo or bootstrap approaches can be used to generate a distribution of some statistic of interest by repeatedly calculating that statistic randomly selected portions of the data because of its good asymptotic properties. For each of the functions, two resampling methods were considered, i.e. Monte-Carlo resampling (default method) or bootstrap resampling. In general, the Monte-Carlo resampling method randomly samples from the original dataset for many times, each time by a tunable sampling ratio $\in (0, 1)$. The bootstrap resampling method, in the other hand, randomly samples the same size of the original dataset from the dataset with replacement.
 
 \begin{figure}[htbp]
 \centering
@@ -86,7 +79,7 @@ y = alkanes$y
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{fig/diagram-enpls-fs.pdf}
-\caption{Feature Selection} \label{fig:diagram_enpls_fs}
+\caption{Feature selection in \texttt{enpls}} \label{fig:diagram_enpls_fs}
 \end{figure}
 
 Monte-Carlo uninformative variable elimination \citep{centner1996elimination} methods have been successfully employed in variable selection \citep{cai2008variable,han2008ensemble}. The important variables should be the ones that possess both large mean value and small standard deviation. We construct the following measure of variable importance:
@@ -115,7 +108,7 @@ By changing the default parameters in \verb|enpls.fs()| and other functions in t
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{fig/diagram-enpls-od.pdf}
-\caption{Outlier Detection} \label{fig:diagram_enpls_od}
+\caption{Outlier detection in \texttt{enpls}} \label{fig:diagram_enpls_od}
 \end{figure}
 
 The distribution of prediction errors generated by a large number of models can contain more sample information (i.e., whether this sample is an outlier or not). Likewise, the mean value $\text{mean}(j)$ and the standard deviation $\text{sd}(j)$ of the prediction error distribution for the $j$-th sample are employed to describe this distribution.
@@ -145,8 +138,8 @@ Figure \ref{fig:enpls.od} reveals the outliers with \verb|criterion = 'sd'|. Thi
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{fig/diagram-enpls-en.pdf}
-\caption{Ensemble Modeling} \label{fig:diagram_enpls_en}
+\includegraphics[width=0.9\textwidth]{fig/diagram-enpls-en.pdf}
+\caption{Ensemble modeling in \texttt{enpls}} \label{fig:diagram_enpls_en}
 \end{figure}
 
 Ensemble methods, like bagging \citep{breiman1996bagging} and boosting \citep{friedman2000special}, are usually used to improve model performance. Naturally, in \texttt{enpls}, we ensemble predictions from multiple PLS models generated by Monte-Carlo or bootstrap resampling methods to improve prediction performance.
@@ -180,7 +173,7 @@ print(cv.enpls.fit)
 plot(cv.enpls.fit)
 @
 
-Then we printed the cross validation result: RMSE and $R^2$. The argument \verb|nfolds| controls the fold number (default is $5$). See \verb|?cv.enpls| for details. Figure \ref{fig:plot.cv.enpls} shows the experimental values and the predicted values of the cross validation result.
+Then we printed the cross validation result: RMSE and $R^2$. The argument \verb|nfolds| controls the fold number (default is $5$). See \verb|?cv.enpls| for details. Figure \ref{fig:cv.enpls} shows the experimental values and the predicted values of the cross validation result.
 
 \bibliographystyle{jss}
 \nocite{*} % list uncited bibs

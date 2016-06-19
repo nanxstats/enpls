@@ -44,7 +44,7 @@ print(enpls.fit)
 predict(enpls.fit, newx = x)
 }
 \author{
-Nan Xiao <\email{road2stat@gmail.com}>
+Nan Xiao <\url{http://nanx.me}>
 }
 \references{
 Dongsheng Cao, Yizeng Liang, Qingsong Xu, Yifeng Yun, and Hongdong Li. 

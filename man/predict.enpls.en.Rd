@@ -34,7 +34,7 @@ plot(y, y.pred, xlim = range(y), ylim = range(y))
 abline(a = 0L, b = 1L)
 }
 \author{
-Nan Xiao <\email{road2stat@gmail.com}>
+Nan Xiao <\url{http://nanx.me}>
 }
 \references{
 Dongsheng Cao, Yizeng Liang, Qingsong Xu, Yifeng Yun, and Hongdong Li. 

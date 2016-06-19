@@ -1,15 +1,14 @@
 Package: enpls
 Type: Package
 Title: Ensemble Partial Least Squares Regression
-Version: 1.1
-Date: 2015-11-26
+Version: 2.0
 Author: Nan Xiao <road2stat@gmail.com>, Dong-Sheng Cao <oriental-cds@163.com>,
     Qing-Song Xu <dasongxu@gmail.com>
 Maintainer: Nan Xiao <road2stat@gmail.com>
 Description: Ensemble partial least squares regression, a unified
     framework for feature selection, outlier detection, and ensemble learning.
 License: GPL (>= 2)
-URL: https://github.com/road2stat/enpls
+URL: http://enpls.org
 BugReports: https://github.com/road2stat/enpls/issues
 LazyData: yes
 VignetteBuilder: knitr

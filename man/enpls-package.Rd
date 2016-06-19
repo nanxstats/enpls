@@ -13,15 +13,10 @@ The comprehensive user guide can be opened with
 \code{vignette('enpls')}.
 
 \tabular{ll}{ Package: \tab enpls\cr Type: \tab Package\cr
-Version: \tab 1.1\cr License: \tab GPL (>= 2)\cr }
+Version: \tab 2.0\cr License: \tab GPL (>= 2)\cr }
 }
 \note{
 Bug reports and feature requests should be sent to
 \url{https://github.com/road2stat/enpls/issues}.
-}
-\author{
-Nan Xiao <\email{road2stat@gmail.com}>
-        Dong-Sheng Cao <\email{oriental-cds@163.com}>
-        Qing-Song Xu <\email{dasongxu@gmail.com}>
 }
 

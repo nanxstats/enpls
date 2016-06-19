@@ -10,7 +10,7 @@
 #'
 #' @return A numeric vector containing the predicted values.
 #'
-#' @author Nan Xiao <\email{road2stat@@gmail.com}>
+#' @author Nan Xiao <\url{http://nanx.me}>
 #'
 #' @seealso See \code{\link{enpls.en}} for performing ensemble PLS regression.
 #'
@@ -36,21 +36,21 @@
 #' abline(a = 0L, b = 1L)
 
 predict.enpls.en = function(object, newx, ...) {
-
+  
   if (missing(newx)) stop('Must provide newx')
-
+  
   if (!inherits(object, 'enpls.en'))
     stop('This function only works for objects of class "enpls.en"')
-
+  
   nmodel = length(object)
-
+  
   predmat = matrix(NA, ncol = nmodel, nrow = nrow(newx))
   for (i in 1:nmodel) {
     predmat[, i] = predict(object[[i]][[1]], newx, object[[i]][[2]])
   }
-
+  
   pred = rowMeans(predmat)
-
+  
   return(pred)
-
+  
 }

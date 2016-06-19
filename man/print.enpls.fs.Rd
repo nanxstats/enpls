@@ -32,7 +32,7 @@ print(varimp)
 print(varimp, nvar = 10L)
 }
 \author{
-Nan Xiao <\email{road2stat@gmail.com}>
+Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
 See \code{\link{enpls.fs}} for feature selection with ensemble PLS.

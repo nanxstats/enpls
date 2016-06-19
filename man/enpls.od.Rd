@@ -51,7 +51,7 @@ plot(od)
 plot(od, criterion = 'sd')
 }
 \author{
-Nan Xiao <\email{road2stat@gmail.com}>
+Nan Xiao <\url{http://nanx.me}>
 }
 \references{
 DongSheng Cao, Yizeng Liang, Qingsong Xu, Hongdong Li, and Xian Chen. 

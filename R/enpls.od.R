@@ -22,7 +22,7 @@
 #' \item \code{predict.error.matrix} - the original prediction error matrix
 #' }
 #'
-#' @author Nan Xiao <\email{road2stat@@gmail.com}>
+#' @author Nan Xiao <\url{http://nanx.me}>
 #'
 #' @seealso See \code{\link{enpls.fs}} for feature selection with ensemble PLS. 
 #' See \code{\link{enpls.en}} for ensemble PLS regression.
@@ -58,69 +58,69 @@ enpls.od = function(x, y,
                     MCtimes = 500L, 
                     method = c('mc', 'bootstrap'), ratio = 0.8, 
                     parallel = 1L) {
-
+  
   if (is.null(maxcomp)) maxcomp = ncol(x)
-
+  
   method = match.arg(method)
-
+  
   x.row = nrow(x)
   samp.idx = vector('list', MCtimes)
   samp.idx.remain = vector('list', MCtimes)
-
+  
   if (method == 'mc') {
     for (i in 1L:MCtimes) {
       samp.idx[[i]] = sample(1L:x.row, floor(x.row * ratio))
       samp.idx.remain[[i]] = setdiff(1L:x.row, samp.idx[[i]])
     }
   }
-
+  
   if (method == 'bootstrap') {
     for (i in 1L:MCtimes) {
       samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
       samp.idx.remain[[i]] = setdiff(1L:x.row, unique(samp.idx[[i]]))
     }
   }
-
+  
   plsdf = as.data.frame(cbind(x, y))
-
+  
   if (parallel < 1.5) {
-
+    
     errorlist = vector('list', MCtimes)
     for (i in 1L:MCtimes) {
       plsdf.sample = plsdf[samp.idx[[i]], ]
       plsdf.remain = plsdf[samp.idx.remain[[i]], ]
       errorlist[[i]] = suppressWarnings(enpls.od.core(plsdf.sample, plsdf.remain, maxcomp))
     }
-
+    
   } else {
-
+    
     registerDoParallel(parallel)
     errorlist = foreach(i = 1L:MCtimes) %dopar% {
       plsdf.sample = plsdf[samp.idx[[i]], ]
       plsdf.remain = plsdf[samp.idx.remain[[i]], ]
       enpls.od.core(plsdf.sample, plsdf.remain, maxcomp)
     }
-
+    
   }
-
+  
   prederrmat = matrix(NA, ncol = x.row, nrow = MCtimes)
   for (i in 1L:MCtimes) {
     for (j in 1L:length(samp.idx.remain[[i]])) {
       prederrmat[i, samp.idx.remain[[i]][j]] = errorlist[[i]][j]
     }
   }
-
+  
   errmean   = abs(colMeans(prederrmat, na.rm = TRUE))
   errmedian = apply(prederrmat, 2L, median, na.rm = TRUE)
   errsd     = apply(prederrmat, 2L, sd, na.rm = TRUE)
-
+  
   object = list('error.mean'    = errmean, 
                 'error.median'  = errmedian, 
                 'error.sd'      = errsd, 
                 'predict.error.matrix' = prederrmat)
   class(object) = 'enpls.od'
   return(object)
-
+  
 }
 
 #' core function for enpls.od
@@ -134,28 +134,28 @@ enpls.od = function(x, y,
 #' @keywords internal
 
 enpls.od.core = function(plsdf.sample, plsdf.remain, maxcomp) {
-
+  
   plsr.cvfit = plsr(y ~ ., data = plsdf.sample, 
                     ncomp  = maxcomp, 
                     scale  = TRUE, 
                     method = 'simpls', 
                     validation = 'CV', segments = 5L)
-
+  
   # choose best component number using adjusted CV
   cv.bestcomp = which.min(RMSEP(plsr.cvfit)[['val']][2L, 1L, -1L])
-
+  
   plsr.fit = plsr(y ~ ., data = plsdf.sample, 
                   ncomp  = cv.bestcomp, 
                   scale  = TRUE, 
                   method = 'simpls', 
                   validation = 'none')
-
+  
   pred = predict(plsr.fit, ncomp = cv.bestcomp, 
                  newdata = plsdf.remain[, !(colnames(plsdf.remain) %in% c('y'))])[, 1L, 1L]
-
+  
   error = plsdf.remain[, 'y'] - pred
   names(error) = NULL
-
+  
   return(error)
-
+  
 }

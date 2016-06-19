@@ -20,7 +20,7 @@
 #' \item \code{coefficient.matrix} - original coefficient matrix
 #' }
 #'
-#' @author Nan Xiao <\email{road2stat@@gmail.com}>
+#' @author Nan Xiao <\url{http://nanx.me}>
 #'
 #' @seealso See \code{\link{enpls.od}} for outlier detection with ensemble PLS. 
 #' See \code{\link{enpls.en}} for ensemble PLS regression.
@@ -51,24 +51,24 @@ enpls.fs = function(x, y,
                     MCtimes = 500L, 
                     method = c('mc', 'bootstrap'), ratio = 0.8, 
                     parallel = 1L) {
-
+  
   if (is.null(maxcomp)) maxcomp = ncol(x)
-
+  
   method = match.arg(method)
-
+  
   x.row = nrow(x)
   samp.idx = vector('list', MCtimes)
-
+  
   if (method == 'mc') {
     for (i in 1L:MCtimes) samp.idx[[i]] = sample(1L:x.row, floor(x.row * ratio))
   }
-
+  
   if (method == 'bootstrap') {
     for (i in 1L:MCtimes) samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
   }
-
+  
   if (parallel < 1.5) {
-
+    
     coeflist = vector('list', MCtimes)
     for (i in 1L:MCtimes) {
       xtmp = x[samp.idx[[i]], ]
@@ -77,9 +77,9 @@ enpls.fs = function(x, y,
       plsdf = as.data.frame(cbind(xtmp, 'y' = ytmp))
       coeflist[[i]] = suppressWarnings(enpls.fs.core(plsdf, maxcomp))
     }
-
+    
   } else {
-
+    
     registerDoParallel(parallel)
     coeflist = foreach(i = 1L:MCtimes) %dopar% {
       x = x[samp.idx[[i]], ]
@@ -88,18 +88,18 @@ enpls.fs = function(x, y,
       plsdf = as.data.frame(cbind(x, y))
       enpls.fs.core(plsdf, maxcomp)
     }
-
+    
   }
-
+  
   coefmat = do.call(rbind, coeflist)
-
+  
   varimp = abs(colMeans(coefmat))/apply(coefmat, 2L, sd)
-
+  
   object = list('variable.importance' = varimp, 
                 'coefficient.matrix'  = coefmat)
   class(object) = 'enpls.fs'
   return(object)
-
+  
 }
 
 #' core function for enpls.fs
@@ -113,24 +113,24 @@ enpls.fs = function(x, y,
 #' @keywords internal
 
 enpls.fs.core = function(plsdf, maxcomp) {
-
+  
   plsr.cvfit = plsr(y ~ ., data = plsdf, 
                     ncomp  = maxcomp, 
                     scale  = FALSE, 
                     method = 'simpls', 
                     validation = 'CV', segments = 5L)
-
+  
   # choose best component number using adjusted CV
   cv.bestcomp = which.min(RMSEP(plsr.cvfit)[['val']][2L, 1L, -1L])
-
+  
   plsr.fit = plsr(y ~ ., data = plsdf, 
                   ncomp  = cv.bestcomp, 
                   scale  = FALSE, 
                   method = 'simpls', 
                   validation = 'none')
-
+  
   plsr.coef = drop(coef(plsr.fit))
-
+  
   return(plsr.coef)
-
+  
 }
