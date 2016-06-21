@@ -13,7 +13,7 @@
 
 \item{nvar}{How many variables to show? Ignored if \code{sort = FALSE}.}
 
-\item{...}{Other parameters to be passed on to \code{print}.}
+\item{...}{Additional parameters for \code{\link{print}}.}
 }
 \description{
 This function prints enpls.fs object.

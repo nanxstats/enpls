@@ -1,8 +1,6 @@
 #' Ensemble Partial Least Squares for Feature Selection
 #'
-#' This function performs feature selection with ensemble partial least squares.
-#'
-#' This function performs feature selection with ensemble partial least squares.
+#' Feature selection with ensemble partial least squares.
 #'
 #' @param x predictor matrix
 #' @param y response vector
@@ -11,8 +9,8 @@
 #' @param MCtimes times of Monte-Carlo
 #' @param method \code{"mc"} or \code{"bootstrap"}. Default is \code{"mc"}.
 #' @param ratio sample ratio used when \code{method = "mc"}
-#' @param parallel Integer. Number of parallel processes to use. 
-#' Default is \code{1}, which means run serially.
+#' @param parallel Integer. Number of CPU cores to use.
+#' Default is \code{1} (not parallelized).
 #'
 #' @return A list containing two components:
 #' \itemize{
@@ -51,6 +49,8 @@ enpls.fs = function(x, y,
                     MCtimes = 500L, 
                     method = c('mc', 'bootstrap'), ratio = 0.8, 
                     parallel = 1L) {
+  
+  if (missing(x) | missing(y)) stop('Please specify both x and y')
   
   if (is.null(maxcomp)) maxcomp = ncol(x)
   
@@ -120,7 +120,7 @@ enpls.fs.core = function(plsdf, maxcomp) {
                     method = 'simpls', 
                     validation = 'CV', segments = 5L)
   
-  # choose best component number using adjusted CV
+  # select best component number using adjusted CV
   cv.bestcomp = which.min(RMSEP(plsr.cvfit)[['val']][2L, 1L, -1L])
   
   plsr.fit = plsr(y ~ ., data = plsdf, 

@@ -21,8 +21,8 @@ if not specified, default is the variable (column) numbers in x.}
 
 \item{ratio}{sample ratio used when \code{method = "mc"}}
 
-\item{parallel}{Integer. Number of parallel processes to use. 
-Default is \code{1}, which means run serially.}
+\item{parallel}{Integer. Number of CPU cores to use.
+Default is \code{1} (not parallelized).}
 }
 \value{
 A list containing two components:
@@ -32,10 +32,7 @@ A list containing two components:
 }
 }
 \description{
-This function performs feature selection with ensemble partial least squares.
-}
-\details{
-This function performs feature selection with ensemble partial least squares.
+Feature selection with ensemble partial least squares.
 }
 \examples{
 data(alkanes)

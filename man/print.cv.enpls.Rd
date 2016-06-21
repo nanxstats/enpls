@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{An object of class \code{cv.enpls}.}
 
-\item{...}{Other parameters to be passed on to \code{print}.}
+\item{...}{Additional parameters for \code{\link{print}}.}
 }
 \description{
 This function prints cv.enpls object.

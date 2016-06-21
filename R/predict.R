@@ -6,7 +6,7 @@
 #'
 #' @param object An object of class \code{enpls.en}.
 #' @param newx new data to predict with
-#' @param ... Other parameters to be passed on to \code{predict}.
+#' @param ... Additional parameters for \code{\link{predict}}.
 #'
 #' @return A numeric vector containing the predicted values.
 #'

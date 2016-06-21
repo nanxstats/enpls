@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.R
 \name{plot.cv.enpls}
 \alias{plot.cv.enpls}
-\title{Plot cv.enpls Object}
+\title{Plot cv.enpls object}
 \usage{
 \method{plot}{cv.enpls}(x, main = NULL, ...)
 }
@@ -11,13 +11,10 @@
 
 \item{main}{plot title}
 
-\item{...}{Other graphical parameters to be passed on to \code{plot}.}
+\item{...}{Additional graphical parameters for \code{\link{plot}}.}
 }
 \description{
-This function plots cv.enpls object.
-}
-\details{
-This function plots cv.enpls object.
+Plot cv.enpls object
 }
 \examples{
 data(alkanes)

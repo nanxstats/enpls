@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.R
 \name{plot.enpls.fs}
 \alias{plot.enpls.fs}
-\title{Plot enpls.fs Object}
+\title{Plot enpls.fs object}
 \usage{
 \method{plot}{enpls.fs}(x, sort = TRUE, nvar = NULL, main = NULL, ...)
 }
@@ -15,13 +15,10 @@
 
 \item{main}{plot title}
 
-\item{...}{Other graphical parameters to be passed on to \code{dotchart}.}
+\item{...}{Additional graphical parameters for \code{\link{dotchart}}.}
 }
 \description{
-This function plots enpls.fs object.
-}
-\details{
-This function plots enpls.fs object.
+Plot enpls.fs object
 }
 \examples{
 data(alkanes)
@@ -34,7 +31,7 @@ plot(varimp)
 plot(varimp, nvar = 10L)
 }
 \author{
-Nan Xiao <\email{road2stat@gmail.com}>
+Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
 See \code{\link{enpls.fs}} for feature selection with ensemble PLS.

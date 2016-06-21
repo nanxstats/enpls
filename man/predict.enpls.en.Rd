@@ -11,7 +11,7 @@
 
 \item{newx}{new data to predict with}
 
-\item{...}{Other parameters to be passed on to \code{predict}.}
+\item{...}{Additional parameters for \code{\link{predict}}.}
 }
 \value{
 A numeric vector containing the predicted values.

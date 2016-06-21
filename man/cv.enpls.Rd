@@ -27,12 +27,7 @@ A list containing four components:
 }
 }
 \description{
-This function performs k-fold cross validation for 
-ensemble partial least squares regression.
-}
-\details{
-This function performs k-fold cross validation for 
-ensemble partial least squares regression.
+K-fold cross validation for ensemble partial least squares regression.
 }
 \examples{
 data(alkanes)

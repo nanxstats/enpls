@@ -1,10 +1,6 @@
 #' Cross Validation for Ensemble Partial Least Squares Regression
-#' 
-#' This function performs k-fold cross validation for 
-#' ensemble partial least squares regression.
 #'
-#' This function performs k-fold cross validation for 
-#' ensemble partial least squares regression.
+#' K-fold cross validation for ensemble partial least squares regression.
 #'
 #' @param x predictor matrix
 #' @param y response vector
@@ -43,6 +39,8 @@
 #' plot(cv.enpls.fit)
 
 cv.enpls = function(x, y, nfolds = 5L, verbose = TRUE, ...) {
+  
+  if (missing(x) | missing(y)) stop('Please specify both x and y')
   
   x.row = nrow(x)
   index = rep_len(1L:nfolds, x.row)

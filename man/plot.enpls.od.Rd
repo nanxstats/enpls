@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.R
 \name{plot.enpls.od}
 \alias{plot.enpls.od}
-\title{Plot enpls.od Object}
+\title{Plot enpls.od object}
 \usage{
 \method{plot}{enpls.od}(x, criterion = c("quantile", "sd"), prob = 0.05,
   sdtimes = 3L, main = NULL, ...)
@@ -19,13 +19,10 @@ could be \code{'quantile'} or \code{'sd'}.}
 
 \item{main}{plot title}
 
-\item{...}{Other graphical parameters to be passed on to \code{plot}.}
+\item{...}{Additional graphical parameters for \code{\link{plot}}.}
 }
 \description{
-This function plots enpls.od object.
-}
-\details{
-This function plots enpls.od object.
+Plot enpls.od object
 }
 \examples{
 data(alkanes)
@@ -38,7 +35,7 @@ plot(od, criterion = 'quantile')
 plot(od, criterion = 'sd')
 }
 \author{
-Nan Xiao <\email{road2stat@gmail.com}>
+Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
 See \code{\link{enpls.od}} for outlier detection with ensemble PLS.

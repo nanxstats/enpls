@@ -5,7 +5,7 @@
 #' This function prints cv.enpls object.
 #'
 #' @param x An object of class \code{cv.enpls}.
-#' @param ... Other parameters to be passed on to \code{print}.
+#' @param ... Additional parameters for \code{\link{print}}.
 #'
 #' @author Nan Xiao <\url{http://nanx.me}>
 #'
@@ -44,7 +44,7 @@ print.cv.enpls = function(x, ...) {
 #' This function prints coefficients of each model in the enpls.en object.
 #'
 #' @param x An object of class \code{enpls.en}.
-#' @param ... Other parameters to be passed on to \code{print}.
+#' @param ... Additional parameters for \code{\link{print}}.
 #'
 #' @author Nan Xiao <\url{http://nanx.me}>
 #'
@@ -90,7 +90,7 @@ print.enpls.en = function(x, ...) {
 #' @param x An object of class \code{enpls.fs}.
 #' @param sort Should the variables be sorted in decreasing order of importance?
 #' @param nvar How many variables to show? Ignored if \code{sort = FALSE}.
-#' @param ... Other parameters to be passed on to \code{print}.
+#' @param ... Additional parameters for \code{\link{print}}.
 #'
 #' @author Nan Xiao <\url{http://nanx.me}>
 #'
@@ -135,7 +135,7 @@ print.enpls.fs = function(x, sort = TRUE, nvar = NULL, ...) {
 #' This function prints enpls.od object.
 #'
 #' @param x An object of class \code{enpls.od}.
-#' @param ... Other parameters to be passed on to \code{print}.
+#' @param ... Additional parameters for \code{\link{print}}.
 #'
 #' @author Nan Xiao <\url{http://nanx.me}>
 #'

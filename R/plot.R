@@ -1,12 +1,10 @@
-#' Plot cv.enpls Object
+#' Plot cv.enpls object
 #'
-#' This function plots cv.enpls object.
-#'
-#' This function plots cv.enpls object.
+#' Plot cv.enpls object
 #'
 #' @param x An object of class \code{cv.enpls}.
 #' @param main plot title
-#' @param ... Other graphical parameters to be passed on to \code{plot}.
+#' @param ... Additional graphical parameters for \code{\link{plot}}.
 #'
 #' @author Nan Xiao <\url{http://nanx.me}>
 #'
@@ -42,19 +40,17 @@ plot.cv.enpls = function(x, main = NULL, ...) {
   
 }
 
-#' Plot enpls.fs Object
+#' Plot enpls.fs object
 #'
-#' This function plots enpls.fs object.
-#'
-#' This function plots enpls.fs object.
+#' Plot enpls.fs object
 #'
 #' @param x An object of class \code{enpls.fs}.
 #' @param sort Should the variables be sorted in decreasing order of importance?
 #' @param nvar How many variables to show? Ignored if \code{sort = FALSE}.
 #' @param main plot title
-#' @param ... Other graphical parameters to be passed on to \code{dotchart}.
+#' @param ... Additional graphical parameters for \code{\link{dotchart}}.
 #'
-#' @author Nan Xiao <\email{road2stat@@gmail.com}>
+#' @author Nan Xiao <\url{http://nanx.me}>
 #'
 #' @seealso See \code{\link{enpls.fs}} for feature selection with ensemble PLS.
 #'
@@ -90,11 +86,9 @@ plot.enpls.fs = function(x,
   
 }
 
-#' Plot enpls.od Object
+#' Plot enpls.od object
 #'
-#' This function plots enpls.od object.
-#'
-#' This function plots enpls.od object.
+#' Plot enpls.od object
 #'
 #' @param x An object of class \code{enpls.od}.
 #' @param criterion Criterion of being outlier, 
@@ -102,9 +96,9 @@ plot.enpls.fs = function(x,
 #' @param prob the quantile
 #' @param sdtimes the times of sd
 #' @param main plot title
-#' @param ... Other graphical parameters to be passed on to \code{plot}.
+#' @param ... Additional graphical parameters for \code{\link{plot}}.
 #'
-#' @author Nan Xiao <\email{road2stat@@gmail.com}>
+#' @author Nan Xiao <\url{http://nanx.me}>
 #'
 #' @seealso See \code{\link{enpls.od}} for outlier detection with ensemble PLS.
 #'
