@@ -1,19 +1,19 @@
-#' Plot cv.enpls object
+#' Plot cv.enspls object
 #'
-#' Plot cv.enpls object
+#' Plot cv.enspls object
 #'
-#' @param x An object of class \code{cv.enpls}.
+#' @param x An object of class \code{cv.enspls}.
 #' @param xlim x vector of lenght 2, x axis limits of the plot
 #' @param ylim y vector of lenght 2, y axis limits of the plot
-#' @param main Plot title, not used here
-#' @param ... Additional graphical parameters for \code{\link{plot}}.
+#' @param main Plot title, not used.
+#' @param ... Additional graphical parameters, not used.
 #'
 #' @author Nan Xiao <\url{http://nanx.me}>
 #'
-#' @seealso See \code{\link{cv.enpls}} for ensemble
+#' @seealso See \code{\link{cv.enspls}} for ensemble sparse
 #' partial least squares regression.
 #'
-#' @method plot cv.enpls
+#' @method plot cv.enspls
 #'
 #' @importFrom ggplot2 ggplot aes_string geom_point geom_abline
 #' coord_fixed xlab ylab
@@ -21,18 +21,20 @@
 #' @export
 #'
 #' @examples
-#' data("alkanes")
-#' x = alkanes$x
-#' y = alkanes$y
+#' # This example takes one minute to run
+#' \dontrun{
+#' data("logd1k")
+#' x = logd1k$x
+#' y = logd1k$y
 #'
 #' set.seed(42)
-#' cvfit = cv.enpls(x, y, MCtimes = 20)
-#' plot(cvfit)
+#' cvfit = cv.enspls(x, y, MCtimes = 10)
+#' plot(cvfit)}
 
-plot.cv.enpls = function(x, xlim = NULL, ylim = NULL, main = NULL, ...) {
+plot.cv.enspls = function(x, xlim = NULL, ylim = NULL, main = NULL, ...) {
 
-  if (!inherits(x, 'cv.enpls'))
-    stop('This function only works for objects of class "cv.enpls"')
+  if (!inherits(x, 'cv.enspls'))
+    stop('This function only works for objects of class "cv.enspls"')
 
   df = as.data.frame(x$'ypred')
 
@@ -55,24 +57,24 @@ plot.cv.enpls = function(x, xlim = NULL, ylim = NULL, main = NULL, ...) {
 
 }
 
-#' Plot enpls.fs object
+#' Plot enspls.fs object
 #'
-#' Plot enpls.fs object
+#' Plot enspls.fs object
 #'
-#' @param x An object of class \code{enpls.fs}.
+#' @param x An object of class \code{enspls.fs}.
 #' @param nvar How many variables to show? Ignored if \code{sort = FALSE}.
 #' @param type Plot type, can be \code{dotplot} or \code{boxplot}.
 #' @param limits Vector of length 2. Set boxplot limits (in quantile) to
 #' remove the extreme outlier coefficients.
-#' @param main plot title, not used
-#' @param ... Additional graphical parameters for \code{\link{dotchart}}.
+#' @param main Plot title, not used.
+#' @param ... Additional graphical parameters, not used.
 #'
 #' @author Nan Xiao <\url{http://nanx.me}>
 #'
-#' @seealso See \code{\link{enpls.fs}} for feature selection with
-#' ensemble partial least squares regression.
+#' @seealso See \code{\link{enspls.fs}} for feature selection with
+#' ensemble sparse partial least squares regression.
 #'
-#' @method plot enpls.fs
+#' @method plot enspls.fs
 #'
 #' @importFrom ggplot2 ggplot geom_point aes_string theme
 #' element_blank element_line scale_y_continuous geom_boxplot coord_flip
@@ -81,24 +83,22 @@ plot.cv.enpls = function(x, xlim = NULL, ylim = NULL, main = NULL, ...) {
 #' @export
 #'
 #' @examples
-#' data("alkanes")
-#' x = alkanes$x
-#' y = alkanes$y
+#' data("logd1k")
+#' x = logd1k$x
+#' y = logd1k$y
 #'
 #' set.seed(42)
-#' fs = enpls.fs(x, y, MCtimes = 100)
-#' plot(fs)
+#' fs = enspls.fs(x, y, MCtimes = 5, maxcomp = 2)
 #' plot(fs, nvar = 10)
-#' plot(fs, type = 'boxplot')
-#' plot(fs, type = 'boxplot', limits = c(0.05, 0.95))
+#' plot(fs, type = 'boxplot', limits = c(0.05, 0.95), nvar = 10)
 
-plot.enpls.fs = function(x, nvar = NULL,
-                         type = c('dotplot', 'boxplot'),
-                         limits = c(0, 1),
-                         main = NULL, ...) {
+plot.enspls.fs = function(x, nvar = NULL,
+                          type = c('dotplot', 'boxplot'),
+                          limits = c(0, 1),
+                          main = NULL, ...) {
 
-  if (!inherits(x, 'enpls.fs'))
-    stop('This function only works for objects of class "enpls.fs"')
+  if (!inherits(x, 'enspls.fs'))
+    stop('This function only works for objects of class "enspls.fs"')
 
   type = match.arg(type)
   imp = x$'variable.importance'
@@ -139,51 +139,51 @@ plot.enpls.fs = function(x, nvar = NULL,
 
 }
 
-#' Plot enpls.od object
+#' Plot enspls.od object
 #'
-#' Plot enpls.od object
+#' Plot enspls.od object
 #'
-#' @param x An object of class \code{enpls.od}.
+#' @param x An object of class \code{enspls.od}.
 #' @param criterion Criterion of being outlier,
-#' could be \code{'quantile'} or \code{'sd'}.
-#' @param prob the quantile
-#' @param sdtimes the times of sd
-#' @param main plot title
+#' could be \code{"quantile"} or \code{"sd"}.
+#' @param prob Quantile probability as cut-off.
+#' @param sdtimes Times of standard deviation as cut-off.
+#' @param main Plot title.
 #' @param ... Additional graphical parameters for \code{\link{plot}}.
 #'
 #' @author Nan Xiao <\url{http://nanx.me}>
 #'
-#' @seealso See \code{\link{enpls.od}} for outlier detection with
-#' ensemble partial least squares regression.
+#' @seealso See \code{\link{enspls.od}} for outlier detection with
+#' ensemble sparse partial least squares regression.
 #'
 #' @importFrom graphics axis grid par points rect
 #'
-#' @method plot enpls.od
+#' @method plot enspls.od
 #'
 #' @export
 #'
 #' @examples
-#' data("alkanes")
-#' x = alkanes$x
-#' y = alkanes$y
+#' data("logd1k")
+#' x = logd1k$x
+#' y = logd1k$y
 #'
 #' set.seed(42)
-#' od = enpls.od(x, y, MCtimes = 100)
-#' plot(od, criterion = 'quantile')
-#' plot(od, criterion = 'sd')
+#' od = enspls.od(x, y, MCtimes = 5, maxcomp = 3)
+#' plot(od, criterion = "quantile", prob = 0.1)
+#' plot(od, criterion = "sd", sdtimes = 1)
 
-plot.enpls.od = function(x,
-                         criterion = c('quantile', 'sd'),
-                         prob = 0.05, sdtimes = 3L,
-                         main = NULL, ...) {
+plot.enspls.od = function(x,
+                          criterion = c('quantile', 'sd'),
+                          prob = 0.05, sdtimes = 3L,
+                          main = NULL, ...) {
 
-  if (!inherits(x, 'enpls.od'))
-    stop('This function only works for objects of class "enpls.od"')
+  if (!inherits(x, 'enspls.od'))
+    stop('This function only works for objects of class "enspls.od"')
 
   criterion = match.arg(criterion)
 
-  error.mean = x$error.mean
-  error.sd = x$error.sd
+  error.mean = x$'error.mean'
+  error.sd = x$'error.sd'
 
   if (criterion == 'quantile') {
     vpos = quantile(error.mean, 1 - prob, na.rm = TRUE)

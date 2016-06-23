@@ -1,0 +1,41 @@
+---
+title: "Ensemble Partial Least Squares Regression"
+author: "Nan Xiao <<road2stat@gmail.com>>"
+date: "`r Sys.Date()`"
+bibliography: enpls.bib
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    number_sections: true
+    css: enpls.css
+    includes:
+      in_header: header.html
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Ensemble Partial Least Squares Regression}
+---
+
+# Introduction
+
+Blah Blah
+
+Blah Blah
+
+The `enpls` package offers a 
+
+[@cao2011toward]
+[@cao2010new]
+[@liang2008modeling]
+[@centner1996elimination]
+[@cai2008variable]
+[@han2008ensemble]
+[@breiman1996bagging]
+[@friedman2000special]
+
+Parallelization can be done by calling one same argument.
+
+# Section Title
+
+Project website: [http://enpls.org](http://enpls.org)
+
+# References

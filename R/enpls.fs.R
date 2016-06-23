@@ -106,7 +106,7 @@ enpls.fs = function(x, y,
 #' core function for enpls.fs
 #'
 #' select the best ncomp with cross-validation and
-#' use it to fit the complete training set again.
+#' use it to fit the complete training set.
 #' scale = FALSE
 #'
 #' @return fitted coefficients

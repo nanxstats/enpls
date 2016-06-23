@@ -25,7 +25,7 @@ if not specified, default is the variable (column) numbers in x.}
 Default is \code{1} (not parallelized).}
 }
 \value{
-A list containing all PLS model objects.
+A list containing all partial least squares model objects.
 }
 \description{
 Ensemble partial least squares regression.
@@ -50,7 +50,9 @@ variable selection using distribution of model features."
 \emph{Journal of computer-aided molecular design} 25, no. 1 (2011): 67--80.
 }
 \seealso{
-See \code{\link{enpls.fs}} for feature selection with ensemble PLS.
-See \code{\link{enpls.od}} for outlier detection with ensemble PLS.
+See \code{\link{enpls.fs}} for feature selection with ensemble
+partial least squares regression.
+See \code{\link{enpls.od}} for outlier detection with ensemble
+partial least squares regression.
 }
 

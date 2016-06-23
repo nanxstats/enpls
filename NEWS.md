@@ -17,6 +17,9 @@ Max Kuhn <max.kuhn@pfizer.com>.
 ## NEW FEATURES
 
 * Project website: http://enpls.org
+
+## IMPROVEMENTS
+
 * General improvements on plotting functions
 
 ## BUG FIXES
@@ -28,4 +31,8 @@ Max Kuhn <max.kuhn@pfizer.com>.
 
 ## NEW FEATURES
 
-* Add sparse partial least squares regression as extra base learner
+* Add sparse partial least squares regression
+
+## IMPROVEMENTS
+
+* Improvements on documentation; rewritten vignette

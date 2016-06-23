@@ -12,12 +12,14 @@
 #' @param parallel Integer. Number of CPU cores to use.
 #' Default is \code{1} (not parallelized).
 #'
-#' @return A list containing all PLS model objects.
+#' @return A list containing all partial least squares model objects.
 #'
 #' @author Nan Xiao <\url{http://nanx.me}>
 #'
-#' @seealso See \code{\link{enpls.fs}} for feature selection with ensemble PLS.
-#' See \code{\link{enpls.od}} for outlier detection with ensemble PLS.
+#' @seealso See \code{\link{enpls.fs}} for feature selection with ensemble
+#' partial least squares regression.
+#' See \code{\link{enpls.od}} for outlier detection with ensemble
+#' partial least squares regression.
 #'
 #' @export enpls.fit
 #'
@@ -93,7 +95,7 @@ enpls.fit = function(x, y,
 #' core function for enpls.fit
 #'
 #' select the best ncomp with cross-validation and
-#' use it to fit the complete training set again.
+#' use it to fit the complete training set.
 #' scale = TRUE
 #'
 #' @return the coefficients
@@ -117,7 +119,8 @@ enpls.fit.core = function(plsdf, maxcomp) {
                   method = 'simpls',
                   validation = 'none')
 
-  enpls.core.fit = list(plsr.fit, cv.bestcomp)  # save cv.bestcomp for predict.enpls
+  # save cv.bestcomp for predict.enpls
+  enpls.core.fit = list('plsr.fit' = plsr.fit, 'cv.bestcomp' = cv.bestcomp)
   return(enpls.core.fit)
 
 }

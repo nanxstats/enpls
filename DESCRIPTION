@@ -7,6 +7,7 @@ Author: Nan Xiao <road2stat@gmail.com>, Dong-Sheng Cao <oriental-cds@163.com>,
 Maintainer: Nan Xiao <road2stat@gmail.com>
 Description: Ensemble partial least squares regression, a unified
     framework for feature selection, outlier detection, and ensemble learning.
+    Sparse partial least squares is also included.
 License: GPL (>= 2)
 URL: http://enpls.org
 BugReports: https://github.com/road2stat/enpls/issues
@@ -16,10 +17,12 @@ LazyData: yes
 VignetteBuilder: knitr
 Imports:
     pls,
+    spls,
     foreach,
     doParallel,
     ggplot2,
     reshape2
 Suggests:
-    knitr
+    knitr,
+    rmarkdown
 RoxygenNote: 5.0.1

@@ -131,7 +131,7 @@ enpls.od = function(x, y,
 #' core function for enpls.od
 #'
 #' select the best ncomp with cross-validation and
-#' use it to fit the complete training set again,
+#' use it to fit the complete training set,
 #' then predict on the test set. scale = TRUE
 #'
 #' @return the error vector between predicted y and real y

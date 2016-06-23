@@ -4,7 +4,7 @@
 [![CRAN Version](http://www.r-pkg.org/badges/version/enpls)](https://cran.r-project.org/package=enpls)
 [![Downloads from the RStudio CRAN mirror](http://cranlogs.r-pkg.org/badges/enpls)](http://cranlogs.r-pkg.org/badges/enpls)
 
-`enpls` offers the ensemble partial least squares regression, a unified framework for feature selection, outlier detection, and ensemble learning.
+`enpls` offers the ensemble partial least squares regression, a unified framework for feature selection, outlier detection, and ensemble learning. Sparse partial least squares is also included.
 
 ## Installation
 

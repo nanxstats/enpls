@@ -2,8 +2,6 @@
 #'
 #' Print cv.enpls object.
 #'
-#' Print cv.enpls object.
-#'
 #' @param x An object of class \code{cv.enpls}.
 #' @param ... Additional parameters for \code{\link{print}}.
 #'
@@ -32,15 +30,13 @@ print.cv.enpls = function(x, ...) {
 
   cat('Cross Validation Result for Ensemble Partial Least Squares\n')
   cat('---\n')
-  cat(paste('RMSE = ', sprintf("%.4f", x$RMSE),
-            ', R2 = ', sprintf("%.6f", x$R2), '\n',
+  cat(paste('RMSE = ', sprintf("%.4f", x$'RMSE'),
+            ', Rsquare = ', sprintf("%.6f", x$'Rsquare'), '\n',
             sep = ''))
 
 }
 
 #' Print Fitted Ensemble Partial Least Squares Object
-#'
-#' Print coefficients of each model in the enpls.fit object.
 #'
 #' Print coefficients of each model in the enpls.fit object.
 #'
@@ -87,8 +83,6 @@ print.enpls.fit = function(x, ...) {
 #'
 #' Print enpls.fs object.
 #'
-#' Print enpls.fs object.
-#'
 #' @param x An object of class \code{enpls.fs}.
 #' @param sort Should the variables be sorted in decreasing order of importance?
 #' @param nvar How many variables to show? Ignored if \code{sort = FALSE}.
@@ -118,7 +112,7 @@ print.enpls.fs = function(x, sort = TRUE, nvar = NULL, ...) {
   if (!inherits(x, 'enpls.fs'))
     stop('This function only works for objects of class "enpls.fs"')
 
-  varimp = x$variable.importance
+  varimp = x$'variable.importance'
   if (is.null(nvar)) nvar = length(varimp)
 
   cat('Variable Importance by Ensemble Partial Least Squares\n')
@@ -132,8 +126,6 @@ print.enpls.fs = function(x, sort = TRUE, nvar = NULL, ...) {
 }
 
 #' Print enpls.od Object
-#'
-#' Print enpls.od object.
 #'
 #' Print enpls.od object.
 #'
@@ -166,9 +158,9 @@ print.enpls.od = function(x, ...) {
   cat('Outlier Detection by Ensemble Partial Least Squares\n')
   cat('---\n')
   cat('Mean residual for each sample:\n')
-  print(x$error.mean)
+  print(x$'error.mean')
   cat('---\n')
   cat('Residual SD for each sample:\n')
-  print(x$error.sd)
+  print(x$'error.sd')
 
 }

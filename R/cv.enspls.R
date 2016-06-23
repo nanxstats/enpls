@@ -1,12 +1,12 @@
-#' Cross Validation for Ensemble Partial Least Squares Regression
+#' Cross Validation for Ensemble Sparse Partial Least Squares Regression
 #'
-#' K-fold cross validation for ensemble partial least squares regression.
+#' K-fold cross validation for ensemble sparse partial least squares regression.
 #'
 #' @param x predictor matrix
 #' @param y response vector
 #' @param nfolds number of folds - default is \code{5}.
 #' @param verbose shall we print the cross validation process
-#' @param ... other arguments that can be passed to \code{\link{enpls.fit}}
+#' @param ... other arguments that can be passed to \code{\link{enspls.fit}}
 #'
 #' @return A list containing four components:
 #' \itemize{
@@ -22,22 +22,24 @@
 #' be selected in the test set (thus the prediction uncertainty
 #' can be measured), please try setting a large \code{MCtimes}.
 #'
-#' @seealso See \code{\link{enpls.fit}} for ensemble
+#' @seealso See \code{\link{enspls.fit}} for ensemble sparse
 #' partial least squares regression.
 #'
-#' @export cv.enpls
+#' @export cv.enspls
 #'
 #' @examples
-#' data("alkanes")
-#' x = alkanes$x
-#' y = alkanes$y
+#' # This example takes one minute to run
+#' \dontrun{
+#' data("logd1k")
+#' x = logd1k$x
+#' y = logd1k$y
 #'
 #' set.seed(42)
-#' cvfit = cv.enpls(x, y, MCtimes = 20)
+#' cvfit = cv.enspls(x, y, MCtimes = 10)
 #' print(cvfit)
-#' plot(cvfit)
+#' plot(cvfit)}
 
-cv.enpls = function(x, y, nfolds = 5L, verbose = TRUE, ...) {
+cv.enspls = function(x, y, nfolds = 5L, verbose = TRUE, ...) {
 
   if (missing(x) | missing(y)) stop('Please specify both x and y')
 
@@ -52,7 +54,7 @@ cv.enpls = function(x, y, nfolds = 5L, verbose = TRUE, ...) {
     ytrain = y[index != i]
     xtest  = x[index == i, ]
     ytest  = y[index == i]
-    fit = enpls.fit(xtrain, ytrain, ...)
+    fit = enspls.fit(xtrain, ytrain, ...)
     ypredvec = predict(fit, newx = xtest)
     ypred[index == i, 1L] = ytest
     ypred[index == i, 2L] = ypredvec
@@ -68,7 +70,7 @@ cv.enpls = function(x, y, nfolds = 5L, verbose = TRUE, ...) {
                 'residual' = residual,
                 'RMSE' = RMSE,
                 'Rsquare' = Rsquare)
-  class(object) = 'cv.enpls'
+  class(object) = 'cv.enspls'
   return(object)
 
 }

@@ -2,8 +2,6 @@
 #'
 #' Make predictions on new data by fitted enpls.fit object.
 #'
-#' Make predictions on new data by fitted enpls.fit object.
-#'
 #' @param object An object of class \code{enpls.fit}.
 #' @param newx New data to predict with.
 #' @param method Use \code{mean} or \code{median} as the final prediction.
@@ -19,12 +17,6 @@
 #' @method predict enpls.fit
 #'
 #' @export
-#'
-#' @references
-#' Dongsheng Cao, Yizeng Liang, Qingsong Xu, Yifeng Yun, and Hongdong Li.
-#' "Toward better QSAR/QSPR modeling: simultaneous outlier detection and
-#' variable selection using distribution of model features."
-#' \emph{Journal of computer-aided molecular design} 25, no. 1 (2011): 67--80.
 #'
 #' @examples
 #' data("alkanes")
