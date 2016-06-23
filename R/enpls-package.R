@@ -1,13 +1,14 @@
 #' Ensemble Partial Least Squares Regression
 #'
-#' The enpls package provides functions for running the 
+#' The enpls package provides functions for running the
 #' ensemble partial least squares regression.
 #'
-#' The comprehensive user guide can be opened with 
+#' The comprehensive user guide can be opened with
 #' \code{vignette('enpls')}.
 #'
-#' \tabular{ll}{ Package: \tab enpls\cr Type: \tab Package\cr
-#' Version: \tab 2.0\cr License: \tab GPL (>= 2)\cr }
+#' \tabular{ll}{ Package: \tab enpls\cr
+#' Type: \tab Package\cr
+#' License: \tab GPL\cr }
 #'
 #' @name enpls-package
 #' @docType package

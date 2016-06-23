@@ -4,12 +4,16 @@
 \alias{plot.cv.enpls}
 \title{Plot cv.enpls object}
 \usage{
-\method{plot}{cv.enpls}(x, main = NULL, ...)
+\method{plot}{cv.enpls}(x, xlim = NULL, ylim = NULL, main = NULL, ...)
 }
 \arguments{
 \item{x}{An object of class \code{cv.enpls}.}
 
-\item{main}{plot title}
+\item{xlim}{x vector of lenght 2, x axis limits of the plot}
+
+\item{ylim}{y vector of lenght 2, y axis limits of the plot}
+
+\item{main}{Plot title, not used here}
 
 \item{...}{Additional graphical parameters for \code{\link{plot}}.}
 }
@@ -17,18 +21,19 @@
 Plot cv.enpls object
 }
 \examples{
-data(alkanes)
+data("alkanes")
 x = alkanes$x
 y = alkanes$y
 
 set.seed(42)
-cv.enpls.fit = cv.enpls(x, y, MCtimes = 20)
-plot(cv.enpls.fit)
+cvfit = cv.enpls(x, y, MCtimes = 20)
+plot(cvfit)
 }
 \author{
 Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
-See \code{\link{cv.enpls}} for performing ensemble PLS regression.
+See \code{\link{cv.enpls}} for ensemble
+partial least squares regression.
 }
 

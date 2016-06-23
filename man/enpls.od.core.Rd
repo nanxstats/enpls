@@ -11,7 +11,7 @@ the error vector between predicted y and real y
 }
 \description{
 select the best ncomp with cross-validation and
-use it to fit the complete training set again, 
+use it to fit the complete training set again,
 then predict on the test set. scale = TRUE
 }
 \keyword{internal}

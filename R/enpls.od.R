@@ -4,7 +4,7 @@
 #'
 #' @param x predictor matrix
 #' @param y response vector
-#' @param maxcomp Maximum number of components included within the models, 
+#' @param maxcomp Maximum number of components included within the models,
 #' if not specified, default is the variable (column) numbers in x.
 #' @param MCtimes times of Monte-Carlo
 #' @param method \code{"mc"} or \code{"bootstrap"}. Default is \code{"mc"}.
@@ -22,8 +22,13 @@
 #'
 #' @author Nan Xiao <\url{http://nanx.me}>
 #'
-#' @seealso See \code{\link{enpls.fs}} for feature selection with ensemble PLS. 
-#' See \code{\link{enpls.en}} for ensemble PLS regression.
+#' @note To maximize the probablity that each observation can
+#' be selected in the test set (thus the prediction uncertainty
+#' can be measured), please try setting a large \code{MCtimes}.
+#'
+#' @seealso See \code{\link{enpls.fs}} for feature selection with
+#' ensemble partial least squares regression.
+#' See \code{\link{enpls.fit}} for ensemble partial least squares regression.
 #'
 #' @export enpls.od
 #'
@@ -31,17 +36,17 @@
 #' @importFrom foreach foreach "%dopar%"
 #'
 #' @references
-#' DongSheng Cao, Yizeng Liang, Qingsong Xu, Hongdong Li, and Xian Chen. 
+#' DongSheng Cao, Yizeng Liang, Qingsong Xu, Hongdong Li, and Xian Chen.
 #' "A new strategy of outlier detection for QSAR/QSPR."
 #' \emph{Journal of computational chemistry} 31, no. 3 (2010): 592--602.
 #'
-#' Dongsheng Cao, Yizeng Liang, Qingsong Xu, Yifeng Yun, and Hongdong Li. 
-#' "Toward better QSAR/QSPR modeling: simultaneous outlier detection and 
-#' variable selection using distribution of model features." 
+#' Dongsheng Cao, Yizeng Liang, Qingsong Xu, Yifeng Yun, and Hongdong Li.
+#' "Toward better QSAR/QSPR modeling: simultaneous outlier detection and
+#' variable selection using distribution of model features."
 #' \emph{Journal of computer-aided molecular design} 25, no. 1 (2011): 67--80.
 #'
 #' @examples
-#' data(alkanes)
+#' data("alkanes")
 #' x = alkanes$x
 #' y = alkanes$y
 #'
@@ -51,111 +56,111 @@
 #' plot(od)
 #' plot(od, criterion = 'sd')
 
-enpls.od = function(x, y, 
-                    maxcomp = NULL, 
-                    MCtimes = 500L, 
-                    method = c('mc', 'bootstrap'), ratio = 0.8, 
+enpls.od = function(x, y,
+                    maxcomp = NULL,
+                    MCtimes = 500L,
+                    method = c('mc', 'bootstrap'), ratio = 0.8,
                     parallel = 1L) {
-  
+
   if (missing(x) | missing(y)) stop('Please specify both x and y')
-  
+
   if (is.null(maxcomp)) maxcomp = ncol(x)
-  
+
   method = match.arg(method)
-  
+
   x.row = nrow(x)
   samp.idx = vector('list', MCtimes)
   samp.idx.remain = vector('list', MCtimes)
-  
+
   if (method == 'mc') {
     for (i in 1L:MCtimes) {
-      samp.idx[[i]] = sample(1L:x.row, floor(x.row * ratio))
+      samp.idx[[i]] = sample(1L:x.row, round(x.row * ratio))
       samp.idx.remain[[i]] = setdiff(1L:x.row, samp.idx[[i]])
     }
   }
-  
+
   if (method == 'bootstrap') {
     for (i in 1L:MCtimes) {
       samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
       samp.idx.remain[[i]] = setdiff(1L:x.row, unique(samp.idx[[i]]))
     }
   }
-  
+
   plsdf = as.data.frame(cbind(x, y))
-  
+
   if (parallel < 1.5) {
-    
+
     errorlist = vector('list', MCtimes)
     for (i in 1L:MCtimes) {
       plsdf.sample = plsdf[samp.idx[[i]], ]
       plsdf.remain = plsdf[samp.idx.remain[[i]], ]
       errorlist[[i]] = suppressWarnings(enpls.od.core(plsdf.sample, plsdf.remain, maxcomp))
     }
-    
+
   } else {
-    
+
     registerDoParallel(parallel)
     errorlist = foreach(i = 1L:MCtimes) %dopar% {
       plsdf.sample = plsdf[samp.idx[[i]], ]
       plsdf.remain = plsdf[samp.idx.remain[[i]], ]
       enpls.od.core(plsdf.sample, plsdf.remain, maxcomp)
     }
-    
+
   }
-  
+
   prederrmat = matrix(NA, ncol = x.row, nrow = MCtimes)
   for (i in 1L:MCtimes) {
     for (j in 1L:length(samp.idx.remain[[i]])) {
       prederrmat[i, samp.idx.remain[[i]][j]] = errorlist[[i]][j]
     }
   }
-  
+
   errmean   = abs(colMeans(prederrmat, na.rm = TRUE))
   errmedian = apply(prederrmat, 2L, median, na.rm = TRUE)
   errsd     = apply(prederrmat, 2L, sd, na.rm = TRUE)
-  
-  object = list('error.mean'    = errmean, 
-                'error.median'  = errmedian, 
-                'error.sd'      = errsd, 
+
+  object = list('error.mean'    = errmean,
+                'error.median'  = errmedian,
+                'error.sd'      = errsd,
                 'predict.error.matrix' = prederrmat)
   class(object) = 'enpls.od'
   return(object)
-  
+
 }
 
 #' core function for enpls.od
 #'
 #' select the best ncomp with cross-validation and
-#' use it to fit the complete training set again, 
+#' use it to fit the complete training set again,
 #' then predict on the test set. scale = TRUE
 #'
 #' @return the error vector between predicted y and real y
-#' 
+#'
 #' @keywords internal
 
 enpls.od.core = function(plsdf.sample, plsdf.remain, maxcomp) {
-  
-  plsr.cvfit = plsr(y ~ ., data = plsdf.sample, 
-                    ncomp  = maxcomp, 
-                    scale  = TRUE, 
-                    method = 'simpls', 
+
+  plsr.cvfit = plsr(y ~ ., data = plsdf.sample,
+                    ncomp  = maxcomp,
+                    scale  = TRUE,
+                    method = 'simpls',
                     validation = 'CV', segments = 5L)
-  
+
   # select best component number using adjusted CV
   cv.bestcomp = which.min(RMSEP(plsr.cvfit)[['val']][2L, 1L, -1L])
-  
-  plsr.fit = plsr(y ~ ., data = plsdf.sample, 
-                  ncomp  = cv.bestcomp, 
-                  scale  = TRUE, 
-                  method = 'simpls', 
+
+  plsr.fit = plsr(y ~ ., data = plsdf.sample,
+                  ncomp  = cv.bestcomp,
+                  scale  = TRUE,
+                  method = 'simpls',
                   validation = 'none')
-  
-  pred = predict(plsr.fit, ncomp = cv.bestcomp, 
+
+  pred = predict(plsr.fit, ncomp = cv.bestcomp,
                  newdata = plsdf.remain[, !(colnames(plsdf.remain) %in% c('y'))])[, 1L, 1L]
-  
+
   error = plsdf.remain[, 'y'] - pred
   names(error) = NULL
-  
+
   return(error)
-  
+
 }

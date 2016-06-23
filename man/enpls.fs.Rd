@@ -12,7 +12,7 @@ enpls.fs(x, y, maxcomp = NULL, MCtimes = 500L, method = c("mc",
 
 \item{y}{response vector}
 
-\item{maxcomp}{Maximum number of components included within the models, 
+\item{maxcomp}{Maximum number of components included within the models,
 if not specified, default is the variable (column) numbers in x.}
 
 \item{MCtimes}{times of Monte-Carlo}
@@ -35,26 +35,27 @@ A list containing two components:
 Feature selection with ensemble partial least squares.
 }
 \examples{
-data(alkanes)
+data("alkanes")
 x = alkanes$x
 y = alkanes$y
 
 set.seed(42)
-varimp = enpls.fs(x, y, MCtimes = 100)
-print(varimp)
-plot(varimp)
+fs = enpls.fs(x, y, MCtimes = 100)
+print(fs)
+plot(fs)
 }
 \author{
 Nan Xiao <\url{http://nanx.me}>
 }
 \references{
-Dongsheng Cao, Yizeng Liang, Qingsong Xu, Yifeng Yun, and Hongdong Li. 
-"Toward better QSAR/QSPR modeling: simultaneous outlier detection and 
-variable selection using distribution of model features." 
+Dongsheng Cao, Yizeng Liang, Qingsong Xu, Yifeng Yun, and Hongdong Li.
+"Toward better QSAR/QSPR modeling: simultaneous outlier detection and
+variable selection using distribution of model features."
 \emph{Journal of computer-aided molecular design} 25, no. 1 (2011): 67--80.
 }
 \seealso{
-See \code{\link{enpls.od}} for outlier detection with ensemble PLS. 
-See \code{\link{enpls.en}} for ensemble PLS regression.
+See \code{\link{enpls.od}} for outlier detection with
+ensemble partial least squares regression.
+See \code{\link{enpls.fit}} for ensemble partial least squares regression.
 }
 

@@ -15,7 +15,7 @@ cv.enpls(x, y, nfolds = 5L, verbose = TRUE, ...)
 
 \item{verbose}{shall we print the cross validation process}
 
-\item{...}{other arguments that can be passed to \code{enpls.en}}
+\item{...}{other arguments that can be passed to \code{\link{enpls.fit}}}
 }
 \value{
 A list containing four components:
@@ -29,26 +29,32 @@ A list containing four components:
 \description{
 K-fold cross validation for ensemble partial least squares regression.
 }
+\note{
+To maximize the probablity that each observation can
+be selected in the test set (thus the prediction uncertainty
+can be measured), please try setting a large \code{MCtimes}.
+}
 \examples{
-data(alkanes)
+data("alkanes")
 x = alkanes$x
 y = alkanes$y
 
 set.seed(42)
-cv.enpls.fit = cv.enpls(x, y, MCtimes = 20)
-print(cv.enpls.fit)
-plot(cv.enpls.fit)
+cvfit = cv.enpls(x, y, MCtimes = 20)
+print(cvfit)
+plot(cvfit)
 }
 \author{
 Nan Xiao <\url{http://nanx.me}>
 }
 \references{
-Dongsheng Cao, Yizeng Liang, Qingsong Xu, Yifeng Yun, and Hongdong Li. 
-"Toward better QSAR/QSPR modeling: simultaneous outlier detection and 
-variable selection using distribution of model features." 
+Dongsheng Cao, Yizeng Liang, Qingsong Xu, Yifeng Yun, and Hongdong Li.
+"Toward better QSAR/QSPR modeling: simultaneous outlier detection and
+variable selection using distribution of model features."
 \emph{Journal of computer-aided molecular design} 25, no. 1 (2011): 67--80.
 }
 \seealso{
-See \code{\link{enpls.en}} for ensemble PLS regression.
+See \code{\link{enpls.fit}} for ensemble
+partial least squares regression.
 }
 

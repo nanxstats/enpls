@@ -4,16 +4,20 @@
 \alias{plot.enpls.fs}
 \title{Plot enpls.fs object}
 \usage{
-\method{plot}{enpls.fs}(x, sort = TRUE, nvar = NULL, main = NULL, ...)
+\method{plot}{enpls.fs}(x, nvar = NULL, type = c("dotplot", "boxplot"),
+  limits = c(0, 1), main = NULL, ...)
 }
 \arguments{
 \item{x}{An object of class \code{enpls.fs}.}
 
-\item{sort}{Should the variables be sorted in decreasing order of importance?}
-
 \item{nvar}{How many variables to show? Ignored if \code{sort = FALSE}.}
 
-\item{main}{plot title}
+\item{type}{Plot type, can be \code{dotplot} or \code{boxplot}.}
+
+\item{limits}{Vector of length 2. Set boxplot limits (in quantile) to
+remove the extreme outlier coefficients.}
+
+\item{main}{plot title, not used}
 
 \item{...}{Additional graphical parameters for \code{\link{dotchart}}.}
 }
@@ -21,19 +25,22 @@
 Plot enpls.fs object
 }
 \examples{
-data(alkanes)
+data("alkanes")
 x = alkanes$x
 y = alkanes$y
 
 set.seed(42)
-varimp = enpls.fs(x, y, MCtimes = 100)
-plot(varimp)
-plot(varimp, nvar = 10L)
+fs = enpls.fs(x, y, MCtimes = 100)
+plot(fs)
+plot(fs, nvar = 10)
+plot(fs, type = 'boxplot')
+plot(fs, type = 'boxplot', limits = c(0.05, 0.95))
 }
 \author{
 Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
-See \code{\link{enpls.fs}} for feature selection with ensemble PLS.
+See \code{\link{enpls.fs}} for feature selection with
+ensemble partial least squares regression.
 }
 

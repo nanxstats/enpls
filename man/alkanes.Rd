@@ -10,13 +10,13 @@
 \item y - numeric vector of length 207 (response)
 }}
 \usage{
-data(alkanes)
+data("alkanes")
 }
 \description{
 Methylalkanes retention index dataset from Liang et, al.
 }
 \details{
-This dataset contains 207 methylalkanes' chromatographic retention index (y) 
+This dataset contains 207 methylalkanes' chromatographic retention index (y)
 which have been modeled by 21 molecular descriptors (x).
 
 Molecular descriptor types:
@@ -28,13 +28,13 @@ Molecular descriptor types:
 }
 }
 \examples{
-data(alkanes)
+data("alkanes")
 str(alkanes)
 }
 \references{
-Yizeng Liang, Dalin Yuan, Qingsong Xu, and Olav Martin Kvalheim. 
-"Modeling based on subspace orthogonal projections for 
-QSAR and QSPR research." 
-Journal of Chemometrics 22, no. 1 (2008): 23--35.
+Yizeng Liang, Dalin Yuan, Qingsong Xu, and Olav Martin Kvalheim.
+"Modeling based on subspace orthogonal projections for
+QSAR and QSPR research."
+\emph{Journal of Chemometrics} 22, no. 1 (2008): 23--35.
 }
 

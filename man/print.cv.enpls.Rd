@@ -12,24 +12,25 @@
 \item{...}{Additional parameters for \code{\link{print}}.}
 }
 \description{
-This function prints cv.enpls object.
+Print cv.enpls object.
 }
 \details{
-This function prints cv.enpls object.
+Print cv.enpls object.
 }
 \examples{
-data(alkanes)
+data("alkanes")
 x = alkanes$x
 y = alkanes$y
 
 set.seed(42)
-cv.enpls.fit = cv.enpls(x, y, MCtimes = 20)
-print(cv.enpls.fit)
+cvfit = cv.enpls(x, y, MCtimes = 20)
+print(cvfit)
 }
 \author{
 Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
-See \code{\link{cv.enpls}} for performing ensemble PLS regression.
+See \code{\link{cv.enpls}} for ensemble
+partial least squares regression.
 }
 

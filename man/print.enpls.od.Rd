@@ -12,13 +12,13 @@
 \item{...}{Additional parameters for \code{\link{print}}.}
 }
 \description{
-This function prints enpls.od object.
+Print enpls.od object.
 }
 \details{
-This function prints enpls.od object.
+Print enpls.od object.
 }
 \examples{
-data(alkanes)
+data("alkanes")
 x = alkanes$x
 y = alkanes$y
 
@@ -30,6 +30,7 @@ print(od)
 Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
-See \code{\link{enpls.od}} for outlier detection with ensemble PLS.
+See \code{\link{enpls.od}} for outlier detection with
+ensemble partial least squares regression.
 }
 

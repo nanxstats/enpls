@@ -16,25 +16,26 @@
 \item{...}{Additional parameters for \code{\link{print}}.}
 }
 \description{
-This function prints enpls.fs object.
+Print enpls.fs object.
 }
 \details{
-This function prints enpls.fs object.
+Print enpls.fs object.
 }
 \examples{
-data(alkanes)
+data("alkanes")
 x = alkanes$x
 y = alkanes$y
 
 set.seed(42)
-varimp = enpls.fs(x, y, MCtimes = 100)
-print(varimp)
-print(varimp, nvar = 10L)
+fs = enpls.fs(x, y, MCtimes = 100)
+print(fs)
+print(fs, nvar = 10L)
 }
 \author{
 Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
-See \code{\link{enpls.fs}} for feature selection with ensemble PLS.
+See \code{\link{enpls.fs}} for feature selection with
+ensemble partial least squares regression.
 }
 

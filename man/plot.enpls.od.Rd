@@ -10,7 +10,7 @@
 \arguments{
 \item{x}{An object of class \code{enpls.od}.}
 
-\item{criterion}{Criterion of being outlier, 
+\item{criterion}{Criterion of being outlier,
 could be \code{'quantile'} or \code{'sd'}.}
 
 \item{prob}{the quantile}
@@ -25,7 +25,7 @@ could be \code{'quantile'} or \code{'sd'}.}
 Plot enpls.od object
 }
 \examples{
-data(alkanes)
+data("alkanes")
 x = alkanes$x
 y = alkanes$y
 
@@ -38,6 +38,7 @@ plot(od, criterion = 'sd')
 Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
-See \code{\link{enpls.od}} for outlier detection with ensemble PLS.
+See \code{\link{enpls.od}} for outlier detection with
+ensemble partial least squares regression.
 }
 
