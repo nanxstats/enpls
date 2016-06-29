@@ -40,7 +40,7 @@ x = alkanes$x
 y = alkanes$y
 
 set.seed(42)
-fs = enpls.fs(x, y, MCtimes = 100)
+fs = enpls.fs(x, y, MCtimes = 50)
 print(fs)
 plot(fs)
 }
