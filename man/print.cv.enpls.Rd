@@ -20,7 +20,7 @@ x = alkanes$x
 y = alkanes$y
 
 set.seed(42)
-cvfit = cv.enpls(x, y, MCtimes = 20)
+cvfit = cv.enpls(x, y, MCtimes = 10)
 print(cvfit)
 }
 \author{

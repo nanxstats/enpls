@@ -24,7 +24,7 @@
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' fit = enpls.fit(x, y, MCtimes = 100)
+#' fit = enpls.fit(x, y, MCtimes = 50)
 #' y.pred = predict(fit, newx = x)
 #' plot(y, y.pred, xlim = range(y), ylim = range(y))
 #' abline(a = 0L, b = 1L)

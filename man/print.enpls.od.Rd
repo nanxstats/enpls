@@ -20,7 +20,7 @@ x = alkanes$x
 y = alkanes$y
 
 set.seed(42)
-od = enpls.od(x, y, MCtimes = 100)
+od = enpls.od(x, y, MCtimes = 50)
 print(od)
 }
 \author{

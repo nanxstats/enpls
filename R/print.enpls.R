@@ -20,7 +20,7 @@
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' cvfit = cv.enpls(x, y, MCtimes = 20)
+#' cvfit = cv.enpls(x, y, MCtimes = 10)
 #' print(cvfit)
 
 print.cv.enpls = function(x, ...) {
@@ -59,7 +59,7 @@ print.cv.enpls = function(x, ...) {
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' fit = enpls.fit(x, y, MCtimes = 100)
+#' fit = enpls.fit(x, y, MCtimes = 50)
 #' print(fit)
 
 print.enpls.fit = function(x, ...) {
@@ -148,7 +148,7 @@ print.enpls.fs = function(x, sort = TRUE, nvar = NULL, ...) {
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' od = enpls.od(x, y, MCtimes = 100)
+#' od = enpls.od(x, y, MCtimes = 50)
 #' print(od)
 
 print.enpls.od = function(x, ...) {

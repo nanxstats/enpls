@@ -26,7 +26,7 @@
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' cvfit = cv.enpls(x, y, MCtimes = 20)
+#' cvfit = cv.enpls(x, y, MCtimes = 10)
 #' plot(cvfit)
 
 plot.cv.enpls = function(x, xlim = NULL, ylim = NULL, main = NULL, ...) {
@@ -86,7 +86,7 @@ plot.cv.enpls = function(x, xlim = NULL, ylim = NULL, main = NULL, ...) {
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' fs = enpls.fs(x, y, MCtimes = 100)
+#' fs = enpls.fs(x, y, MCtimes = 50)
 #' plot(fs)
 #' plot(fs, nvar = 10)
 #' plot(fs, type = "boxplot")
@@ -168,7 +168,7 @@ plot.enpls.fs = function(x, nvar = NULL,
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' od = enpls.od(x, y, MCtimes = 100)
+#' od = enpls.od(x, y, MCtimes = 50)
 #' plot(od, criterion = 'quantile')
 #' plot(od, criterion = 'sd')
 
