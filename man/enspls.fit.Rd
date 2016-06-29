@@ -39,9 +39,9 @@ x = logd1k$x
 y = logd1k$y
 
 set.seed(42)
-fs = enspls.fs(x, y, MCtimes = 5, maxcomp = 3)
-print(fs)
-plot(fs, nvar = 10)
+fit = enspls.fit(x, y, MCtimes = 4, maxcomp = 3)
+print(fit)
+predict(fit, newx = x)
 }
 \author{
 Nan Xiao <\url{http://nanx.me}>

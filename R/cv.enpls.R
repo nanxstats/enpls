@@ -8,11 +8,12 @@
 #' @param verbose shall we print the cross validation process
 #' @param ... other arguments that can be passed to \code{\link{enpls.fit}}
 #'
-#' @return A list containing four components:
+#' @return A list containing:
 #' \itemize{
 #' \item \code{ypred} - a matrix containing two columns: real y and predicted y
 #' \item \code{residual} - cross validation result (y.pred - y.real)
 #' \item \code{RMSE} - RMSE
+#' \item \code{MAE} - MAE
 #' \item \code{Rsquare} - Rsquare
 #' }
 #'
@@ -61,12 +62,17 @@ cv.enpls = function(x, y, nfolds = 5L, verbose = TRUE, ...) {
   colnames(ypred) = c('y.real', 'y.pred')
 
   residual = ypred[, 1L] - ypred[, 2L]
+  # RMSE
   RMSE = sqrt(mean((residual)^2, na.rm = TRUE))
+  # MAE (Mean Absolute Error)
+  MAE = mean(abs(residual), na.rm = TRUE)
+  # R-square
   Rsquare = 1L - (sum((residual)^2, na.rm = TRUE)/sum((y - mean(y))^2))
 
   object = list('ypred' = ypred,
                 'residual' = residual,
                 'RMSE' = RMSE,
+                'MAE' = MAE,
                 'Rsquare' = Rsquare)
   class(object) = 'cv.enpls'
   return(object)

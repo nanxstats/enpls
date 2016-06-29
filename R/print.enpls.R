@@ -30,8 +30,9 @@ print.cv.enpls = function(x, ...) {
 
   cat('Cross Validation Result for Ensemble Partial Least Squares\n')
   cat('---\n')
-  cat(paste('RMSE = ', sprintf("%.4f", x$'RMSE'),
-            ', Rsquare = ', sprintf("%.6f", x$'Rsquare'), '\n',
+  cat(paste('RMSE = ', sprintf("%.4f", x$'RMSE'), '\n',
+            'MAE = ', sprintf("%.6f", x$'MAE'), '\n',
+            'Rsquare = ', sprintf("%.6f", x$'Rsquare'), '\n',
             sep = ''))
 
 }

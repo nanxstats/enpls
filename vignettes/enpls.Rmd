@@ -1,5 +1,5 @@
 ---
-title: "Ensemble Partial Least Squares Regression"
+title: "An Introduction to the `enpls` Package"
 author: "Nan Xiao <<road2stat@gmail.com>>"
 date: "`r Sys.Date()`"
 bibliography: enpls.bib
@@ -12,30 +12,157 @@ output:
       in_header: header.html
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{Ensemble Partial Least Squares Regression}
+  %\VignetteIndexEntry{An Introduction to the enpls Package}
 ---
 
 # Introduction
 
-Blah Blah
+The `enpls` package offers an algorithmic framework for measuring
+feature importance, detecting outliers, and ensemble modeling
+based on (sparse) partial least squares regression.
+The key functions included in the package are listed in the table below.
 
-Blah Blah
++-----------------------+-----------------------+------------------------------+
+| Task                  | Partial Least Squares | Sparse Partial Least Squares |
++=======================+=======================+==============================+
+| Model fitting         | `enpls.fit()`         | `enspls.fit()`               |
++-----------------------+-----------------------+------------------------------+
+| Cross validation      | `cv.enpls()`          | `cv.enspls()`                |
++-----------------------+-----------------------+------------------------------+
+| Outlier detection     | `enpls.od()`          | `enspls.od()`                |
++-----------------------+-----------------------+------------------------------+
+| Feature importance    | `enpls.fs()`          | `enspls.fs()`                |
++-----------------------+-----------------------+------------------------------+
 
-The `enpls` package offers a 
+Please refer to our paper [@xiao2016enpls] for details on the intuition
+and mathematical details of the ensemble learning approaches used here.
 
-[@cao2011toward]
-[@cao2010new]
-[@liang2008modeling]
-[@centner1996elimination]
-[@cai2008variable]
-[@han2008ensemble]
-[@breiman1996bagging]
-[@friedman2000special]
+In the next, we will use the data from [@wang2015silico] to demonstrate
+the general workflow of `enpls`. The dataset contains 1,000 compounds,
+each characterized by 80 molecular descriptors. The response is the
+octanol/water partition coefficient at pH 7.4 (logD7.4).
 
-Parallelization can be done by calling one same argument.
+Let's load the data and take a look at it:
 
-# Section Title
+```{r}
+library("enpls")
+library("ggplot2")
 
-Project website: [http://enpls.org](http://enpls.org)
+data("logd1k")
+x = logd1k$x
+y = logd1k$y
+head(x)[, 1:5]
+head(y)
+```
+
+# Model Fitting
+
+Here we fit the ensemble sparse partial least squares to the data,
+so that the model complexity could usually be further reduced than
+vanilla partial least squares when we build each model.
+
+```{r, fig.width = 8, fig.height = 8, out.width = 600, out.height = 600}
+set.seed(42)
+fit = enspls.fit(x, y, ratio = 0.7, MCtimes = 20, maxcomp = 3)
+y.pred = predict(fit, newx = x)
+
+df = data.frame(y, y.pred)
+ggplot(df, aes_string(x = "y", y = "y.pred")) +
+  geom_abline(slope = 1, intercept = 0, colour = "darkgrey") +
+  geom_point(size = 3, shape = 1, alpha = 0.8) +
+  coord_fixed(ratio = 1) +
+  xlab("Observed Response") +
+  ylab("Predicted Response")
+```
+
+We used the fitted model to predict on the training data and
+plotted the predicted values against the true values.
+
+The parameter `ratio` decides the sampling ratio for each Monte-Carlo
+run; `maxcomp` controls the maximum number of components included
+within each model; `MCtimes` sets the times of Monte-Carlo resampling,
+we recommend setting it to a large number (500 by default).
+
+One common parameter for all functions in `enpls` is `parallel`,
+it controls the number of CPU cores to use if you want to train
+the models in parallel.
+
+# Cross Validation
+
+K-fold cross validation is a traditional way to measure the empirical
+predictive performance of the model. We can use function `cv.enpls()`
+or `cv.enspls()` to perform $k$-fold cross validation for the ensemble
+(sparse) partial least squares model.
+
+Since the parameters (number of components and level of sparsity)
+are automatically tuned for each model in `enpls`, the cross validation
+here is used to see if certain combinations of parameters (specified by
+`ratio`, `maxcomp`, `alpha`, etc.) can produce ensemble models with
+better performance.
+
+```{r, fig.width = 8, fig.height = 8, out.width = 600, out.height = 600}
+cv.fit = cv.enspls(x, y, nfolds = 5, ratio = 0.7,
+                   MCtimes = 10, maxcomp = 3, verbose = FALSE)
+print(cv.fit)
+plot(cv.fit)
+```
+
+The returned object gives three model performance evaluation metrics
+for the ensemble model: RMSE, MAE, and $R^2$. Here we also plotted the
+predicted values for each test fold against the true response.
+
+# Feature Importance
+
+To measure feature importance, simply use `enpls.fs()` or `enspls.fs()`:
+
+```{r, fig.width = 8, fig.height = 8, out.width = 600, out.height = 600}
+fs = enspls.fs(x, y, ratio = 0.7, MCtimes = 20, maxcomp = 3)
+print(fs, nvar = 10)
+plot(fs, nvar = 10)
+plot(fs, type = "boxplot", nvar = 10)
+```
+
+The top 10 most important features are ranked as above. The boxplot
+gives additional information about the coefficient stability of each
+feature. We can see the feature TPSA (Topological Polar Surface Area)
+has different pattern compared to others: it has large effect size,
+but the effect sizes also have a large variance. This indicates
+that TPSA is important for predicting logD7.4. However,
+such importance may vary on different subsets of the samples.
+
+# Outlier Detection
+
+By using information from the prediction error distribution for each
+sample produced by many models, we can measure if the responses
+of particular samples are harder to predict than the others.
+Such measurements can help on identifying outliers in the dataset.
+Thus, they can be removed to get us a "clean" dataset before the
+actual modeling.
+
+This can be done with `enpls.od()`, `enspls.od()` easily:
+
+```{r, fig.width = 8, fig.height = 8, out.width = 600, out.height = 600}
+od = enspls.od(x, y, ratio = 0.8, MCtimes = 20, maxcomp = 3)
+plot(od, prob = 0.05)
+plot(od, criterion = "sd", sdtimes = 2)
+```
+
+The two plots showed that several samples in our dataset might be
+outlier candidates, based on two different criterions.
+The samples in each area of the plots represent different types
+of outliers, as defined in [@xiao2016enpls].
+
+# Conclusion
+
+Ensemble learning is not only powerful for improving base learner's
+predictive performance but also capable of accomplishing model diagnostic
+tasks, such as measuring the importance of features.
+It would be interesting to see if such ideas could be applied to more
+relevant topics and further facilitate the predictive modeling tasks.
+
+If you used `enpls` in your research, please feel free
+to cite our paper [@xiao2016enpls] in your publications.
+We will be more than happy to listen to your feedbacks.
+The enpls project website: [http://enpls.org](http://enpls.org)
 
 # References

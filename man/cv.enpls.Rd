@@ -18,11 +18,12 @@ cv.enpls(x, y, nfolds = 5L, verbose = TRUE, ...)
 \item{...}{other arguments that can be passed to \code{\link{enpls.fit}}}
 }
 \value{
-A list containing four components:
+A list containing:
 \itemize{
 \item \code{ypred} - a matrix containing two columns: real y and predicted y
 \item \code{residual} - cross validation result (y.pred - y.real)
 \item \code{RMSE} - RMSE
+\item \code{MAE} - MAE
 \item \code{Rsquare} - Rsquare
 }
 }

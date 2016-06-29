@@ -50,8 +50,8 @@ plot.cv.enpls = function(x, xlim = NULL, ylim = NULL, main = NULL, ...) {
     geom_abline(slope = 1, intercept = 0, colour = 'darkgrey') +
     geom_point(size = 3, shape = 1, alpha = 0.8) +
     coord_fixed(ratio = 1) +
-    xlab('Predicted Response') +
-    ylab('Observed Response')
+    xlab('Observed Response') +
+    ylab('Predicted Response')
 
 }
 
@@ -89,8 +89,8 @@ plot.cv.enpls = function(x, xlim = NULL, ylim = NULL, main = NULL, ...) {
 #' fs = enpls.fs(x, y, MCtimes = 100)
 #' plot(fs)
 #' plot(fs, nvar = 10)
-#' plot(fs, type = 'boxplot')
-#' plot(fs, type = 'boxplot', limits = c(0.05, 0.95))
+#' plot(fs, type = "boxplot")
+#' plot(fs, type = "boxplot", limits = c(0.05, 0.95))
 
 plot.enpls.fs = function(x, nvar = NULL,
                          type = c('dotplot', 'boxplot'),

@@ -33,8 +33,8 @@ set.seed(42)
 fs = enpls.fs(x, y, MCtimes = 100)
 plot(fs)
 plot(fs, nvar = 10)
-plot(fs, type = 'boxplot')
-plot(fs, type = 'boxplot', limits = c(0.05, 0.95))
+plot(fs, type = "boxplot")
+plot(fs, type = "boxplot", limits = c(0.05, 0.95))
 }
 \author{
 Nan Xiao <\url{http://nanx.me}>
