@@ -7,8 +7,8 @@
 #'
 #' @author Nan Xiao <\url{http://nanx.me}>
 #'
-#' @seealso See \code{\link{cv.enpls}} for ensemble
-#' partial least squares regression.
+#' @seealso See \code{\link{cv.enpls}} for cross-validation of ensemble
+#' partial least squares regression models.
 #'
 #' @method print cv.enpls
 #'
@@ -46,8 +46,8 @@ print.cv.enpls = function(x, ...) {
 #'
 #' @author Nan Xiao <\url{http://nanx.me}>
 #'
-#' @seealso See \code{\link{enpls.fit}} for ensemble
-#' partial least squares regression.
+#' @seealso See \code{\link{enpls.fit}} for fitting ensemble
+#' partial least squares regression models.
 #'
 #' @method print enpls.fit
 #'
@@ -86,13 +86,13 @@ print.enpls.fit = function(x, ...) {
 #'
 #' @param x An object of class \code{enpls.fs}.
 #' @param sort Should the variables be sorted in decreasing order of importance?
-#' @param nvar How many variables to show? Ignored if \code{sort = FALSE}.
+#' @param nvar Number of top variables to show. Ignored if \code{sort = FALSE}.
 #' @param ... Additional parameters for \code{\link{print}}.
 #'
 #' @author Nan Xiao <\url{http://nanx.me}>
 #'
-#' @seealso See \code{\link{enpls.fs}} for feature selection with
-#' ensemble partial least squares regression.
+#' @seealso See \code{\link{enpls.fs}} for measuring feature importance with
+#' ensemble partial least squares regressions.
 #'
 #' @method print enpls.fs
 #'
@@ -136,7 +136,7 @@ print.enpls.fs = function(x, sort = TRUE, nvar = NULL, ...) {
 #' @author Nan Xiao <\url{http://nanx.me}>
 #'
 #' @seealso See \code{\link{enpls.od}} for outlier detection with
-#' ensemble partial least squares regression.
+#' ensemble partial least squares regressions.
 #'
 #' @method print enpls.od
 #'

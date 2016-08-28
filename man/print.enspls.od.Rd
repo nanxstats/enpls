@@ -28,6 +28,6 @@ Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
 See \code{\link{enspls.od}} for outlier detection with
-ensemble sparse partial least squares regression.
+ensemble sparse partial least squares regressions.
 }
 

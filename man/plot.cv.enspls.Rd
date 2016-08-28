@@ -9,13 +9,13 @@
 \arguments{
 \item{x}{An object of class \code{cv.enspls}.}
 
-\item{xlim}{x vector of lenght 2, x axis limits of the plot}
+\item{xlim}{x Vector of length 2 - x axis limits of the plot.}
 
-\item{ylim}{y vector of lenght 2, y axis limits of the plot}
+\item{ylim}{y Vector of length 2 - y axis limits of the plot.}
 
-\item{main}{Plot title, not used.}
+\item{main}{Plot title, not used currently.}
 
-\item{...}{Additional graphical parameters, not used.}
+\item{...}{Additional graphical parameters, not used currently.}
 }
 \description{
 Plot cv.enspls object
@@ -35,7 +35,7 @@ plot(cvfit)}
 Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
-See \code{\link{cv.enspls}} for ensemble sparse
-partial least squares regression.
+See \code{\link{cv.enspls}} for cross-validation of
+ensemble sparse partial least squares regression models.
 }
 

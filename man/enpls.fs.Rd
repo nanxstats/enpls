@@ -2,25 +2,26 @@
 % Please edit documentation in R/enpls.fs.R
 \name{enpls.fs}
 \alias{enpls.fs}
-\title{Ensemble Partial Least Squares for Feature Selection}
+\title{Ensemble Partial Least Squares for Measuring Feature Importance}
 \usage{
-enpls.fs(x, y, maxcomp = NULL, reptimes = 500L, method = c("mc",
-  "bootstrap"), ratio = 0.8, parallel = 1L)
+enpls.fs(x, y, maxcomp = NULL, reptimes = 500L, method = c("mc", "boot"),
+  ratio = 0.8, parallel = 1L)
 }
 \arguments{
-\item{x}{predictor matrix}
+\item{x}{Predictor matrix.}
 
-\item{y}{response vector}
+\item{y}{Response vector.}
 
-\item{maxcomp}{Maximum number of components included within the models,
-if not specified, default is the variable (column) numbers in x.}
+\item{maxcomp}{Maximum number of components included within each model.
+If not specified, will use the variable (column) numbers in \code{x}.}
 
 \item{reptimes}{Number of models to build with Monte-Carlo resampling
 or bootstrapping.}
 
-\item{method}{\code{"mc"} or \code{"bootstrap"}. Default is \code{"mc"}.}
+\item{method}{Resampling method. \code{"mc"} (Monte-Carlo resampling)
+or \code{"boot"} (bootstrapping). Default is \code{"mc"}.}
 
-\item{ratio}{sample ratio used when \code{method = "mc"}}
+\item{ratio}{Sampling ratio used when \code{method = "mc"}.}
 
 \item{parallel}{Integer. Number of CPU cores to use.
 Default is \code{1} (not parallelized).}
@@ -33,7 +34,7 @@ A list containing two components:
 }
 }
 \description{
-Feature selection with ensemble partial least squares.
+Measuring feature importance with ensemble partial least squares.
 }
 \examples{
 data("alkanes")
@@ -50,7 +51,8 @@ Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
 See \code{\link{enpls.od}} for outlier detection with
-ensemble partial least squares regression.
-See \code{\link{enpls.fit}} for ensemble partial least squares regression.
+ensemble partial least squares regressions.
+See \code{\link{enpls.fit}} for fitting ensemble partial least
+squares regression models.
 }
 

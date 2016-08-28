@@ -27,7 +27,7 @@ print(cvfit)
 Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
-See \code{\link{cv.enpls}} for ensemble
-partial least squares regression.
+See \code{\link{cv.enpls}} for cross-validation of ensemble
+partial least squares regression models.
 }
 

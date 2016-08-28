@@ -43,3 +43,4 @@ Max Kuhn <max.kuhn@pfizer.com>.
 
 * General improvements on function documentation
 * Changing the argument name `MCtimes` to `reptimes`
+* Changing the option name `"bootstrap"` to `"boot"`

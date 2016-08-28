@@ -2,11 +2,11 @@
 #'
 #' K-fold cross validation for ensemble sparse partial least squares regression.
 #'
-#' @param x predictor matrix
-#' @param y response vector
-#' @param nfolds number of folds - default is \code{5}.
-#' @param verbose shall we print the cross validation process
-#' @param ... other arguments that can be passed to \code{\link{enspls.fit}}
+#' @param x Predictor matrix.
+#' @param y Response vector.
+#' @param nfolds Number of folds, default is \code{5}.
+#' @param verbose Shall we print out the progress of cross-validation?
+#' @param ... Arguments to be passed to \code{\link{enspls.fit}}.
 #'
 #' @return A list containing:
 #' \itemize{
@@ -24,7 +24,7 @@
 #' can be measured), please try setting a large \code{reptimes}.
 #'
 #' @seealso See \code{\link{enspls.fit}} for ensemble sparse
-#' partial least squares regression.
+#' partial least squares regressions.
 #'
 #' @export cv.enspls
 #'

@@ -11,7 +11,7 @@
 
 \item{sort}{Should the variables be sorted in decreasing order of importance?}
 
-\item{nvar}{How many variables to show? Ignored if \code{sort = FALSE}.}
+\item{nvar}{Number of top variables to show. Ignored if \code{sort = FALSE}.}
 
 \item{...}{Additional parameters for \code{\link{print}}.}
 }
@@ -32,7 +32,7 @@ print(fs, nvar = 10L)
 Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
-See \code{\link{enpls.fs}} for feature selection with
-ensemble partial least squares regression.
+See \code{\link{enpls.fs}} for measuring feature importance with
+ensemble partial least squares regressions.
 }
 

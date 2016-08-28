@@ -2,16 +2,17 @@
 #'
 #' Outlier detection with ensemble sparse partial least squares.
 #'
-#' @param x predictor matrix
-#' @param y response vector
-#' @param maxcomp Maximum number of components included within the models,
-#' if not specified, default is 5.
+#' @param x Predictor matrix.
+#' @param y Response vector.
+#' @param maxcomp Maximum number of components included within each model.
+#' If not specified, will use 5 by default.
 #' @param alpha Parameter (grid) controlling sparsity of the model.
 #' If not specified, default is \code{seq(0.2, 0.8, 0.2)}.
 #' @param reptimes Number of models to build with Monte-Carlo resampling
 #' or bootstrapping.
-#' @param method \code{"mc"} or \code{"bootstrap"}. Default is \code{"mc"}.
-#' @param ratio sample ratio used when \code{method = "mc"}
+#' @param method Resampling method. \code{"mc"} (Monte-Carlo resampling)
+#' or \code{"boot"} (bootstrapping). Default is \code{"mc"}.
+#' @param ratio Sampling ratio used when \code{method = "mc"}.
 #' @param parallel Integer. Number of CPU cores to use.
 #' Default is \code{1} (not parallelized).
 #'
@@ -29,10 +30,10 @@
 #' be selected in the test set (thus the prediction uncertainty
 #' can be measured), please try setting a large \code{reptimes}.
 #'
-#' @seealso See \code{\link{enspls.fs}} for feature selection with
-#' ensemble sparse partial least squares regression.
-#' See \code{\link{enspls.fit}} for ensemble sparse
-#' partial least squares regression.
+#' @seealso See \code{\link{enspls.fs}} for measuring feature importance
+#' with ensemble sparse partial least squares regressions.
+#' See \code{\link{enspls.fit}} for fitting ensemble sparse
+#' partial least squares regression models.
 #'
 #' @export enspls.od
 #'
@@ -53,7 +54,7 @@ enspls.od = function(x, y,
                      maxcomp = 5L,
                      alpha = seq(0.2, 0.8, 0.2),
                      reptimes = 500L,
-                     method = c('mc', 'bootstrap'), ratio = 0.8,
+                     method = c('mc', 'boot'), ratio = 0.8,
                      parallel = 1L) {
 
   if (missing(x) | missing(y)) stop('Please specify both x and y')
@@ -71,7 +72,7 @@ enspls.od = function(x, y,
     }
   }
 
-  if (method == 'bootstrap') {
+  if (method == 'boot') {
     for (i in 1L:reptimes) {
       samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
       samp.idx.remain[[i]] = setdiff(1L:x.row, unique(samp.idx[[i]]))

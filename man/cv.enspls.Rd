@@ -7,15 +7,15 @@
 cv.enspls(x, y, nfolds = 5L, verbose = TRUE, ...)
 }
 \arguments{
-\item{x}{predictor matrix}
+\item{x}{Predictor matrix.}
 
-\item{y}{response vector}
+\item{y}{Response vector.}
 
-\item{nfolds}{number of folds - default is \code{5}.}
+\item{nfolds}{Number of folds, default is \code{5}.}
 
-\item{verbose}{shall we print the cross validation process}
+\item{verbose}{Shall we print out the progress of cross-validation?}
 
-\item{...}{other arguments that can be passed to \code{\link{enspls.fit}}}
+\item{...}{Arguments to be passed to \code{\link{enspls.fit}}.}
 }
 \value{
 A list containing:
@@ -52,6 +52,6 @@ Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
 See \code{\link{enspls.fit}} for ensemble sparse
-partial least squares regression.
+partial least squares regressions.
 }
 

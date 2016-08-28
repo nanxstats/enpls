@@ -3,15 +3,15 @@
 #' Plot cv.enspls object
 #'
 #' @param x An object of class \code{cv.enspls}.
-#' @param xlim x vector of lenght 2, x axis limits of the plot
-#' @param ylim y vector of lenght 2, y axis limits of the plot
-#' @param main Plot title, not used.
-#' @param ... Additional graphical parameters, not used.
+#' @param xlim x Vector of length 2 - x axis limits of the plot.
+#' @param ylim y Vector of length 2 - y axis limits of the plot.
+#' @param main Plot title, not used currently.
+#' @param ... Additional graphical parameters, not used currently.
 #'
 #' @author Nan Xiao <\url{http://nanx.me}>
 #'
-#' @seealso See \code{\link{cv.enspls}} for ensemble sparse
-#' partial least squares regression.
+#' @seealso See \code{\link{cv.enspls}} for cross-validation of
+#' ensemble sparse partial least squares regression models.
 #'
 #' @method plot cv.enspls
 #'
@@ -62,17 +62,17 @@ plot.cv.enspls = function(x, xlim = NULL, ylim = NULL, main = NULL, ...) {
 #' Plot enspls.fs object
 #'
 #' @param x An object of class \code{enspls.fs}.
-#' @param nvar How many variables to show? Ignored if \code{sort = FALSE}.
-#' @param type Plot type, can be \code{dotplot} or \code{boxplot}.
+#' @param nvar Number of top variables to show. Ignored if \code{sort = FALSE}.
+#' @param type Plot type, can be \code{"dotplot"} or \code{"boxplot"}.
 #' @param limits Vector of length 2. Set boxplot limits (in quantile) to
 #' remove the extreme outlier coefficients.
-#' @param main Plot title, not used.
-#' @param ... Additional graphical parameters, not used.
+#' @param main Plot title, not used currently.
+#' @param ... Additional graphical parameters, not used currently.
 #'
 #' @author Nan Xiao <\url{http://nanx.me}>
 #'
-#' @seealso See \code{\link{enspls.fs}} for feature selection with
-#' ensemble sparse partial least squares regression.
+#' @seealso See \code{\link{enspls.fs}} for measuring feature importance with
+#' ensemble sparse partial least squares regressions.
 #'
 #' @method plot enspls.fs
 #'
@@ -144,17 +144,17 @@ plot.enspls.fs = function(x, nvar = NULL,
 #' Plot enspls.od object
 #'
 #' @param x An object of class \code{enspls.od}.
-#' @param criterion Criterion of being outlier,
-#' could be \code{"quantile"} or \code{"sd"}.
-#' @param prob Quantile probability as cut-off.
-#' @param sdtimes Times of standard deviation as cut-off.
+#' @param criterion Criterion of being classified as an outlier,
+#' can be \code{"quantile"} or \code{"sd"}.
+#' @param prob Quantile probability as the cut-off value.
+#' @param sdtimes Times of standard deviation as the cut-off value.
 #' @param main Plot title.
 #' @param ... Additional graphical parameters for \code{\link{plot}}.
 #'
 #' @author Nan Xiao <\url{http://nanx.me}>
 #'
 #' @seealso See \code{\link{enspls.od}} for outlier detection with
-#' ensemble sparse partial least squares regression.
+#' ensemble sparse partial least squares regressions.
 #'
 #' @importFrom graphics axis grid par points rect
 #'

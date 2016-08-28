@@ -2,14 +2,15 @@
 #'
 #' Outlier detection with ensemble partial least squares.
 #'
-#' @param x predictor matrix
-#' @param y response vector
-#' @param maxcomp Maximum number of components included within the models,
-#' if not specified, default is the variable (column) numbers in x.
+#' @param x Predictor matrix.
+#' @param y Response vector.
+#' @param maxcomp Maximum number of components included within each model.
+#' If not specified, will use the variable (column) numbers in \code{x}.
 #' @param reptimes Number of models to build with Monte-Carlo resampling
 #' or bootstrapping.
-#' @param method \code{"mc"} or \code{"bootstrap"}. Default is \code{"mc"}.
-#' @param ratio sample ratio used when \code{method = "mc"}
+#' @param method Resampling method. \code{"mc"} (Monte-Carlo resampling)
+#' or \code{"boot"} (bootstrapping). Default is \code{"mc"}.
+#' @param ratio Sampling ratio used when \code{method = "mc"}.
 #' @param parallel Integer. Number of CPU cores to use.
 #' Default is \code{1} (not parallelized).
 #'
@@ -27,9 +28,10 @@
 #' be selected in the test set (thus the prediction uncertainty
 #' can be measured), please try setting a large \code{reptimes}.
 #'
-#' @seealso See \code{\link{enpls.fs}} for feature selection with
-#' ensemble partial least squares regression.
-#' See \code{\link{enpls.fit}} for ensemble partial least squares regression.
+#' @seealso See \code{\link{enpls.fs}} for measuring feature importance with
+#' ensemble partial least squares regressions.
+#' See \code{\link{enpls.fit}} for fitting ensemble partial least
+#' squares regression models.
 #'
 #' @export enpls.od
 #'
@@ -50,7 +52,7 @@
 enpls.od = function(x, y,
                     maxcomp = NULL,
                     reptimes = 500L,
-                    method = c('mc', 'bootstrap'), ratio = 0.8,
+                    method = c('mc', 'boot'), ratio = 0.8,
                     parallel = 1L) {
 
   if (missing(x) | missing(y)) stop('Please specify both x and y')
@@ -70,7 +72,7 @@ enpls.od = function(x, y,
     }
   }
 
-  if (method == 'bootstrap') {
+  if (method == 'boot') {
     for (i in 1L:reptimes) {
       samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
       samp.idx.remain[[i]] = setdiff(1L:x.row, unique(samp.idx[[i]]))

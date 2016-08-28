@@ -10,12 +10,12 @@
 \arguments{
 \item{x}{An object of class \code{enpls.od}.}
 
-\item{criterion}{Criterion of being outlier,
-could be \code{"quantile"} or \code{"sd"}.}
+\item{criterion}{Criterion of being classified as an outlier,
+can be \code{"quantile"} or \code{"sd"}.}
 
-\item{prob}{Quantile probability as cut-off.}
+\item{prob}{Quantile probability as the cut-off value.}
 
-\item{sdtimes}{Times of standard deviation as cut-off.}
+\item{sdtimes}{Times of standard deviation as the cut-off value.}
 
 \item{main}{Plot title.}
 
@@ -31,14 +31,14 @@ y = alkanes$y
 
 set.seed(42)
 od = enpls.od(x, y, reptimes = 50)
-plot(od, criterion = 'quantile')
-plot(od, criterion = 'sd')
+plot(od, criterion = "quantile")
+plot(od, criterion = "sd")
 }
 \author{
 Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
 See \code{\link{enpls.od}} for outlier detection with
-ensemble partial least squares regression.
+ensemble partial least squares regressions.
 }
 

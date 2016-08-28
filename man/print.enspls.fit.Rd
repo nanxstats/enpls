@@ -27,7 +27,7 @@ print(fit)
 Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
-See \code{\link{enspls.fit}} for ensemble sparse
-partial least squares regression.
+See \code{\link{enspls.fit}} for fitting ensemble sparse
+partial least squares regression models.
 }
 

@@ -28,6 +28,6 @@ Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
 See \code{\link{enpls.od}} for outlier detection with
-ensemble partial least squares regression.
+ensemble partial least squares regressions.
 }
 

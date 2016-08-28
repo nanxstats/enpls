@@ -5,16 +5,15 @@
 \title{Ensemble Sparse Partial Least Squares Regression}
 \usage{
 enspls.fit(x, y, maxcomp = 5L, alpha = seq(0.2, 0.8, 0.2),
-  reptimes = 500L, method = c("mc", "bootstrap"), ratio = 0.8,
-  parallel = 1L)
+  reptimes = 500L, method = c("mc", "boot"), ratio = 0.8, parallel = 1L)
 }
 \arguments{
-\item{x}{predictor matrix}
+\item{x}{Predictor matrix.}
 
-\item{y}{response vector}
+\item{y}{Response vector.}
 
-\item{maxcomp}{Maximum number of components included within the models,
-if not specified, default is 5.}
+\item{maxcomp}{Maximum number of components included within each model.
+If not specified, will use 5 by default.}
 
 \item{alpha}{Parameter (grid) controlling sparsity of the model.
 If not specified, default is \code{seq(0.2, 0.8, 0.2)}.}
@@ -22,9 +21,10 @@ If not specified, default is \code{seq(0.2, 0.8, 0.2)}.}
 \item{reptimes}{Number of models to build with Monte-Carlo resampling
 or bootstrapping.}
 
-\item{method}{\code{"mc"} or \code{"bootstrap"}. Default is \code{"mc"}.}
+\item{method}{Resampling method. \code{"mc"} (Monte-Carlo resampling)
+or \code{"boot"} (bootstrapping). Default is \code{"mc"}.}
 
-\item{ratio}{sample ratio used when \code{method = "mc"}}
+\item{ratio}{Sampling ratio used when \code{method = "mc"}.}
 
 \item{parallel}{Integer. Number of CPU cores to use.
 Default is \code{1} (not parallelized).}
@@ -49,9 +49,9 @@ predict(fit, newx = x)
 Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
-See \code{\link{enspls.fs}} for feature selection with ensemble
-sparse partial least squares regression.
+See \code{\link{enspls.fs}} for measuring feature importance
+with ensemble sparse partial least squares regressions.
 See \code{\link{enspls.od}} for outlier detection with ensemble
-sparse partial least squares regression.
+sparse partial least squares regressions.
 }
 

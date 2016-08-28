@@ -10,16 +10,16 @@
 \arguments{
 \item{x}{An object of class \code{enpls.fs}.}
 
-\item{nvar}{How many variables to show? Ignored if \code{sort = FALSE}.}
+\item{nvar}{Number of top variables to show. Ignored if \code{sort = FALSE}.}
 
-\item{type}{Plot type, can be \code{dotplot} or \code{boxplot}.}
+\item{type}{Plot type. \code{"dotplot"} or \code{"boxplot"}.}
 
 \item{limits}{Vector of length 2. Set boxplot limits (in quantile) to
 remove the extreme outlier coefficients.}
 
-\item{main}{Plot title, not used.}
+\item{main}{Plot title, not used currently.}
 
-\item{...}{Additional graphical parameters, not used.}
+\item{...}{Additional graphical parameters, not used currently.}
 }
 \description{
 Plot enpls.fs object
@@ -40,7 +40,7 @@ plot(fs, type = "boxplot", limits = c(0.05, 0.95))
 Nan Xiao <\url{http://nanx.me}>
 }
 \seealso{
-See \code{\link{enpls.fs}} for feature selection with
-ensemble partial least squares regression.
+See \code{\link{enpls.fs}} for measuring feature importance with
+ensemble partial least squares regressions.
 }
 
