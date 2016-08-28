@@ -4,8 +4,9 @@
 \alias{enspls.fit}
 \title{Ensemble Sparse Partial Least Squares Regression}
 \usage{
-enspls.fit(x, y, maxcomp = 5L, alpha = seq(0.2, 0.8, 0.2), MCtimes = 500L,
-  method = c("mc", "bootstrap"), ratio = 0.8, parallel = 1L)
+enspls.fit(x, y, maxcomp = 5L, alpha = seq(0.2, 0.8, 0.2),
+  reptimes = 500L, method = c("mc", "bootstrap"), ratio = 0.8,
+  parallel = 1L)
 }
 \arguments{
 \item{x}{predictor matrix}
@@ -18,7 +19,8 @@ if not specified, default is 5.}
 \item{alpha}{Parameter (grid) controlling sparsity of the model.
 If not specified, default is \code{seq(0.2, 0.8, 0.2)}.}
 
-\item{MCtimes}{times of Monte-Carlo}
+\item{reptimes}{Number of models to build with Monte-Carlo resampling
+or bootstrapping.}
 
 \item{method}{\code{"mc"} or \code{"bootstrap"}. Default is \code{"mc"}.}
 
@@ -39,7 +41,7 @@ x = logd1k$x
 y = logd1k$y
 
 set.seed(42)
-fit = enspls.fit(x, y, MCtimes = 4, maxcomp = 3)
+fit = enspls.fit(x, y, reptimes = 4, maxcomp = 3)
 print(fit)
 predict(fit, newx = x)
 }

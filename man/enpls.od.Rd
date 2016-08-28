@@ -4,7 +4,7 @@
 \alias{enpls.od}
 \title{Ensemble Partial Least Squares for Outlier Detection}
 \usage{
-enpls.od(x, y, maxcomp = NULL, MCtimes = 500L, method = c("mc",
+enpls.od(x, y, maxcomp = NULL, reptimes = 500L, method = c("mc",
   "bootstrap"), ratio = 0.8, parallel = 1L)
 }
 \arguments{
@@ -15,7 +15,8 @@ enpls.od(x, y, maxcomp = NULL, MCtimes = 500L, method = c("mc",
 \item{maxcomp}{Maximum number of components included within the models,
 if not specified, default is the variable (column) numbers in x.}
 
-\item{MCtimes}{times of Monte-Carlo}
+\item{reptimes}{Number of models to build with Monte-Carlo resampling
+or bootstrapping.}
 
 \item{method}{\code{"mc"} or \code{"bootstrap"}. Default is \code{"mc"}.}
 
@@ -39,7 +40,7 @@ Outlier detection with ensemble partial least squares.
 \note{
 To maximize the probablity that each observation can
 be selected in the test set (thus the prediction uncertainty
-can be measured), please try setting a large \code{MCtimes}.
+can be measured), please try setting a large \code{reptimes}.
 }
 \examples{
 data("alkanes")
@@ -47,23 +48,13 @@ x = alkanes$x
 y = alkanes$y
 
 set.seed(42)
-od = enpls.od(x, y, MCtimes = 100)
+od = enpls.od(x, y, reptimes = 100)
 print(od)
 plot(od)
 plot(od, criterion = 'sd')
 }
 \author{
 Nan Xiao <\url{http://nanx.me}>
-}
-\references{
-DongSheng Cao, Yizeng Liang, Qingsong Xu, Hongdong Li, and Xian Chen.
-"A new strategy of outlier detection for QSAR/QSPR."
-\emph{Journal of computational chemistry} 31, no. 3 (2010): 592--602.
-
-Dongsheng Cao, Yizeng Liang, Qingsong Xu, Yifeng Yun, and Hongdong Li.
-"Toward better QSAR/QSPR modeling: simultaneous outlier detection and
-variable selection using distribution of model features."
-\emph{Journal of computer-aided molecular design} 25, no. 1 (2011): 67--80.
 }
 \seealso{
 See \code{\link{enpls.fs}} for feature selection with

@@ -4,7 +4,7 @@
 \alias{enpls.fit}
 \title{Ensemble Partial Least Squares Regression}
 \usage{
-enpls.fit(x, y, maxcomp = NULL, MCtimes = 500L, method = c("mc",
+enpls.fit(x, y, maxcomp = NULL, reptimes = 500L, method = c("mc",
   "bootstrap"), ratio = 0.8, parallel = 1L)
 }
 \arguments{
@@ -15,7 +15,8 @@ enpls.fit(x, y, maxcomp = NULL, MCtimes = 500L, method = c("mc",
 \item{maxcomp}{Maximum number of components included within the models,
 if not specified, default is the variable (column) numbers in x.}
 
-\item{MCtimes}{times of Monte-Carlo}
+\item{reptimes}{Number of models to build with Monte-Carlo resampling
+or bootstrapping.}
 
 \item{method}{\code{"mc"} or \code{"bootstrap"}. Default is \code{"mc"}.}
 
@@ -36,18 +37,12 @@ x = alkanes$x
 y = alkanes$y
 
 set.seed(42)
-fit = enpls.fit(x, y, MCtimes = 50)
+fit = enpls.fit(x, y, reptimes = 50)
 print(fit)
 predict(fit, newx = x)
 }
 \author{
 Nan Xiao <\url{http://nanx.me}>
-}
-\references{
-Dongsheng Cao, Yizeng Liang, Qingsong Xu, Yifeng Yun, and Hongdong Li.
-"Toward better QSAR/QSPR modeling: simultaneous outlier detection and
-variable selection using distribution of model features."
-\emph{Journal of computer-aided molecular design} 25, no. 1 (2011): 67--80.
 }
 \seealso{
 See \code{\link{enpls.fs}} for feature selection with ensemble

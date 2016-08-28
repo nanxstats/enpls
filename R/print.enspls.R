@@ -22,7 +22,7 @@
 #' y = logd1k$y
 #'
 #' set.seed(42)
-#' cvfit = cv.enspls(x, y, MCtimes = 10)
+#' cvfit = cv.enspls(x, y, reptimes = 10)
 #' print(cvfit)}
 
 print.cv.enspls = function(x, ...) {
@@ -63,7 +63,7 @@ print.cv.enspls = function(x, ...) {
 #' y = logd1k$y
 #'
 #' set.seed(42)
-#' fit = enspls.fit(x, y, MCtimes = 5, maxcomp = 3)
+#' fit = enspls.fit(x, y, reptimes = 5, maxcomp = 3)
 #' print(fit)
 
 print.enspls.fit = function(x, ...) {
@@ -73,9 +73,9 @@ print.enspls.fit = function(x, ...) {
 
   coefmeta = coef(x[[1]][[1]])
   varcount = nrow(coefmeta)
-  mctimes  = length(x)
-  coefdf   = matrix(NA, ncol = mctimes, nrow = varcount)
-  for (i in 1:mctimes) coefdf[, i] = coef(x[[i]][[1]])
+  reptimes  = length(x)
+  coefdf   = matrix(NA, ncol = reptimes, nrow = varcount)
+  for (i in 1:reptimes) coefdf[, i] = coef(x[[i]][[1]])
   rownames(coefdf) = rownames(coefmeta)
 
   cat('Coefficients of the Models by Ensemble Sparse Partial Least Squares\n')
@@ -108,7 +108,7 @@ print.enspls.fit = function(x, ...) {
 #' y = logd1k$y
 #'
 #' set.seed(42)
-#' fs = enspls.fs(x, y, MCtimes = 5, maxcomp = 3)
+#' fs = enspls.fs(x, y, reptimes = 5, maxcomp = 3)
 #' print(fs, nvar = 10L)
 
 print.enspls.fs = function(x, sort = TRUE, nvar = NULL, ...) {
@@ -151,7 +151,7 @@ print.enspls.fs = function(x, sort = TRUE, nvar = NULL, ...) {
 #' y = logd1k$y
 #'
 #' set.seed(42)
-#' od = enspls.od(x, y, MCtimes = 5, maxcomp = 3)
+#' od = enspls.od(x, y, reptimes = 5, maxcomp = 3)
 #' print(od)
 
 print.enspls.od = function(x, ...) {

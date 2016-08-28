@@ -20,7 +20,7 @@ x = logd1k$x
 y = logd1k$y
 
 set.seed(42)
-fit = enspls.fit(x, y, MCtimes = 5, maxcomp = 3)
+fit = enspls.fit(x, y, reptimes = 5, maxcomp = 3)
 print(fit)
 }
 \author{

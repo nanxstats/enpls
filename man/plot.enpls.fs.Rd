@@ -30,7 +30,7 @@ x = alkanes$x
 y = alkanes$y
 
 set.seed(42)
-fs = enpls.fs(x, y, MCtimes = 50)
+fs = enpls.fs(x, y, reptimes = 50)
 plot(fs)
 plot(fs, nvar = 10)
 plot(fs, type = "boxplot")

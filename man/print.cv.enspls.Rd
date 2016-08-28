@@ -22,7 +22,7 @@ x = logd1k$x
 y = logd1k$y
 
 set.seed(42)
-cvfit = cv.enspls(x, y, MCtimes = 10)
+cvfit = cv.enspls(x, y, reptimes = 10)
 print(cvfit)}
 }
 \author{

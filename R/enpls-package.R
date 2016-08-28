@@ -3,8 +3,7 @@
 #' The enpls package provides functions for running the
 #' ensemble partial least squares regression.
 #'
-#' The comprehensive user guide can be opened with
-#' \code{vignette('enpls')}.
+#' The package vignette can be opened with \code{vignette("enpls")}.
 #'
 #' \tabular{ll}{ Package: \tab enpls\cr
 #' Type: \tab Package\cr

@@ -25,10 +25,9 @@
 #' }
 #'
 #' @references
-#' Yizeng Liang, Dalin Yuan, Qingsong Xu, and Olav Martin Kvalheim.
-#' "Modeling based on subspace orthogonal projections for
-#' QSAR and QSPR research."
-#' \emph{Journal of Chemometrics} 22, no. 1 (2008): 23--35.
+#' Yi-Zeng Liang, Da-Lin Yuan, Qing-Song Xu, and Olav Martin Kvalheim.
+#' "Modeling based on subspace orthogonal projections for QSAR and
+#' QSPR research." \emph{Journal of Chemometrics} 22, no. 1 (2008): 23--35.
 #'
 #' @examples
 #' data("alkanes")
@@ -55,7 +54,7 @@ NULL
 #' The first 1000 compounds in the original dataset were selected.
 #'
 #' @references
-#' Wang, Jian-Bing, Dong-Sheng Cao, Min-Feng Zhu, Yong-Huan Yun, Nan Xiao,
+#' Jian-Bing Wang, Dong-Sheng Cao, Min-Feng Zhu, Yong-Huan Yun, Nan Xiao,
 #' and Yi-Zeng Liang. "In silico evaluation of logD7.4 and comparison with
 #' other prediction methods."
 #' \emph{Journal of Chemometrics} 29, no. 7 (2015): 389--398.

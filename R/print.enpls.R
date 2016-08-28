@@ -20,7 +20,7 @@
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' cvfit = cv.enpls(x, y, MCtimes = 10)
+#' cvfit = cv.enpls(x, y, reptimes = 10)
 #' print(cvfit)
 
 print.cv.enpls = function(x, ...) {
@@ -59,7 +59,7 @@ print.cv.enpls = function(x, ...) {
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' fit = enpls.fit(x, y, MCtimes = 50)
+#' fit = enpls.fit(x, y, reptimes = 50)
 #' print(fit)
 
 print.enpls.fit = function(x, ...) {
@@ -69,9 +69,9 @@ print.enpls.fit = function(x, ...) {
 
   coefmeta = coef(x[[1]][[1]], intercept = TRUE)[, 1, 1]
   varcount = length(coefmeta)
-  mctimes  = length(x)
-  coefdf   = matrix(NA, ncol = mctimes, nrow = varcount)
-  for (i in 1:mctimes) coefdf[, i] = coef(x[[i]][[1]], intercept = TRUE)[, 1, 1]
+  reptimes  = length(x)
+  coefdf   = matrix(NA, ncol = reptimes, nrow = varcount)
+  for (i in 1:reptimes) coefdf[, i] = coef(x[[i]][[1]], intercept = TRUE)[, 1, 1]
   rownames(coefdf) = names(coefmeta)
 
   cat('Coefficients of the Models by Ensemble Partial Least Squares\n')
@@ -104,7 +104,7 @@ print.enpls.fit = function(x, ...) {
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' fs = enpls.fs(x, y, MCtimes = 100)
+#' fs = enpls.fs(x, y, reptimes = 100)
 #' print(fs)
 #' print(fs, nvar = 10L)
 
@@ -148,7 +148,7 @@ print.enpls.fs = function(x, sort = TRUE, nvar = NULL, ...) {
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' od = enpls.od(x, y, MCtimes = 50)
+#' od = enpls.od(x, y, reptimes = 50)
 #' print(od)
 
 print.enpls.od = function(x, ...) {

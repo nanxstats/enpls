@@ -1,6 +1,6 @@
 ---
 title: "An Introduction to the `enpls` Package"
-author: "Nan Xiao <<road2stat@gmail.com>>"
+author: "Nan Xiao <<http://nanx.me>>"
 date: "`r Sys.Date()`"
 bibliography: enpls.bib
 output:
@@ -63,7 +63,7 @@ vanilla partial least squares when we build each model.
 
 ```{r, fig.width = 8, fig.height = 8, out.width = 600, out.height = 600}
 set.seed(42)
-fit = enspls.fit(x, y, ratio = 0.7, MCtimes = 20, maxcomp = 3)
+fit = enspls.fit(x, y, ratio = 0.7, reptimes = 20, maxcomp = 3)
 y.pred = predict(fit, newx = x)
 
 df = data.frame(y, y.pred)
@@ -80,7 +80,7 @@ plotted the predicted values against the true values.
 
 The parameter `ratio` decides the sampling ratio for each Monte-Carlo
 run; `maxcomp` controls the maximum number of components included
-within each model; `MCtimes` sets the times of Monte-Carlo resampling,
+within each model; `reptimes` sets the times of Monte-Carlo resampling,
 we recommend setting it to a large number (500 by default).
 
 One common parameter for all functions in `enpls` is `parallel`,
@@ -102,7 +102,7 @@ better performance.
 
 ```{r, fig.width = 8, fig.height = 8, out.width = 600, out.height = 600}
 cv.fit = cv.enspls(x, y, nfolds = 5, ratio = 0.7,
-                   MCtimes = 10, maxcomp = 3, verbose = FALSE)
+                   reptimes = 10, maxcomp = 3, verbose = FALSE)
 print(cv.fit)
 plot(cv.fit)
 ```
@@ -116,7 +116,7 @@ predicted values for each test fold against the true response.
 To measure feature importance, simply use `enpls.fs()` or `enspls.fs()`:
 
 ```{r, fig.width = 8, fig.height = 8, out.width = 600, out.height = 600}
-fs = enspls.fs(x, y, ratio = 0.7, MCtimes = 20, maxcomp = 3)
+fs = enspls.fs(x, y, ratio = 0.7, reptimes = 20, maxcomp = 3)
 print(fs, nvar = 10)
 plot(fs, nvar = 10)
 plot(fs, type = "boxplot", nvar = 10)
@@ -142,7 +142,7 @@ actual modeling.
 This can be done with `enpls.od()`, `enspls.od()` easily:
 
 ```{r, fig.width = 8, fig.height = 8, out.width = 600, out.height = 600}
-od = enspls.od(x, y, ratio = 0.8, MCtimes = 20, maxcomp = 3)
+od = enspls.od(x, y, ratio = 0.8, reptimes = 20, maxcomp = 3)
 plot(od, prob = 0.05)
 plot(od, criterion = "sd", sdtimes = 2)
 ```

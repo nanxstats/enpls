@@ -33,7 +33,7 @@ K-fold cross validation for ensemble sparse partial least squares regression.
 \note{
 To maximize the probablity that each observation can
 be selected in the test set (thus the prediction uncertainty
-can be measured), please try setting a large \code{MCtimes}.
+can be measured), please try setting a large \code{reptimes}.
 }
 \examples{
 # This example takes one minute to run
@@ -43,7 +43,7 @@ x = logd1k$x
 y = logd1k$y
 
 set.seed(42)
-cvfit = cv.enspls(x, y, MCtimes = 10)
+cvfit = cv.enspls(x, y, reptimes = 10)
 print(cvfit)
 plot(cvfit)}
 }

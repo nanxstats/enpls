@@ -28,7 +28,7 @@
 #' y = logd1k$y
 #'
 #' set.seed(42)
-#' cvfit = cv.enspls(x, y, MCtimes = 10)
+#' cvfit = cv.enspls(x, y, reptimes = 10)
 #' plot(cvfit)}
 
 plot.cv.enspls = function(x, xlim = NULL, ylim = NULL, main = NULL, ...) {
@@ -88,7 +88,7 @@ plot.cv.enspls = function(x, xlim = NULL, ylim = NULL, main = NULL, ...) {
 #' y = logd1k$y
 #'
 #' set.seed(42)
-#' fs = enspls.fs(x, y, MCtimes = 5, maxcomp = 2)
+#' fs = enspls.fs(x, y, reptimes = 5, maxcomp = 2)
 #' plot(fs, nvar = 10)
 #' plot(fs, type = "boxplot", limits = c(0.05, 0.95), nvar = 10)
 
@@ -168,7 +168,7 @@ plot.enspls.fs = function(x, nvar = NULL,
 #' y = logd1k$y
 #'
 #' set.seed(42)
-#' od = enspls.od(x, y, MCtimes = 4, maxcomp = 2)
+#' od = enspls.od(x, y, reptimes = 4, maxcomp = 2)
 #' plot(od, criterion = "quantile", prob = 0.1)
 #' plot(od, criterion = "sd", sdtimes = 1)
 

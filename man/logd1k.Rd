@@ -25,7 +25,7 @@ data(logd1k)
 str(logd1k)
 }
 \references{
-Wang, Jian-Bing, Dong-Sheng Cao, Min-Feng Zhu, Yong-Huan Yun, Nan Xiao,
+Jian-Bing Wang, Dong-Sheng Cao, Min-Feng Zhu, Yong-Huan Yun, Nan Xiao,
 and Yi-Zeng Liang. "In silico evaluation of logD7.4 and comparison with
 other prediction methods."
 \emph{Journal of Chemometrics} 29, no. 7 (2015): 389--398.

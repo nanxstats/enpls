@@ -6,7 +6,8 @@
 #' @param y response vector
 #' @param maxcomp Maximum number of components included within the models,
 #' if not specified, default is the variable (column) numbers in x.
-#' @param MCtimes times of Monte-Carlo
+#' @param reptimes Number of models to build with Monte-Carlo resampling
+#' or bootstrapping.
 #' @param method \code{"mc"} or \code{"bootstrap"}. Default is \code{"mc"}.
 #' @param ratio sample ratio used when \code{method = "mc"}
 #' @param parallel Integer. Number of CPU cores to use.
@@ -26,25 +27,19 @@
 #' @importFrom doParallel registerDoParallel
 #' @importFrom foreach foreach "%dopar%"
 #'
-#' @references
-#' Dongsheng Cao, Yizeng Liang, Qingsong Xu, Yifeng Yun, and Hongdong Li.
-#' "Toward better QSAR/QSPR modeling: simultaneous outlier detection and
-#' variable selection using distribution of model features."
-#' \emph{Journal of computer-aided molecular design} 25, no. 1 (2011): 67--80.
-#'
 #' @examples
 #' data("alkanes")
 #' x = alkanes$x
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' fit = enpls.fit(x, y, MCtimes = 50)
+#' fit = enpls.fit(x, y, reptimes = 50)
 #' print(fit)
 #' predict(fit, newx = x)
 
 enpls.fit = function(x, y,
                      maxcomp = NULL,
-                     MCtimes = 500L,
+                     reptimes = 500L,
                      method = c('mc', 'bootstrap'), ratio = 0.8,
                      parallel = 1L) {
 
@@ -55,20 +50,20 @@ enpls.fit = function(x, y,
   method = match.arg(method)
 
   x.row = nrow(x)
-  samp.idx = vector('list', MCtimes)
+  samp.idx = vector('list', reptimes)
 
   if (method == 'mc') {
-    for (i in 1L:MCtimes) samp.idx[[i]] = sample(1L:x.row, round(x.row * ratio))
+    for (i in 1L:reptimes) samp.idx[[i]] = sample(1L:x.row, round(x.row * ratio))
   }
 
   if (method == 'bootstrap') {
-    for (i in 1L:MCtimes) samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
+    for (i in 1L:reptimes) samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
   }
 
   if (parallel < 1.5) {
 
-    modellist = vector('list', MCtimes)
-    for (i in 1L:MCtimes) {
+    modellist = vector('list', reptimes)
+    for (i in 1L:reptimes) {
       xtmp = x[samp.idx[[i]], ]
       ytmp = y[samp.idx[[i]]]
       plsdf = as.data.frame(cbind(xtmp, 'y' = ytmp))
@@ -78,7 +73,7 @@ enpls.fit = function(x, y,
   } else {
 
     registerDoParallel(parallel)
-    modellist = foreach(i = 1L:MCtimes) %dopar% {
+    modellist = foreach(i = 1L:reptimes) %dopar% {
       xtmp = x[samp.idx[[i]], ]
       ytmp = y[samp.idx[[i]]]
       plsdf = as.data.frame(cbind(xtmp, 'y' = ytmp))

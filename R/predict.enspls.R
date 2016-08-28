@@ -26,7 +26,7 @@
 #' y = logd1k$y
 #'
 #' set.seed(42)
-#' fit = enspls.fit(x, y, MCtimes = 5, maxcomp = 2)
+#' fit = enspls.fit(x, y, reptimes = 5, maxcomp = 2)
 #' y.pred = predict(fit, newx = x)
 #' plot(y, y.pred, xlim = range(y), ylim = range(y))
 #' abline(a = 0L, b = 1L)

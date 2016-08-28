@@ -8,7 +8,8 @@
 #' if not specified, default is 5.
 #' @param alpha Parameter (grid) controlling sparsity of the model.
 #' If not specified, default is \code{seq(0.2, 0.8, 0.2)}.
-#' @param MCtimes times of Monte-Carlo
+#' @param reptimes Number of models to build with Monte-Carlo resampling
+#' or bootstrapping.
 #' @param method \code{"mc"} or \code{"bootstrap"}. Default is \code{"mc"}.
 #' @param ratio sample ratio used when \code{method = "mc"}
 #' @param parallel Integer. Number of CPU cores to use.
@@ -34,14 +35,14 @@
 #' y = logd1k$y
 #'
 #' set.seed(42)
-#' fit = enspls.fit(x, y, MCtimes = 4, maxcomp = 3)
+#' fit = enspls.fit(x, y, reptimes = 4, maxcomp = 3)
 #' print(fit)
 #' predict(fit, newx = x)
 
 enspls.fit = function(x, y,
                       maxcomp = 5L,
                       alpha = seq(0.2, 0.8, 0.2),
-                      MCtimes = 500L,
+                      reptimes = 500L,
                       method = c('mc', 'bootstrap'), ratio = 0.8,
                       parallel = 1L) {
 
@@ -50,20 +51,20 @@ enspls.fit = function(x, y,
   method = match.arg(method)
 
   x.row = nrow(x)
-  samp.idx = vector('list', MCtimes)
+  samp.idx = vector('list', reptimes)
 
   if (method == 'mc') {
-    for (i in 1L:MCtimes) samp.idx[[i]] = sample(1L:x.row, round(x.row * ratio))
+    for (i in 1L:reptimes) samp.idx[[i]] = sample(1L:x.row, round(x.row * ratio))
   }
 
   if (method == 'bootstrap') {
-    for (i in 1L:MCtimes) samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
+    for (i in 1L:reptimes) samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
   }
 
   if (parallel < 1.5) {
 
-    modellist = vector('list', MCtimes)
-    for (i in 1L:MCtimes) {
+    modellist = vector('list', reptimes)
+    for (i in 1L:reptimes) {
       xtmp = x[samp.idx[[i]], ]
       ytmp = y[samp.idx[[i]]]
       modellist[[i]] = enspls.fit.core(xtmp, ytmp, maxcomp, alpha)
@@ -72,7 +73,7 @@ enspls.fit = function(x, y,
   } else {
 
     registerDoParallel(parallel)
-    modellist = foreach(i = 1L:MCtimes) %dopar% {
+    modellist = foreach(i = 1L:reptimes) %dopar% {
       xtmp = x[samp.idx[[i]], ]
       ytmp = y[samp.idx[[i]]]
       enspls.fit.core(xtmp, ytmp, maxcomp, alpha)

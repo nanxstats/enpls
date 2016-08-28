@@ -21,7 +21,7 @@
 #'
 #' @note To maximize the probablity that each observation can
 #' be selected in the test set (thus the prediction uncertainty
-#' can be measured), please try setting a large \code{MCtimes}.
+#' can be measured), please try setting a large \code{reptimes}.
 #'
 #' @seealso See \code{\link{enpls.fit}} for ensemble
 #' partial least squares regression.
@@ -34,7 +34,7 @@
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' cvfit = cv.enpls(x, y, MCtimes = 10)
+#' cvfit = cv.enpls(x, y, reptimes = 10)
 #' print(cvfit)
 #' plot(cvfit)
 

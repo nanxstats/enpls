@@ -4,7 +4,7 @@
 \alias{enspls.od}
 \title{Ensemble Sparse Partial Least Squares for Outlier Detection}
 \usage{
-enspls.od(x, y, maxcomp = 5L, alpha = seq(0.2, 0.8, 0.2), MCtimes = 500L,
+enspls.od(x, y, maxcomp = 5L, alpha = seq(0.2, 0.8, 0.2), reptimes = 500L,
   method = c("mc", "bootstrap"), ratio = 0.8, parallel = 1L)
 }
 \arguments{
@@ -18,7 +18,8 @@ if not specified, default is 5.}
 \item{alpha}{Parameter (grid) controlling sparsity of the model.
 If not specified, default is \code{seq(0.2, 0.8, 0.2)}.}
 
-\item{MCtimes}{times of Monte-Carlo}
+\item{reptimes}{Number of models to build with Monte-Carlo resampling
+or bootstrapping.}
 
 \item{method}{\code{"mc"} or \code{"bootstrap"}. Default is \code{"mc"}.}
 
@@ -42,7 +43,7 @@ Outlier detection with ensemble sparse partial least squares.
 \note{
 To maximize the probablity that each observation can
 be selected in the test set (thus the prediction uncertainty
-can be measured), please try setting a large \code{MCtimes}.
+can be measured), please try setting a large \code{reptimes}.
 }
 \examples{
 data("logd1k")
@@ -50,7 +51,7 @@ x = logd1k$x
 y = logd1k$y
 
 set.seed(42)
-od = enspls.od(x, y, MCtimes = 5, maxcomp = 3)
+od = enspls.od(x, y, reptimes = 5, maxcomp = 3)
 plot(od, prob = 0.1)
 plot(od, criterion = "sd", sdtimes = 1)
 }
