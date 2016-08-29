@@ -130,8 +130,8 @@ plot.enspls.fs = function(x, nvar = NULL,
     p = ggplot(df, aes_string(x = 'variable', y = 'value')) +
       scale_y_continuous(limits = quantile(df$'value', limits)) +
       geom_boxplot() + coord_flip() +
-      xlab('Coefficients') +
-      ylab('Variable Name')
+      xlab('Variable Name') +
+      ylab('Coefficient')
 
   }
 
