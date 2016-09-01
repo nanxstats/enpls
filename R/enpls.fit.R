@@ -83,6 +83,8 @@ enpls.fit = function(x, y,
 
   }
 
+  names(modellist) = paste0('pls_model_', 1L:length(modellist))
+
   class(modellist) = 'enpls.fit'
   return(modellist)
 
@@ -109,14 +111,24 @@ enpls.fit.core = function(plsdf, maxcomp) {
   # select best component number using adjusted CV
   cv.bestcomp = which.min(RMSEP(plsr.cvfit)[['val']][2L, 1L, -1L])
 
+  # remove plsr.cvfit object
+  rm(plsr.cvfit)
+
   plsr.fit = plsr(y ~ ., data = plsdf,
                   ncomp  = cv.bestcomp,
                   scale  = TRUE,
                   method = 'simpls',
                   validation = 'none')
 
+  # minify plsr.fit object to reduce memory footprint
+  plsr.fit[['model']] = NULL
+
   # save cv.bestcomp for predict.enpls
   enpls.core.fit = list('plsr.fit' = plsr.fit, 'cv.bestcomp' = cv.bestcomp)
+
+  # remove plsr.fit object
+  rm(plsr.fit)
+
   return(enpls.core.fit)
 
 }

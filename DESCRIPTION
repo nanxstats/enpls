@@ -1,7 +1,7 @@
 Package: enpls
 Type: Package
 Title: Ensemble Partial Least Squares Regression
-Version: 4.0
+Version: 4.2
 Author: Nan Xiao <me@nanx.me>, Dong-Sheng Cao <oriental-cds@163.com>,
     Miao-Zhu Li <miaozhu.li@duke.edu>, Qing-Song Xu <qsxu@csu.edu.cn>
 Maintainer: Nan Xiao <me@nanx.me>

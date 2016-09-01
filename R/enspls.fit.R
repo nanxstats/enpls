@@ -82,6 +82,8 @@ enspls.fit = function(x, y,
 
   }
 
+  names(modellist) = paste0('spls_model_', 1L:length(modellist))
+
   class(modellist) = 'enspls.fit'
   return(modellist)
 
@@ -114,6 +116,9 @@ enspls.fit.core = function(xtmp, ytmp, maxcomp, alpha) {
   cv.bestcomp  = spls.cvfit$'K.opt'
   cv.bestalpha = spls.cvfit$'eta.opt'
 
+  # clean up spls.cvfit object
+  rm(spls.cvfit)
+
   spls.fit = spls(xtmp, ytmp,
                   K = cv.bestcomp, eta = cv.bestalpha,
                   scale.x = TRUE, scale.y = FALSE)
@@ -122,6 +127,10 @@ enspls.fit.core = function(xtmp, ytmp, maxcomp, alpha) {
   enspls.core.fit = list('spls.fit' = spls.fit,
                          'cv.bestcomp' = cv.bestcomp,
                          'cv.bestalpha' = cv.bestalpha)
+
+  # clean up spls.fit object
+  rm(spls.fit)
+
   return(enspls.core.fit)
 
 }

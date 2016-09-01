@@ -44,3 +44,13 @@ Max Kuhn <max.kuhn@pfizer.com>.
 * General improvements on function documentation
 * Changing the argument name `MCtimes` to `reptimes`
 * Changing the option name `"bootstrap"` to `"boot"`
+
+# CHANGES IN enpls VERSION 4.2 (2016-09-02)
+
+## IMPROVEMENTS
+
+* Reduced memory footprints for `enpls.fit()` and `enspls.fit()`
+
+## NEW FEATURES
+
+* New functions for computing RMSE, MAE, and RMSLE
