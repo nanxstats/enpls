@@ -1,1 +1,4 @@
 # TODO
+
+ * add feature importance clustering using Ckmeans.1d.dp
+ * support more derivations of vanilla PLS
