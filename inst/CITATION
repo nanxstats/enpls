@@ -2,9 +2,9 @@ citHeader("To cite the enpls package in publications, please use:")
 
 citEntry(
 entry = "Article",
-title = "enpls: R Package for Ensemble Partial Least Squares Regression",
+title = "enpls: an R Package for Ensemble Partial Least Squares Regression",
 journal = "arXiv preprint",
 year = "2016",
 author = "Nan Xiao and Dong-Sheng Cao and Miao-Zhu Li and Qing-Song Xu",
-textVersion = "Nan Xiao, Dong-Sheng Cao, Miao-Zhu Li, and Qing-Song Xu. (2016). enpls: R Package for Ensemble Partial Least Squares Regression. arXiv preprint."
+textVersion = "Nan Xiao, Dong-Sheng Cao, Miao-Zhu Li, and Qing-Song Xu. (2016). enpls: an R Package for Ensemble Partial Least Squares Regression. arXiv preprint."
 )

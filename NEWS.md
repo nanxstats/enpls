@@ -16,7 +16,7 @@ Max Kuhn <max.kuhn@pfizer.com>.
 
 ## NEW FEATURES
 
-* Project website: http://enpls.org
+* Project website: [http://enpls.org](http://enpls.org)
 
 ## IMPROVEMENTS
 
@@ -53,4 +53,4 @@ Max Kuhn <max.kuhn@pfizer.com>.
 
 ## NEW FEATURES
 
-* New functions for computing RMSE, MAE, and RMSLE
+* New functions `enpls.rmse()`, `enpls.mae()`, and `enpls.rmsle()` for computing RMSE, MAE, and RMSLE

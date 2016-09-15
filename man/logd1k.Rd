@@ -18,7 +18,7 @@ Distribution coefficients at pH 7.4 (logD7.4) dataset from Wang et, al.
 }
 \details{
 This dataset contains distribution coefficients at pH 7.4 (logD7.4)
-for 1,000 compounds, and their 80 molecular descriptors computed with RDKit.
+for 1,000 compounds, and 80 molecular descriptors computed with RDKit.
 }
 \examples{
 data(logd1k)

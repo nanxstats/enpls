@@ -1,5 +1,5 @@
 ---
-title: "An Introduction to the `enpls` Package"
+title: "A Brief Introduction to enpls"
 author: "Nan Xiao <<http://nanx.me>>"
 date: "`r Sys.Date()`"
 bibliography: enpls.bib
@@ -12,7 +12,7 @@ output:
       in_header: header.html
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{An Introduction to the enpls Package}
+  %\VignetteIndexEntry{A Brief Introduction to enpls}
 ---
 
 # Introduction
