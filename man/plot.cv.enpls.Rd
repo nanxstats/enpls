@@ -4,7 +4,8 @@
 \alias{plot.cv.enpls}
 \title{Plot cv.enpls object}
 \usage{
-\method{plot}{cv.enpls}(x, xlim = NULL, ylim = NULL, main = NULL, ...)
+\method{plot}{cv.enpls}(x, xlim = NULL, ylim = NULL, alpha = 0.8,
+  main = NULL, ...)
 }
 \arguments{
 \item{x}{An object of class \code{cv.enpls}.}
@@ -12,6 +13,8 @@
 \item{xlim}{x Vector of length 2 - x axis limits of the plot.}
 
 \item{ylim}{y Vector of length 2 - y axis limits of the plot.}
+
+\item{alpha}{An alpha transparency value for points, a real number in (0, 1].}
 
 \item{main}{Plot title, not used currently.}
 

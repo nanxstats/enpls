@@ -168,3 +168,60 @@ print.enspls.od = function(x, ...) {
   print(x$'error.sd')
 
 }
+
+#' Print enspls.ad Object
+#'
+#' Print enspls.ad object.
+#'
+#' @param x An object of class \code{enspls.ad}.
+#' @param ... Additional parameters for \code{\link{print}}.
+#'
+#' @author Nan Xiao <\url{http://nanx.me}>
+#'
+#' @seealso See \code{\link{enspls.ad}} for model applicability domain
+#' evaluation with ensemble sparse partial least squares regressions.
+#'
+#' @method print enspls.ad
+#'
+#' @export
+#'
+#' @examples
+#' data("logd1k")
+#'
+#' # training set
+#' x = logd1k$x[1:200, ]
+#' y = logd1k$y[1:200]
+#'
+#' # two test sets
+#' xtest = list("test1" = logd1k$x[201:300, ],
+#'              "test2" = logd1k$x[301:400, ])
+#' ytest = list("test1" = logd1k$y[201:300],
+#'              "test2" = logd1k$y[301:400])
+#'
+#' set.seed(42)
+#' ad = enspls.ad(x, y, xtest, ytest,
+#'                maxcomp = 3, alpha = c(0.3, 0.6, 0.9),
+#'                space = "variable", method = "mc",
+#'                ratio = 0.8, reptimes = 20)
+#' print(ad)
+
+print.enspls.ad = function(x, ...) {
+
+  if (!inherits(x, 'enspls.ad'))
+    stop('This function only works for objects of class "enspls.ad"')
+
+  cat('Model Applicability Domain Evaluation by ENSPLS\n')
+  cat('---\n')
+  cat('Absolute mean prediction error for each training set sample:\n')
+  print(x$'tr.error.mean')
+  cat('---\n')
+  cat('Prediction error SD for each training set sample:\n')
+  print(x$'tr.error.sd')
+  cat('---\n')
+  cat('Absolute mean prediction error for each test set sample:\n')
+  print(x$'te.error.mean')
+  cat('---\n')
+  cat('Prediction error SD for each test set sample:\n')
+  print(x$'te.error.sd')
+
+}

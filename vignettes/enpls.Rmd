@@ -1,5 +1,5 @@
 ---
-title: "A Brief Introduction to enpls"
+title: "A Quick Introduction to enpls"
 author: "Nan Xiao <<http://nanx.me>>"
 date: "`r Sys.Date()`"
 bibliography: enpls.bib
@@ -12,7 +12,7 @@ output:
       in_header: header.html
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{A Brief Introduction to enpls}
+  %\VignetteIndexEntry{A Quick Introduction to enpls}
 ---
 
 # Introduction
@@ -22,17 +22,19 @@ feature importance, detecting outliers, and ensemble modeling
 based on (sparse) partial least squares regression.
 The key functions included in the package are listed in the table below.
 
-+-----------------------+-----------------------+------------------------------+
-| Task                  | Partial Least Squares | Sparse Partial Least Squares |
-+=======================+=======================+==============================+
-| Model fitting         | `enpls.fit()`         | `enspls.fit()`               |
-+-----------------------+-----------------------+------------------------------+
-| Cross validation      | `cv.enpls()`          | `cv.enspls()`                |
-+-----------------------+-----------------------+------------------------------+
-| Outlier detection     | `enpls.od()`          | `enspls.od()`                |
-+-----------------------+-----------------------+------------------------------+
-| Feature importance    | `enpls.fs()`          | `enspls.fs()`                |
-+-----------------------+-----------------------+------------------------------+
++--------------------------------+-----------------------+------------------------------+
+| Task                           | Partial Least Squares | Sparse Partial Least Squares |
++================================+=======================+==============================+
+| Model fitting                  | `enpls.fit()`         | `enspls.fit()`               |
++--------------------------------+-----------------------+------------------------------+
+| Cross validation               | `cv.enpls()`          | `cv.enspls()`                |
++--------------------------------+-----------------------+------------------------------+
+| Detect outliers                | `enpls.od()`          | `enspls.od()`                |
++--------------------------------+-----------------------+------------------------------+
+| Measure feature importance     | `enpls.fs()`          | `enspls.fs()`                |
++--------------------------------+-----------------------+------------------------------+
+| Evaluate applicability domain  | `enpls.ad()`          | `enspls.ad()`                |
++--------------------------------+-----------------------+------------------------------+
 
 Please refer to our paper [@xiao2016enpls] for details on the intuition
 and mathematical details of the ensemble learning approaches used here.
@@ -139,7 +141,7 @@ Such measurements can help on identifying outliers in the dataset.
 Thus, they can be removed to get us a "clean" dataset before the
 actual modeling.
 
-This can be done with `enpls.od()`, `enspls.od()` easily:
+This could be done with `enpls.od()`, `enspls.od()` easily:
 
 ```{r, fig.width = 8, fig.height = 8, out.width = 600, out.height = 600}
 od = enspls.od(x, y, ratio = 0.8, reptimes = 20, maxcomp = 3)
@@ -152,11 +154,56 @@ outlier candidates, based on two different criterions.
 The samples in each area of the plots represent different types
 of outliers, as defined in [@xiao2016enpls].
 
+# Applicability Domain Evaluation
+
+Model applicability domain measures how well the predictive
+model (PLS/Sparse PLS model) we built on the training set performs on
+external test sets. A certain type of perturbation (such as bootstrapping,
+jackknifing) is applied to the samples or the variables of the
+training set, and we could get many different predictions for all
+samples in all test sets (and of course, including the training set)
+using each sub-model built with each perturbated training set.
+The general evaluation strategy design and comparisons were analyzed
+in @kaneko2014applicability.
+
+The functions `enpls.ad()` and `enspls.ad()` could help us evaluate the
+model applicability domain. Here we constructed two "pseudo" test sets
+from the original `logd1k` dataset for demonstration:
+
+```{r, fig.width = 8, fig.height = 8, out.width = 600, out.height = 600}
+# make training set
+xtrain = logd1k$x[1:500, ]
+ytrain = logd1k$y[1:500]
+
+# make two test sets
+xtest = list("test.1" = logd1k$x[501:600, ],
+             "test.2" = logd1k$x[601:700, ])
+ytest = list("test.1" = logd1k$y[501:600],
+             "test.2" = logd1k$y[601:700])
+
+ad = enspls.ad(xtrain, ytrain, xtest, ytest,
+               maxcomp = 3, space = "variable", method = "mc",
+               ratio = 0.8, reptimes = 50)
+plot(ad)
+```
+
+Additionally, by using
+
+```{r, eval = FALSE}
+plot(ad, type = "interactive")
+```
+
+we will get an interactive plot, which could help us better explore
+the model applicability domain by supporting zooming-in / inspecting
+which sample each point represents interactively. The interactive plot
+is based on [plotly](https://cran.r-project.org/package=plotly),
+and it only requires an HTML viewer to be correctly rendered.
+
 # Conclusion
 
-Ensemble learning is not only powerful for improving base learner's
-predictive performance but also capable of accomplishing model diagnostic
-tasks, such as measuring the importance of features.
+Ensemble learning approaches are not only powerful for improving base
+learner's predictive performance but also capable of accomplishing model
+diagnostic tasks, such as measuring the importance of features.
 It would be interesting to see if such ideas could be applied to more
 relevant topics and further facilitate the predictive modeling tasks.
 

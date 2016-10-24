@@ -4,7 +4,7 @@
 [![CRAN Version](http://www.r-pkg.org/badges/version/enpls)](https://cran.r-project.org/package=enpls)
 [![Downloads from the RStudio CRAN mirror](http://cranlogs.r-pkg.org/badges/enpls)](http://cranlogs.r-pkg.org/badges/enpls)
 
-`enpls` offers an algorithmic framework for measuring feature importance, outlier detection, and ensemble modeling based on (sparse) partial least squares regressions.
+`enpls` offers an algorithmic framework for measuring feature importance, outlier detection, model applicability domain evaluation, and ensemble predictive modeling with (sparse) partial least squares regressions.
 
 ## Installation
 

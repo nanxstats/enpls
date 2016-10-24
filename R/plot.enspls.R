@@ -5,6 +5,7 @@
 #' @param x An object of class \code{cv.enspls}.
 #' @param xlim x Vector of length 2 - x axis limits of the plot.
 #' @param ylim y Vector of length 2 - y axis limits of the plot.
+#' @param alpha An alpha transparency value for points, a real number in (0, 1].
 #' @param main Plot title, not used currently.
 #' @param ... Additional graphical parameters, not used currently.
 #'
@@ -31,7 +32,8 @@
 #' cvfit = cv.enspls(x, y, reptimes = 10)
 #' plot(cvfit)}
 
-plot.cv.enspls = function(x, xlim = NULL, ylim = NULL, main = NULL, ...) {
+plot.cv.enspls = function(x, xlim = NULL, ylim = NULL, alpha = 0.8,
+                          main = NULL, ...) {
 
   if (!inherits(x, 'cv.enspls'))
     stop('This function only works for objects of class "cv.enspls"')
@@ -50,7 +52,7 @@ plot.cv.enspls = function(x, xlim = NULL, ylim = NULL, main = NULL, ...) {
                         xmin = xlim[1L], xmax = xlim[2L],
                         ymin = ylim[1L], ymax = ylim[2L])) +
     geom_abline(slope = 1, intercept = 0, colour = 'darkgrey') +
-    geom_point(size = 3, shape = 1, alpha = 0.8) +
+    geom_point(size = 3, shape = 1, alpha = alpha) +
     coord_fixed(ratio = 1) +
     xlab('Observed Response') +
     ylab('Predicted Response')
@@ -148,6 +150,7 @@ plot.enspls.fs = function(x, nvar = NULL,
 #' can be \code{"quantile"} or \code{"sd"}.
 #' @param prob Quantile probability as the cut-off value.
 #' @param sdtimes Times of standard deviation as the cut-off value.
+#' @param alpha An alpha transparency value for points, a real number in (0, 1].
 #' @param main Plot title.
 #' @param ... Additional graphical parameters for \code{\link{plot}}.
 #'
@@ -175,7 +178,7 @@ plot.enspls.fs = function(x, nvar = NULL,
 plot.enspls.od = function(x,
                           criterion = c('quantile', 'sd'),
                           prob = 0.05, sdtimes = 3L,
-                          main = NULL, ...) {
+                          alpha = 1, main = NULL, ...) {
 
   if (!inherits(x, 'enspls.od'))
     stop('This function only works for objects of class "enspls.od"')
@@ -212,7 +215,7 @@ plot.enspls.od = function(x,
   # grid lines
   grid(col = 'white', lty = 1)
 
-  points(error.mean, error.sd)
+  points(error.mean, error.sd, col = rgb2alpha('#000000', alpha))
 
   axis(side = 1, labels = TRUE, col = 'darkgrey', lwd = 0.3, cex.axis = 0.8)
   axis(side = 2, labels = TRUE, col = 'darkgrey', lwd = 0.3, cex.axis = 0.8)
@@ -221,24 +224,131 @@ plot.enspls.od = function(x,
   abline(v = vpos, col = 'black', lty = 2)
 
   if (length(yout) != 0L) {
-    points(error.mean[yout], error.sd[yout], pch = 21, bg = '#d62728')
+    points(error.mean[yout], error.sd[yout], pch = 21,
+           col = rgb2alpha('#000000', alpha),
+           bg = rgb2alpha('#D62728', alpha))
     text(error.mean[yout], error.sd[yout],
          labels = as.character(yout),
-         col = '#d62728', cex = 0.8, font = 2, pos = 3)
+         col = '#D62728', cex = 0.8, font = 2, pos = 3)
   }
 
   if (length(Xout) != 0L) {
-    points(error.mean[Xout], error.sd[Xout], pch = 21, bg = '#1f77b4')
+    points(error.mean[Xout], error.sd[Xout], pch = 21,
+           col = rgb2alpha('#000000', alpha),
+           bg = rgb2alpha('#1F77B4', alpha))
     text(error.mean[Xout], error.sd[Xout],
          labels = as.character(Xout),
-         col = '#1f77b4', cex = 0.8, font = 2, pos = 1)
+         col = '#1F77B4', cex = 0.8, font = 2, pos = 1)
   }
 
   if (length(abnormal) != 0L) {
-    points(error.mean[abnormal], error.sd[abnormal], pch = 21, bg = '#2ca02c')
+    points(error.mean[abnormal], error.sd[abnormal], pch = 21,
+           col = rgb2alpha('#000000', alpha),
+           bg = rgb2alpha('#2CA02C', alpha))
     text(error.mean[abnormal], error.sd[abnormal],
          labels = as.character(abnormal),
-         col = '#2ca02c', cex = 0.8, font = 2, pos = 1)
+         col = '#2CA02C', cex = 0.8, font = 2, pos = 1)
   }
+
+}
+
+#' Plot enspls.ad object
+#'
+#' Plot enspls.ad object
+#'
+#' @param x An object of class \code{enspls.ad}.
+#' @param type Plot type. Can be \code{"static"} or \code{"interactive"}.
+#' @param main Plot title.
+#' @param ... Additional graphical parameters for \code{\link{plot}}.
+#'
+#' @author Nan Xiao <\url{http://nanx.me}>
+#'
+#' @seealso See \code{\link{enspls.ad}} for model applicability domain
+#' evaluation with ensemble sparse partial least squares regressions.
+#'
+#' @importFrom ggplot2 ggplot
+#' @importFrom plotly ggplotly
+#'
+#' @method plot enspls.ad
+#'
+#' @export
+#'
+#' @examples
+#' data("logd1k")
+#'
+#' # training set
+#' x = logd1k$x[1:200, ]
+#' y = logd1k$y[1:200]
+#'
+#' # two test sets
+#' xtest = list("test1" = logd1k$x[201:300, ],
+#'              "test2" = logd1k$x[301:400, ])
+#' ytest = list("test1" = logd1k$y[201:300],
+#'              "test2" = logd1k$y[301:400])
+#'
+#' set.seed(42)
+#' ad = enspls.ad(x, y, xtest, ytest,
+#'                maxcomp = 3, alpha = c(0.3, 0.6, 0.9),
+#'                space = "variable", method = "mc",
+#'                ratio = 0.8, reptimes = 20)
+#'
+#' plot(ad)
+#' # The interactive plot requires a HTML viewer
+#' \dontrun{
+#' plot(ad, type = "interactive")}
+
+plot.enspls.ad = function(x,
+                          type = c('static', 'interactive'),
+                          main = NULL, ...) {
+
+  if (!inherits(x, 'enspls.ad'))
+    stop('This function only works for objects of class "enspls.ad"')
+
+  type = match.arg(type)
+
+  n.testset = length(x$'te.error.mean')
+  nsamp.tr  = length(x$'tr.error.mean')
+  nsamp.te  = sapply(x$'te.error.mean', length)
+
+  tr.df = data.frame('Mean' = x$'tr.error.mean',
+                     'SD'   = x$'tr.error.sd',
+                     'Set'  = 'Train')
+
+  te.list = vector('list', n.testset)
+  for (i in 1L:n.testset) {
+    te.list[[i]] = data.frame('Mean' = x[['te.error.mean']][[i]],
+                              'SD'   = x[['te.error.sd']][[i]],
+                              'Set'  = paste0('Test.', i))
+  }
+
+  df = rbind(tr.df, Reduce(rbind, te.list))
+
+  if (type == 'static') {  # static plot with ggplot2
+
+    p = ggplot(df) +
+      geom_point(aes_string(x = 'Mean', y = 'SD',
+                            color = 'Set', shape = 'Set')) +
+      scale_shape(solid = FALSE) +  # hollow shapes
+      scale_colour_brewer(palette = 'Set1') +
+      xlab('Absolute Mean Prediction Error') +
+      ylab('Prediction Error SD')
+
+  } else {  # interactive plot with plotly
+
+    hovertext = sprintf('Sample ID: %s', rownames(df))
+    df = data.frame(df, 'hovertext' = hovertext)
+
+    g = ggplot(df) +
+      geom_point(aes_string(x = 'Mean', y = 'SD',
+                            color = 'Set', text = 'hovertext')) +
+      scale_colour_brewer(palette = 'Set1') +
+      xlab('Absolute Mean Prediction Error') +
+      ylab('Prediction Error SD')
+
+    p = ggplotly(g)
+
+  }
+
+  p
 
 }

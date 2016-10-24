@@ -5,7 +5,7 @@
 \title{Plot enspls.od object}
 \usage{
 \method{plot}{enspls.od}(x, criterion = c("quantile", "sd"), prob = 0.05,
-  sdtimes = 3L, main = NULL, ...)
+  sdtimes = 3L, alpha = 1, main = NULL, ...)
 }
 \arguments{
 \item{x}{An object of class \code{enspls.od}.}
@@ -16,6 +16,8 @@ can be \code{"quantile"} or \code{"sd"}.}
 \item{prob}{Quantile probability as the cut-off value.}
 
 \item{sdtimes}{Times of standard deviation as the cut-off value.}
+
+\item{alpha}{An alpha transparency value for points, a real number in (0, 1].}
 
 \item{main}{Plot title.}
 

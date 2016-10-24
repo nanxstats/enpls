@@ -155,7 +155,7 @@ enspls.od.core = function(x.sample, y.sample, x.remain, y.remain,
                   K = cv.bestcomp, eta = cv.bestalpha,
                   scale.x = TRUE, scale.y = FALSE)
 
-  pred = predict(spls.fit, newdata = x.remain)
+  pred = predict(spls.fit, newx = x.remain)
 
   error = y.remain - pred
   names(error) = NULL
