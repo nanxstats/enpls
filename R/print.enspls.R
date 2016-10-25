@@ -63,7 +63,8 @@ print.cv.enspls = function(x, ...) {
 #' y = logd1k$y
 #'
 #' set.seed(42)
-#' fit = enspls.fit(x, y, reptimes = 5, maxcomp = 3)
+#' fit = enspls.fit(x, y, reptimes = 5, maxcomp = 3,
+#'                  alpha = c(0.3, 0.6, 0.9))
 #' print(fit)
 
 print.enspls.fit = function(x, ...) {
@@ -108,7 +109,8 @@ print.enspls.fit = function(x, ...) {
 #' y = logd1k$y
 #'
 #' set.seed(42)
-#' fs = enspls.fs(x, y, reptimes = 5, maxcomp = 3)
+#' fs = enspls.fs(x, y, reptimes = 5, maxcomp = 3,
+#'                alpha = c(0.3, 0.6, 0.9))
 #' print(fs, nvar = 10L)
 
 print.enspls.fs = function(x, sort = TRUE, nvar = NULL, ...) {
@@ -151,7 +153,8 @@ print.enspls.fs = function(x, sort = TRUE, nvar = NULL, ...) {
 #' y = logd1k$y
 #'
 #' set.seed(42)
-#' od = enspls.od(x, y, reptimes = 5, maxcomp = 3)
+#' od = enspls.od(x, y, reptimes = 5, maxcomp = 3,
+#'                alpha = c(0.3, 0.6, 0.9))
 #' print(od)
 
 print.enspls.od = function(x, ...) {
@@ -187,22 +190,25 @@ print.enspls.od = function(x, ...) {
 #'
 #' @examples
 #' data("logd1k")
+#' # remove low variance variables
+#' x = logd1k$x[, -c(17, 52, 59)]
+#' y = logd1k$y
 #'
 #' # training set
-#' x = logd1k$x[1:200, ]
-#' y = logd1k$y[1:200]
+#' x.tr = x[1:300, ]
+#' y.tr = y[1:300]
 #'
 #' # two test sets
-#' xtest = list("test1" = logd1k$x[201:300, ],
-#'              "test2" = logd1k$x[301:400, ])
-#' ytest = list("test1" = logd1k$y[201:300],
-#'              "test2" = logd1k$y[301:400])
+#' x.te = list("test.1" = x[301:400, ],
+#'             "test.2" = x[401:500, ])
+#' y.te = list("test.1" = y[301:400],
+#'             "test.2" = y[401:500])
 #'
 #' set.seed(42)
-#' ad = enspls.ad(x, y, xtest, ytest,
+#' ad = enspls.ad(x.tr, y.tr, x.te, y.te,
 #'                maxcomp = 3, alpha = c(0.3, 0.6, 0.9),
 #'                space = "variable", method = "mc",
-#'                ratio = 0.8, reptimes = 20)
+#'                ratio = 0.8, reptimes = 10)
 #' print(ad)
 
 print.enspls.ad = function(x, ...) {

@@ -148,7 +148,7 @@ print.enpls.fs = function(x, sort = TRUE, nvar = NULL, ...) {
 #' y = alkanes$y
 #'
 #' set.seed(42)
-#' od = enpls.od(x, y, reptimes = 50)
+#' od = enpls.od(x, y, reptimes = 40)
 #' print(od)
 
 print.enpls.od = function(x, ...) {
@@ -184,21 +184,23 @@ print.enpls.od = function(x, ...) {
 #'
 #' @examples
 #' data("alkanes")
+#' x = alkanes$x
+#' y = alkanes$y
 #'
 #' # training set
-#' x = alkanes$x[1:100, ]
-#' y = alkanes$y[1:100]
+#' x.tr = x[1:100, ]
+#' y.tr = y[1:100]
 #'
 #' # two test sets
-#' xtest = list("test1" = alkanes$x[101:150, ],
-#'              "test2" = alkanes$x[151:207, ])
-#' ytest = list("test1" = alkanes$y[101:150],
-#'              "test2" = alkanes$y[151:207])
+#' x.te = list("test.1" = x[101:150, ],
+#'             "test.2" = x[151:207, ])
+#' y.te = list("test.1" = y[101:150],
+#'             "test.2" = y[151:207])
 #'
 #' set.seed(42)
-#' ad = enpls.ad(x, y, xtest, ytest,
+#' ad = enpls.ad(x.tr, y.tr, x.te, y.te,
 #'               space = "variable", method = "mc",
-#'               ratio = 0.8, reptimes = 50)
+#'               ratio = 0.9, reptimes = 50)
 #' print(ad)
 
 print.enpls.ad = function(x, ...) {

@@ -266,7 +266,7 @@ plot.enspls.od = function(x,
 #' @seealso See \code{\link{enspls.ad}} for model applicability domain
 #' evaluation with ensemble sparse partial least squares regressions.
 #'
-#' @importFrom ggplot2 ggplot
+#' @importFrom ggplot2 ggplot scale_shape scale_colour_brewer
 #' @importFrom plotly ggplotly
 #'
 #' @method plot enspls.ad
@@ -275,23 +275,25 @@ plot.enspls.od = function(x,
 #'
 #' @examples
 #' data("logd1k")
+#' # remove low variance variables
+#' x = logd1k$x[, -c(17, 52, 59)]
+#' y = logd1k$y
 #'
 #' # training set
-#' x = logd1k$x[1:200, ]
-#' y = logd1k$y[1:200]
+#' x.tr = x[1:300, ]
+#' y.tr = y[1:300]
 #'
 #' # two test sets
-#' xtest = list("test1" = logd1k$x[201:300, ],
-#'              "test2" = logd1k$x[301:400, ])
-#' ytest = list("test1" = logd1k$y[201:300],
-#'              "test2" = logd1k$y[301:400])
+#' x.te = list("test.1" = x[301:400, ],
+#'             "test.2" = x[401:500, ])
+#' y.te = list("test.1" = y[301:400],
+#'             "test.2" = y[401:500])
 #'
 #' set.seed(42)
-#' ad = enspls.ad(x, y, xtest, ytest,
+#' ad = enspls.ad(x.tr, y.tr, x.te, y.te,
 #'                maxcomp = 3, alpha = c(0.3, 0.6, 0.9),
 #'                space = "variable", method = "mc",
-#'                ratio = 0.8, reptimes = 20)
-#'
+#'                ratio = 0.8, reptimes = 10)
 #' plot(ad)
 #' # The interactive plot requires a HTML viewer
 #' \dontrun{

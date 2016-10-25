@@ -49,7 +49,7 @@ x = alkanes$x
 y = alkanes$y
 
 set.seed(42)
-od = enpls.od(x, y, reptimes = 100)
+od = enpls.od(x, y, reptimes = 50)
 print(od)
 plot(od)
 plot(od, criterion = 'sd')

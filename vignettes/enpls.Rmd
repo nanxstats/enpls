@@ -1,5 +1,5 @@
 ---
-title: "A Quick Introduction to enpls"
+title: "A Brief Introduction to enpls"
 author: "Nan Xiao <<http://nanx.me>>"
 date: "`r Sys.Date()`"
 bibliography: enpls.bib
@@ -12,7 +12,7 @@ output:
       in_header: header.html
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{A Quick Introduction to enpls}
+  %\VignetteIndexEntry{A Brief Introduction to enpls}
 ---
 
 # Introduction
@@ -171,17 +171,20 @@ model applicability domain. Here we constructed two "pseudo" test sets
 from the original `logd1k` dataset for demonstration:
 
 ```{r, fig.width = 8, fig.height = 8, out.width = 600, out.height = 600}
+# remove low variance variables
+x = x[, -c(17, 52, 59)]
+
 # make training set
-xtrain = logd1k$x[1:500, ]
-ytrain = logd1k$y[1:500]
+x.tr = x[1:500, ]
+y.tr = y[1:500]
 
 # make two test sets
-xtest = list("test.1" = logd1k$x[501:600, ],
-             "test.2" = logd1k$x[601:700, ])
-ytest = list("test.1" = logd1k$y[501:600],
-             "test.2" = logd1k$y[601:700])
+x.te = list("test.1" = x[501:700, ],
+            "test.2" = x[701:800, ])
+y.te = list("test.1" = y[501:700],
+            "test.2" = y[701:800])
 
-ad = enspls.ad(xtrain, ytrain, xtest, ytest,
+ad = enspls.ad(x.tr, y.tr, x.te, y.te,
                maxcomp = 3, space = "variable", method = "mc",
                ratio = 0.8, reptimes = 50)
 plot(ad)
