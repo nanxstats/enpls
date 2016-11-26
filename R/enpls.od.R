@@ -5,7 +5,10 @@
 #' @param x Predictor matrix.
 #' @param y Response vector.
 #' @param maxcomp Maximum number of components included within each model.
-#' If not specified, will use the variable (column) numbers in \code{x}.
+#' If not specified, will use the maximum number possible (considering
+#' cross-validation and special cases where n is smaller than p).
+#' @param cvfolds Number of cross-validation folds used in each model
+#' for automatic parameter selection, default is \code{5}.
 #' @param reptimes Number of models to build with Monte-Carlo resampling
 #' or bootstrapping.
 #' @param method Resampling method. \code{"mc"} (Monte-Carlo resampling)
@@ -50,14 +53,14 @@
 #' plot(od, criterion = 'sd')
 
 enpls.od = function(x, y,
-                    maxcomp = NULL,
+                    maxcomp  = NULL,
+                    cvfolds  = 5L,
                     reptimes = 500L,
-                    method = c('mc', 'boot'), ratio = 0.8,
+                    method   = c('mc', 'boot'),
+                    ratio    = 0.8,
                     parallel = 1L) {
 
   if (missing(x) | missing(y)) stop('Please specify both x and y')
-
-  if (is.null(maxcomp)) maxcomp = ncol(x)
 
   method = match.arg(method)
 
@@ -87,7 +90,8 @@ enpls.od = function(x, y,
     for (i in 1L:reptimes) {
       plsdf.sample = plsdf[samp.idx[[i]], ]
       plsdf.remain = plsdf[samp.idx.remain[[i]], ]
-      errorlist[[i]] = suppressWarnings(enpls.od.core(plsdf.sample, plsdf.remain, maxcomp))
+      errorlist[[i]] = suppressWarnings(
+        enpls.od.core(plsdf.sample, plsdf.remain, maxcomp, cvfolds))
     }
 
   } else {
@@ -96,7 +100,7 @@ enpls.od = function(x, y,
     errorlist = foreach(i = 1L:reptimes) %dopar% {
       plsdf.sample = plsdf[samp.idx[[i]], ]
       plsdf.remain = plsdf[samp.idx.remain[[i]], ]
-      enpls.od.core(plsdf.sample, plsdf.remain, maxcomp)
+      enpls.od.core(plsdf.sample, plsdf.remain, maxcomp, cvfolds)
     }
 
   }
@@ -131,21 +135,37 @@ enpls.od = function(x, y,
 #'
 #' @keywords internal
 
-enpls.od.core = function(plsdf.sample, plsdf.remain, maxcomp) {
+enpls.od.core = function(plsdf.sample, plsdf.remain, maxcomp, cvfolds) {
 
-  plsr.cvfit = plsr(y ~ ., data = plsdf.sample,
-                    ncomp  = maxcomp,
-                    scale  = TRUE,
-                    method = 'simpls',
-                    validation = 'CV', segments = 5L)
+  if (is.null(maxcomp)) {
+
+    plsr.cvfit = plsr(y ~ .,
+                      data       = plsdf.sample,
+                      scale      = TRUE,
+                      method     = 'simpls',
+                      validation = 'CV',
+                      segments   = cvfolds)
+
+  } else {
+
+    plsr.cvfit = plsr(y ~ .,
+                      data       = plsdf.sample,
+                      ncomp      = maxcomp,
+                      scale      = TRUE,
+                      method     = 'simpls',
+                      validation = 'CV',
+                      segments   = cvfolds)
+
+  }
 
   # select best component number using adjusted CV
   cv.bestcomp = which.min(RMSEP(plsr.cvfit)[['val']][2L, 1L, -1L])
 
-  plsr.fit = plsr(y ~ ., data = plsdf.sample,
-                  ncomp  = cv.bestcomp,
-                  scale  = TRUE,
-                  method = 'simpls',
+  plsr.fit = plsr(y ~ .,
+                  data       = plsdf.sample,
+                  ncomp      = cv.bestcomp,
+                  scale      = TRUE,
+                  method     = 'simpls',
                   validation = 'none')
 
   pred = predict(plsr.fit, ncomp = cv.bestcomp,

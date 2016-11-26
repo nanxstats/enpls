@@ -1,9 +1,11 @@
 #' Ensemble Partial Least Squares Regression
 #'
-#' The enpls package provides functions for running the
-#' ensemble partial least squares regression.
+#' enpls offers an algorithmic framework for measuring feature importance,
+#' outlier detection, model applicability evaluation, and
+#' ensemble predictive modeling with (sparse)
+#' partial least squares regressions.
 #'
-#' The package vignette can be opened with \code{vignette("enpls")}.
+#' See the vignette via \code{vignette("enpls")}.
 #'
 #' \tabular{ll}{ Package: \tab enpls\cr
 #' Type: \tab Package\cr

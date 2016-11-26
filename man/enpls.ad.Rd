@@ -4,9 +4,9 @@
 \alias{enpls.ad}
 \title{Ensemble Partial Least Squares for Model Applicability Domain Evaluation}
 \usage{
-enpls.ad(x, y, xtest, ytest, maxcomp = NULL, space = c("sample",
-  "variable"), method = c("mc", "boot"), reptimes = 500L, ratio = 0.8,
-  parallel = 1L)
+enpls.ad(x, y, xtest, ytest, maxcomp = NULL, cvfolds = 5L,
+  space = c("sample", "variable"), method = c("mc", "boot"),
+  reptimes = 500L, ratio = 0.8, parallel = 1L)
 }
 \arguments{
 \item{x}{Predictor matrix of the training set.}
@@ -20,7 +20,11 @@ predictor matrix (see example code below).}
 response vector (see example code below).}
 
 \item{maxcomp}{Maximum number of components included within each model.
-If not specified, will use the variable (column) numbers in \code{x}.}
+If not specified, will use the maximum number possible (considering
+cross-validation and special cases where n is smaller than p).}
+
+\item{cvfolds}{Number of cross-validation folds used in each model
+for automatic parameter selection, default is \code{5}.}
 
 \item{space}{Space in which to apply the resampling method.
 Can be the sample space (\code{"sample"}) or

@@ -9,7 +9,10 @@
 #' @param ytest List, with the i-th component being the i-th test set's
 #' response vector (see example code below).
 #' @param maxcomp Maximum number of components included within each model.
-#' If not specified, will use the variable (column) numbers in \code{x}.
+#' If not specified, will use the maximum number possible (considering
+#' cross-validation and special cases where n is smaller than p).
+#' @param cvfolds Number of cross-validation folds used in each model
+#' for automatic parameter selection, default is \code{5}.
 #' @param space Space in which to apply the resampling method.
 #' Can be the sample space (\code{"sample"}) or
 #' the variable space (\code{"variable"}).
@@ -79,11 +82,12 @@
 
 enpls.ad = function(x, y,
                     xtest, ytest,
-                    maxcomp = NULL,
-                    space = c('sample', 'variable'),
-                    method = c('mc', 'boot'),
+                    maxcomp  = NULL,
+                    cvfolds  = 5L,
+                    space    = c('sample', 'variable'),
+                    method   = c('mc', 'boot'),
                     reptimes = 500L,
-                    ratio = 0.8,
+                    ratio    = 0.8,
                     parallel = 1L) {
 
   if (missing(x) | missing(y) | missing(xtest) | missing(ytest))
@@ -104,8 +108,6 @@ enpls.ad = function(x, y,
   for (i in 1L:n.testset) errorlist.te[[i]] = vector('list', reptimes)
 
   if (space == 'sample') {
-
-    if (is.null(maxcomp)) maxcomp = ncol(x)
 
     idx.row = vector('list', reptimes)
 
@@ -129,7 +131,7 @@ enpls.ad = function(x, y,
       for (i in 1L:reptimes) {
         plsdf.tr = as.data.frame(cbind(x[idx.row[[i]], ],
                                        'y' = y[idx.row[[i]]]))
-        fit = suppressWarnings(enpls.ad.core.fit(plsdf.tr, maxcomp))
+        fit = suppressWarnings(enpls.ad.core.fit(plsdf.tr, maxcomp, cvfolds))
         errorlist.tr[[i]] = suppressWarnings(enpls.ad.core.pred(
           fit, as.data.frame(cbind(x, 'y' = y))))
         for (j in 1L:n.testset) {
@@ -145,7 +147,7 @@ enpls.ad = function(x, y,
       fit.list = foreach(i = 1L:reptimes) %dopar% {
         plsdf.tr = as.data.frame(cbind(x[idx.row[[i]], ],
                                        'y' = y[idx.row[[i]]]))
-        enpls.ad.core.fit(plsdf.tr, maxcomp)
+        enpls.ad.core.fit(plsdf.tr, maxcomp, cvfolds)
       }
 
       for (i in 1L:reptimes) {
@@ -175,7 +177,6 @@ enpls.ad = function(x, y,
       idx.col = vector('list', reptimes)
 
       n.var = round(x.col * ratio)
-      if (is.null(maxcomp)) maxcomp = n.var
       for (i in 1L:reptimes) idx.col[[i]] =
         sample(1L:x.col, n.var, replace = FALSE)
 
@@ -183,7 +184,7 @@ enpls.ad = function(x, y,
 
         for (i in 1L:reptimes) {
           plsdf.tr = as.data.frame(cbind(x[, idx.col[[i]]], 'y' = y))
-          fit = suppressWarnings(enpls.ad.core.fit(plsdf.tr, maxcomp))
+          fit = suppressWarnings(enpls.ad.core.fit(plsdf.tr, maxcomp, cvfolds))
           errorlist.tr[[i]] = suppressWarnings(enpls.ad.core.pred(fit, plsdf.tr))
           for (j in 1L:n.testset) {
             errorlist.te[[j]][[i]] =
@@ -198,7 +199,7 @@ enpls.ad = function(x, y,
         registerDoParallel(parallel)
         fit.list = foreach(i = 1L:reptimes) %dopar% {
           plsdf.tr = as.data.frame(cbind(x[, idx.col[[i]]], 'y' = y))
-          enpls.ad.core.fit(plsdf.tr, maxcomp)
+          enpls.ad.core.fit(plsdf.tr, maxcomp, cvfolds)
         }
 
         for (i in 1L:reptimes) {
@@ -265,21 +266,37 @@ enpls.ad = function(x, y,
 #'
 #' @keywords internal
 
-enpls.ad.core.fit = function(trainingset, maxcomp) {
+enpls.ad.core.fit = function(trainingset, maxcomp, cvfolds) {
 
-  plsr.cvfit = plsr(y ~ ., data = trainingset,
-                    ncomp  = maxcomp,
-                    scale  = TRUE,
-                    method = 'simpls',
-                    validation = 'CV', segments = 5L)
+  if (is.null(maxcomp)) {
+
+    plsr.cvfit = plsr(y ~ .,
+                      data       = trainingset,
+                      scale      = TRUE,
+                      method     = 'simpls',
+                      validation = 'CV',
+                      segments   = cvfolds)
+
+  } else {
+
+    plsr.cvfit = plsr(y ~ .,
+                      data       = trainingset,
+                      ncomp      = maxcomp,
+                      scale      = TRUE,
+                      method     = 'simpls',
+                      validation = 'CV',
+                      segments   = cvfolds)
+
+  }
 
   # select best component number using adjusted CV
   cv.bestcomp = which.min(RMSEP(plsr.cvfit)[['val']][2L, 1L, -1L])
 
-  plsr.fit = plsr(y ~ ., data = trainingset,
-                  ncomp  = cv.bestcomp,
-                  scale  = TRUE,
-                  method = 'simpls',
+  plsr.fit = plsr(y ~ .,
+                  data       = trainingset,
+                  ncomp      = cv.bestcomp,
+                  scale      = TRUE,
+                  method     = 'simpls',
                   validation = 'none')
 
   return(list('plsr.fit' = plsr.fit, 'cv.bestcomp' = cv.bestcomp))

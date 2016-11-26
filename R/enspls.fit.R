@@ -5,7 +5,9 @@
 #' @param x Predictor matrix.
 #' @param y Response vector.
 #' @param maxcomp Maximum number of components included within each model.
-#' If not specified, will use 5 by default.
+#' If not specified, will use \code{5} by default.
+#' @param cvfolds Number of cross-validation folds used in each model
+#' for automatic parameter selection, default is \code{5}.
 #' @param alpha Parameter (grid) controlling sparsity of the model.
 #' If not specified, default is \code{seq(0.2, 0.8, 0.2)}.
 #' @param reptimes Number of models to build with Monte-Carlo resampling
@@ -42,10 +44,12 @@
 #' predict(fit, newx = x)
 
 enspls.fit = function(x, y,
-                      maxcomp = 5L,
-                      alpha = seq(0.2, 0.8, 0.2),
+                      maxcomp  = 5L,
+                      cvfolds  = 5L,
+                      alpha    = seq(0.2, 0.8, 0.2),
                       reptimes = 500L,
-                      method = c('mc', 'boot'), ratio = 0.8,
+                      method   = c('mc', 'boot'),
+                      ratio    = 0.8,
                       parallel = 1L) {
 
   if (missing(x) | missing(y)) stop('Please specify both x and y')
@@ -69,7 +73,7 @@ enspls.fit = function(x, y,
     for (i in 1L:reptimes) {
       xtmp = x[samp.idx[[i]], ]
       ytmp = y[samp.idx[[i]]]
-      modellist[[i]] = enspls.fit.core(xtmp, ytmp, maxcomp, alpha)
+      modellist[[i]] = enspls.fit.core(xtmp, ytmp, maxcomp, cvfolds, alpha)
     }
 
   } else {
@@ -78,7 +82,7 @@ enspls.fit = function(x, y,
     modellist = foreach(i = 1L:reptimes) %dopar% {
       xtmp = x[samp.idx[[i]], ]
       ytmp = y[samp.idx[[i]]]
-      enspls.fit.core(xtmp, ytmp, maxcomp, alpha)
+      enspls.fit.core(xtmp, ytmp, maxcomp, cvfolds, alpha)
     }
 
   }
@@ -103,14 +107,17 @@ enspls.fit = function(x, y,
 #'
 #' @keywords internal
 
-enspls.fit.core = function(xtmp, ytmp, maxcomp, alpha) {
+enspls.fit.core = function(xtmp, ytmp, maxcomp, cvfolds, alpha) {
 
   invisible(
     capture.output(
-      spls.cvfit <- cv.spls(xtmp, ytmp,
-                            fold = 5,
-                            K = maxcomp, eta = alpha,
-                            scale.x = TRUE, scale.y = FALSE,
+      spls.cvfit <- cv.spls(xtmp,
+                            ytmp,
+                            fold    = cvfolds,
+                            K       = maxcomp,
+                            eta     = alpha,
+                            scale.x = TRUE,
+                            scale.y = FALSE,
                             plot.it = FALSE)))
 
   # select best component number and alpha using adjusted CV
@@ -120,9 +127,12 @@ enspls.fit.core = function(xtmp, ytmp, maxcomp, alpha) {
   # clean up spls.cvfit object
   rm(spls.cvfit)
 
-  spls.fit = spls(xtmp, ytmp,
-                  K = cv.bestcomp, eta = cv.bestalpha,
-                  scale.x = TRUE, scale.y = FALSE)
+  spls.fit = spls(xtmp,
+                  ytmp,
+                  K       = cv.bestcomp,
+                  eta     = cv.bestalpha,
+                  scale.x = TRUE,
+                  scale.y = FALSE)
 
   # save cv.bestcomp and cv.bestalpha for predict.enspls
   enspls.core.fit = list('spls.fit' = spls.fit,

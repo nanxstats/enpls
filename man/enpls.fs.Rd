@@ -4,8 +4,8 @@
 \alias{enpls.fs}
 \title{Ensemble Partial Least Squares for Measuring Feature Importance}
 \usage{
-enpls.fs(x, y, maxcomp = NULL, reptimes = 500L, method = c("mc", "boot"),
-  ratio = 0.8, parallel = 1L)
+enpls.fs(x, y, maxcomp = NULL, cvfolds = 5L, reptimes = 500L,
+  method = c("mc", "boot"), ratio = 0.8, parallel = 1L)
 }
 \arguments{
 \item{x}{Predictor matrix.}
@@ -13,7 +13,11 @@ enpls.fs(x, y, maxcomp = NULL, reptimes = 500L, method = c("mc", "boot"),
 \item{y}{Response vector.}
 
 \item{maxcomp}{Maximum number of components included within each model.
-If not specified, will use the variable (column) numbers in \code{x}.}
+If not specified, will use the maximum number possible (considering
+cross-validation and special cases where n is smaller than p).}
+
+\item{cvfolds}{Number of cross-validation folds used in each model
+for automatic parameter selection, default is \code{5}.}
 
 \item{reptimes}{Number of models to build with Monte-Carlo resampling
 or bootstrapping.}

@@ -4,8 +4,8 @@
 \alias{enspls.od}
 \title{Ensemble Sparse Partial Least Squares for Outlier Detection}
 \usage{
-enspls.od(x, y, maxcomp = 5L, alpha = seq(0.2, 0.8, 0.2), reptimes = 500L,
-  method = c("mc", "boot"), ratio = 0.8, parallel = 1L)
+enspls.od(x, y, maxcomp = 5L, cvfolds = 5L, alpha = seq(0.2, 0.8, 0.2),
+  reptimes = 500L, method = c("mc", "boot"), ratio = 0.8, parallel = 1L)
 }
 \arguments{
 \item{x}{Predictor matrix.}
@@ -13,7 +13,10 @@ enspls.od(x, y, maxcomp = 5L, alpha = seq(0.2, 0.8, 0.2), reptimes = 500L,
 \item{y}{Response vector.}
 
 \item{maxcomp}{Maximum number of components included within each model.
-If not specified, will use 5 by default.}
+If not specified, will use \code{5} by default.}
+
+\item{cvfolds}{Number of cross-validation folds used in each model
+for automatic parameter selection, default is \code{5}.}
 
 \item{alpha}{Parameter (grid) controlling sparsity of the model.
 If not specified, default is \code{seq(0.2, 0.8, 0.2)}.}

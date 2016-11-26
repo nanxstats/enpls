@@ -5,7 +5,10 @@
 #' @param x Predictor matrix.
 #' @param y Response vector.
 #' @param maxcomp Maximum number of components included within each model.
-#' If not specified, will use the variable (column) numbers in \code{x}.
+#' If not specified, will use the maximum number possible (considering
+#' cross-validation and special cases where n is smaller than p).
+#' @param cvfolds Number of cross-validation folds used in each model
+#' for automatic parameter selection, default is \code{5}.
 #' @param reptimes Number of models to build with Monte-Carlo resampling
 #' or bootstrapping.
 #' @param method Resampling method. \code{"mc"} (Monte-Carlo resampling)
@@ -39,14 +42,14 @@
 #' predict(fit, newx = x)
 
 enpls.fit = function(x, y,
-                     maxcomp = NULL,
+                     maxcomp  = NULL,
+                     cvfolds  = 5L,
                      reptimes = 500L,
-                     method = c('mc', 'boot'), ratio = 0.8,
+                     method   = c('mc', 'boot'),
+                     ratio    = 0.8,
                      parallel = 1L) {
 
   if (missing(x) | missing(y)) stop('Please specify both x and y')
-
-  if (is.null(maxcomp)) maxcomp = ncol(x)
 
   method = match.arg(method)
 
@@ -68,7 +71,7 @@ enpls.fit = function(x, y,
       xtmp = x[samp.idx[[i]], ]
       ytmp = y[samp.idx[[i]]]
       plsdf = as.data.frame(cbind(xtmp, 'y' = ytmp))
-      modellist[[i]] = suppressWarnings(enpls.fit.core(plsdf, maxcomp))
+      modellist[[i]] = suppressWarnings(enpls.fit.core(plsdf, maxcomp, cvfolds))
     }
 
   } else {
@@ -78,7 +81,7 @@ enpls.fit = function(x, y,
       xtmp = x[samp.idx[[i]], ]
       ytmp = y[samp.idx[[i]]]
       plsdf = as.data.frame(cbind(xtmp, 'y' = ytmp))
-      enpls.fit.core(plsdf, maxcomp)
+      enpls.fit.core(plsdf, maxcomp, cvfolds)
     }
 
   }
@@ -100,13 +103,28 @@ enpls.fit = function(x, y,
 #'
 #' @keywords internal
 
-enpls.fit.core = function(plsdf, maxcomp) {
+enpls.fit.core = function(plsdf, maxcomp, cvfolds) {
 
-  plsr.cvfit = plsr(y ~ ., data = plsdf,
-                    ncomp  = maxcomp,
-                    scale  = TRUE,
-                    method = 'simpls',
-                    validation = 'CV', segments = 5L)
+  if (is.null(maxcomp)) {
+
+    plsr.cvfit = plsr(y ~ .,
+                      data       = plsdf,
+                      scale      = TRUE,
+                      method     = 'simpls',
+                      validation = 'CV',
+                      segments   = cvfolds)
+
+  } else {
+
+    plsr.cvfit = plsr(y ~ .,
+                      data       = plsdf,
+                      ncomp      = maxcomp,
+                      scale      = TRUE,
+                      method     = 'simpls',
+                      validation = 'CV',
+                      segments   = cvfolds)
+
+  }
 
   # select best component number using adjusted CV
   cv.bestcomp = which.min(RMSEP(plsr.cvfit)[['val']][2L, 1L, -1L])
@@ -114,10 +132,11 @@ enpls.fit.core = function(plsdf, maxcomp) {
   # remove plsr.cvfit object
   rm(plsr.cvfit)
 
-  plsr.fit = plsr(y ~ ., data = plsdf,
-                  ncomp  = cv.bestcomp,
-                  scale  = TRUE,
-                  method = 'simpls',
+  plsr.fit = plsr(y ~ .,
+                  data       = plsdf,
+                  ncomp      = cv.bestcomp,
+                  scale      = TRUE,
+                  method     = 'simpls',
                   validation = 'none')
 
   # minify plsr.fit object to reduce memory footprint

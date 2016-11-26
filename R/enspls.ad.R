@@ -11,7 +11,9 @@
 #' @param ytest List, with the i-th component being the i-th test set's
 #' response vector (see example code below).
 #' @param maxcomp Maximum number of components included within each model.
-#' If not specified, will use 5 by default.
+#' If not specified, will use \code{5} by default.
+#' @param cvfolds Number of cross-validation folds used in each model
+#' for automatic parameter selection, default is \code{5}.
 #' @param alpha Parameter (grid) controlling sparsity of the model.
 #' If not specified, default is \code{seq(0.2, 0.8, 0.2)}.
 #' @param space Space in which to apply the resampling method.
@@ -85,12 +87,13 @@
 
 enspls.ad = function(x, y,
                      xtest, ytest,
-                     maxcomp = 5L,
-                     alpha = seq(0.2, 0.8, 0.2),
-                     space = c('sample', 'variable'),
-                     method = c('mc', 'boot'),
+                     maxcomp  = 5L,
+                     cvfolds  = 5L,
+                     alpha    = seq(0.2, 0.8, 0.2),
+                     space    = c('sample', 'variable'),
+                     method   = c('mc', 'boot'),
                      reptimes = 500L,
-                     ratio = 0.8,
+                     ratio    = 0.8,
                      parallel = 1L) {
 
   if (missing(x) | missing(y) | missing(xtest) | missing(ytest))
@@ -132,7 +135,8 @@ enspls.ad = function(x, y,
     if (parallel < 1.5) {
 
       for (i in 1L:reptimes) {
-        fit = enspls.ad.core.fit(x[idx.row[[i]], ], y[idx.row[[i]]], maxcomp, alpha)
+        fit = enspls.ad.core.fit(x[idx.row[[i]], ], y[idx.row[[i]]],
+                                 maxcomp, cvfolds, alpha)
         errorlist.tr[[i]] = enspls.ad.core.pred(fit, x, y)
         for (j in 1L:n.testset) {
           errorlist.te[[j]][[i]] =
@@ -144,7 +148,8 @@ enspls.ad = function(x, y,
 
       registerDoParallel(parallel)
       fit.list = foreach(i = 1L:reptimes) %dopar% {
-        enspls.ad.core.fit(x[idx.row[[i]], ], y[idx.row[[i]]], maxcomp, alpha)
+        enspls.ad.core.fit(x[idx.row[[i]], ], y[idx.row[[i]]],
+                           maxcomp, cvfolds, alpha)
       }
 
       for (i in 1L:reptimes) {
@@ -177,7 +182,8 @@ enspls.ad = function(x, y,
       if (parallel < 1.5) {
 
         for (i in 1L:reptimes) {
-          fit = enspls.ad.core.fit(x[, idx.col[[i]]], y, maxcomp, alpha)
+          fit = enspls.ad.core.fit(x[, idx.col[[i]]], y,
+                                   maxcomp, cvfolds, alpha)
           errorlist.tr[[i]] = enspls.ad.core.pred(fit, x[, idx.col[[i]]], y)
           for (j in 1L:n.testset) {
             errorlist.te[[j]][[i]] =
@@ -189,7 +195,7 @@ enspls.ad = function(x, y,
 
         registerDoParallel(parallel)
         fit.list = foreach(i = 1L:reptimes) %dopar% {
-          enspls.ad.core.fit(x[, idx.col[[i]]], y, maxcomp, alpha)
+          enspls.ad.core.fit(x[, idx.col[[i]]], y, maxcomp, cvfolds, alpha)
         }
 
         for (i in 1L:reptimes) {
@@ -255,23 +261,29 @@ enspls.ad = function(x, y,
 #'
 #' @keywords internal
 
-enspls.ad.core.fit = function(x.tr, y.tr, maxcomp, alpha) {
+enspls.ad.core.fit = function(x.tr, y.tr, maxcomp, cvfolds, alpha) {
 
   invisible(
     capture.output(
-      spls.cvfit <- cv.spls(x.tr, y.tr,
-                            fold = 5,
-                            K = maxcomp, eta = alpha,
-                            scale.x = TRUE, scale.y = FALSE,
+      spls.cvfit <- cv.spls(x.tr,
+                            y.tr,
+                            fold    = cvfolds,
+                            K       = maxcomp,
+                            eta     = alpha,
+                            scale.x = TRUE,
+                            scale.y = FALSE,
                             plot.it = FALSE)))
 
   # select best component number and alpha using adjusted CV
   cv.bestcomp  = spls.cvfit$'K.opt'
   cv.bestalpha = spls.cvfit$'eta.opt'
 
-  spls.fit = spls(x.tr, y.tr,
-                  K = cv.bestcomp, eta = cv.bestalpha,
-                  scale.x = TRUE, scale.y = FALSE)
+  spls.fit = spls(x.tr,
+                  y.tr,
+                  K       = cv.bestcomp,
+                  eta     = cv.bestalpha,
+                  scale.x = TRUE,
+                  scale.y = FALSE)
 
   return(spls.fit)
 

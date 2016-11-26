@@ -4,7 +4,7 @@
 \alias{enspls.fs.core}
 \title{core function for enspls.fs}
 \usage{
-enspls.fs.core(xtmp, ytmp, maxcomp, alpha)
+enspls.fs.core(xtmp, ytmp, maxcomp, cvfolds, alpha)
 }
 \value{
 fitted coefficients

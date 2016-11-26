@@ -4,7 +4,7 @@
 \alias{enpls.fit.core}
 \title{core function for enpls.fit}
 \usage{
-enpls.fit.core(plsdf, maxcomp)
+enpls.fit.core(plsdf, maxcomp, cvfolds)
 }
 \value{
 the coefficients

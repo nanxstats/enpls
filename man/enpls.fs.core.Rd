@@ -4,7 +4,7 @@
 \alias{enpls.fs.core}
 \title{core function for enpls.fs}
 \usage{
-enpls.fs.core(plsdf, maxcomp)
+enpls.fs.core(plsdf, maxcomp, cvfolds)
 }
 \value{
 fitted coefficients

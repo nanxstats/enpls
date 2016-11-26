@@ -11,7 +11,10 @@ cv.enpls(x, y, nfolds = 5L, verbose = TRUE, ...)
 
 \item{y}{Response vector.}
 
-\item{nfolds}{Number of folds, default is \code{5}.}
+\item{nfolds}{Number of cross-validation folds, default is \code{5}.
+Note that this is the CV folds for the ensemble PLS model,
+not the individual PLS models. To control the CV folds for
+single PLS models, please use the argument \code{cvfolds}.}
 
 \item{verbose}{Shall we print out the progress of cross-validation?}
 

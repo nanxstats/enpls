@@ -1,11 +1,14 @@
 Package: enpls
 Type: Package
 Title: Ensemble Partial Least Squares Regression
-Version: 5.0
+Version: 5.6
 Author: Nan Xiao <me@nanx.me>, Dong-Sheng Cao,
     Miao-Zhu Li <miaozhu.li@duke.edu>, Qing-Song Xu <qsxu@csu.edu.cn>
 Maintainer: Nan Xiao <me@nanx.me>
-Description: An algorithmic framework for measuring feature importance, outlier detection, model applicability domain evaluation, and ensemble predictive modeling with (sparse) partial least squares regressions.
+Description: An algorithmic framework for measuring feature importance,
+    outlier detection, model applicability domain evaluation,
+    and ensemble predictive modeling with (sparse)
+    partial least squares regressions.
 License: GPL (>= 2)
 URL: http://enpls.org
 BugReports: https://github.com/road2stat/enpls/issues

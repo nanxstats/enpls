@@ -1,3 +1,13 @@
+# CHANGES IN enpls VERSION 5.6 (2016-11-25)
+
+## NEW FEATURES
+
+* New argument `cvfolds` now available in all applicable functions for finer control of cross-validation folds in automatic parameter selection of each PLS/SPLS model.
+
+## IMPROVEMENTS
+
+* Critical implementation improvements for processing the case where argument `maxcomp = NULL` (maximum number of components not specified explicitly) in `enpls.` functions. Now it should correctly determine the maximum number of components to use, considering both cross-validation and special cases such as n < p. Thanks to Dr. You-Wu Lin for the feedback.
+
 # CHANGES IN enpls VERSION 5.0 (2016-10-20)
 
 ## NEW FEATURES

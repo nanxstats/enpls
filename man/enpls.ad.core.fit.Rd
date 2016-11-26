@@ -4,7 +4,7 @@
 \alias{enpls.ad.core.fit}
 \title{core fitting function for enpls.ad}
 \usage{
-enpls.ad.core.fit(trainingset, maxcomp)
+enpls.ad.core.fit(trainingset, maxcomp, cvfolds)
 }
 \value{
 the fitted plsr object

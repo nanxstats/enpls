@@ -5,8 +5,8 @@
 \title{Ensemble Sparse Partial Least Squares for
 Model Applicability Domain Evaluation}
 \usage{
-enspls.ad(x, y, xtest, ytest, maxcomp = 5L, alpha = seq(0.2, 0.8, 0.2),
-  space = c("sample", "variable"), method = c("mc", "boot"),
+enspls.ad(x, y, xtest, ytest, maxcomp = 5L, cvfolds = 5L, alpha = seq(0.2,
+  0.8, 0.2), space = c("sample", "variable"), method = c("mc", "boot"),
   reptimes = 500L, ratio = 0.8, parallel = 1L)
 }
 \arguments{
@@ -21,7 +21,10 @@ predictor matrix (see example code below).}
 response vector (see example code below).}
 
 \item{maxcomp}{Maximum number of components included within each model.
-If not specified, will use 5 by default.}
+If not specified, will use \code{5} by default.}
+
+\item{cvfolds}{Number of cross-validation folds used in each model
+for automatic parameter selection, default is \code{5}.}
 
 \item{alpha}{Parameter (grid) controlling sparsity of the model.
 If not specified, default is \code{seq(0.2, 0.8, 0.2)}.}

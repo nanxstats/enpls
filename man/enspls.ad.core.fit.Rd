@@ -4,7 +4,7 @@
 \alias{enspls.ad.core.fit}
 \title{core fitting function for enspls.ad}
 \usage{
-enspls.ad.core.fit(x.tr, y.tr, maxcomp, alpha)
+enspls.ad.core.fit(x.tr, y.tr, maxcomp, cvfolds, alpha)
 }
 \value{
 the fitted spls object

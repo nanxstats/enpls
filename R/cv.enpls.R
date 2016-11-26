@@ -4,7 +4,10 @@
 #'
 #' @param x Predictor matrix.
 #' @param y Response vector.
-#' @param nfolds Number of folds, default is \code{5}.
+#' @param nfolds Number of cross-validation folds, default is \code{5}.
+#' Note that this is the CV folds for the ensemble PLS model,
+#' not the individual PLS models. To control the CV folds for
+#' single PLS models, please use the argument \code{cvfolds}.
 #' @param verbose Shall we print out the progress of cross-validation?
 #' @param ... Arguments to be passed to \code{\link{enpls.fit}}.
 #'
@@ -62,18 +65,15 @@ cv.enpls = function(x, y, nfolds = 5L, verbose = TRUE, ...) {
   colnames(ypred) = c('y.real', 'y.pred')
 
   residual = ypred[, 1L] - ypred[, 2L]
-  # RMSE
-  RMSE = sqrt(mean((residual)^2, na.rm = TRUE))
-  # MAE (Mean Absolute Error)
-  MAE = mean(abs(residual), na.rm = TRUE)
-  # R-square
-  Rsquare = 1L - (sum((residual)^2, na.rm = TRUE)/sum((y - mean(y))^2))
+  RMSE     = sqrt(mean((residual)^2, na.rm = TRUE))
+  MAE      = mean(abs(residual), na.rm = TRUE)
+  Rsquare  = 1L - (sum((residual)^2, na.rm = TRUE)/sum((y - mean(y))^2))
 
-  object = list('ypred' = ypred,
+  object = list('ypred'    = ypred,
                 'residual' = residual,
-                'RMSE' = RMSE,
-                'MAE' = MAE,
-                'Rsquare' = Rsquare)
+                'RMSE'     = RMSE,
+                'MAE'      = MAE,
+                'Rsquare'  = Rsquare)
   class(object) = 'cv.enpls'
   return(object)
 
