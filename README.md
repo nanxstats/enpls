@@ -1,6 +1,7 @@
 # enpls
 
 [![Build Status](https://travis-ci.org/road2stat/enpls.svg?branch=master)](https://travis-ci.org/road2stat/enpls)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/road2stat/enpls?branch=master&svg=true)](https://ci.appveyor.com/project/road2stat/enpls)
 [![CRAN Version](http://www.r-pkg.org/badges/version/enpls)](https://cran.r-project.org/package=enpls)
 [![Downloads from the RStudio CRAN mirror](http://cranlogs.r-pkg.org/badges/enpls)](http://cranlogs.r-pkg.org/badges/enpls)
 
