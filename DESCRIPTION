@@ -9,7 +9,7 @@ Description: An algorithmic framework for measuring feature importance,
     outlier detection, model applicability domain evaluation,
     and ensemble predictive modeling with (sparse)
     partial least squares regressions.
-License: GPL (>= 2)
+License: GPL-3 | file LICENSE
 URL: http://enpls.org
 BugReports: https://github.com/road2stat/enpls/issues
 Depends:
