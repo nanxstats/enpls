@@ -1,0 +1,66 @@
+templates:
+  params:
+    bootswatch: united
+
+reference:
+  - title: "Model Fitting"
+    desc: "Functions for fitting ensemble (spase) partial least sqaures regression models."
+    contents:
+      - enpls.fit
+      - enspls.fit
+      - predict.enpls.fit
+      - predict.enspls.fit
+      - print.enpls.fit
+      - print.enspls.fit
+  - title: "Cross-Validation"
+    desc: "Cross-validation routines for ensemble (spase) PLS/SPLS models."
+    contents:
+      - cv.enpls
+      - cv.enspls
+      - plot.cv.enpls
+      - plot.cv.enspls
+      - print.cv.enpls
+      - print.cv.enspls
+  - title: "Measuring Feature Importance"
+    desc: >
+      Functions for measuring feature importance using ensemble PLS/SPLS models.
+    contents:
+      - enpls.fs
+      - enspls.fs
+      - plot.enpls.fs
+      - plot.enspls.fs
+      - print.enpls.fs
+      - print.enspls.fs
+  - title: "Outlier Detection"
+    desc: >
+      Functions for detecting "outliers" using ensemble PLS/SPLS models.
+    contents:
+      - enpls.od
+      - enspls.od
+      - plot.enpls.od
+      - plot.enspls.od
+      - print.enpls.od
+      - print.enspls.od
+  - title: "Model Applicability Domain Evaluation"
+    desc: >
+      Functions for evaluating model applicability domain using ensemble PLS/SPLS models.
+    contents:
+      - enpls.ad
+      - enspls.ad
+      - plot.enpls.ad
+      - plot.enspls.ad
+      - print.enpls.ad
+      - print.enspls.ad
+  - title: "Performance Evaluation Metrics"
+    desc: >
+      Functions for computing evaluation metrics for regression models.
+    contents:
+      - enpls.rmse
+      - enpls.rmsle
+      - enpls.mae
+  - title: "Datasets"
+    desc: >
+      Example datasets
+    contents:
+      - alkanes
+      - logd1k

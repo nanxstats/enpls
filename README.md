@@ -30,8 +30,27 @@ library("enpls")
 
 and you are all set. See [the vignette](http://enpls.org/doc/) (or open with `vignette("enpls")` in R) for a quick-start guide.
 
+## Gallery
+
+### Measuring Feature Importance
+
+<img src="http://enpls.org/img/enpls-fs.png" width="49%" alt="enpls-fs">
+<img src="http://enpls.org/img/enpls-fs-boxplot.png" width="49%" alt="enpls-fs-boxplot">
+
+### Outlier Detection
+
+<img src="http://enpls.org/img/enpls-od.png" width="63%" alt="enpls-od">
+
+### Model Applicability Domain Evaluation
+
+<img src="http://enpls.org/img/enpls-ad.png" width="69%" alt="enpls-ad">
+
+### Ensemble Model Fitting and Prediction
+
+<img src="http://enpls.org/img/enpls-fit.png" width="60%" alt="enpls-fit">
+
 ## Links
 
-* Project website: [http://enpls.org](http://enpls.org)
+* Web: [http://enpls.org](http://enpls.org)
 * CRAN: [https://cran.r-project.org/package=enpls](https://cran.r-project.org/package=enpls)
 * GitHub: [https://github.com/road2stat/enpls](https://github.com/road2stat/enpls)
