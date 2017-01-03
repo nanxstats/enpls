@@ -39,15 +39,13 @@ and you are all set. See [the vignette](http://enpls.org/doc/) (or open with `vi
 
 ### Outlier Detection
 
-<img src="http://enpls.org/img/enpls-od.png" width="63%" alt="enpls-od">
+<img src="http://enpls.org/img/enpls-od-1.png" width="49%" alt="enpls-od-1">
+<img src="http://enpls.org/img/enpls-od-2.png" width="49%" alt="enpls-od-2">
 
-### Model Applicability Domain Evaluation
+### Model Applicability Domain Evaluation / Ensemble Predictive Modeling
 
-<img src="http://enpls.org/img/enpls-ad.png" width="69%" alt="enpls-ad">
-
-### Ensemble Model Fitting and Prediction
-
-<img src="http://enpls.org/img/enpls-fit.png" width="60%" alt="enpls-fit">
+<img src="http://enpls.org/img/enpls-ad.png" width="49%" alt="enpls-ad">
+<img src="http://enpls.org/img/enpls-fit.png" width="49%" alt="enpls-fit">
 
 ## Links
 
