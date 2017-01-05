@@ -22,13 +22,7 @@ Or try the development version on GitHub:
 devtools::install_github("road2stat/enpls")
 ```
 
-To load the package in R, simply use
-
-```r
-library("enpls")
-```
-
-and you are all set. See [the vignette](http://enpls.org/doc/) (or open with `vignette("enpls")` in R) for a quick-start guide.
+See [the vignette](http://enpls.org/doc/) (or open with `vignette("enpls")` in R) for a quick-start guide.
 
 ## Gallery
 

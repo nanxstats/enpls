@@ -1,6 +1,4 @@
-# enpls 5.7 (2017-01-02)
-
-## New Features
+# enpls 5.7 (2017-01-05)
 
 ## Improvements
 

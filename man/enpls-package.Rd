@@ -11,7 +11,7 @@ ensemble predictive modeling with (sparse)
 partial least squares regressions.
 }
 \details{
-See the vignette via \code{vignette("enpls")}.
+Browse the package vignette via \code{vignette("enpls")}.
 
 \tabular{ll}{ Package: \tab enpls\cr
 Type: \tab Package\cr
