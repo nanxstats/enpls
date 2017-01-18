@@ -24,7 +24,7 @@
 #' \item \code{coefficient.matrix} - original coefficient matrix
 #' }
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @seealso See \code{\link{enspls.od}} for outlier detection with
 #' ensemble sparse partial least squares regressions.

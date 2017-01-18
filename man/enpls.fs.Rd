@@ -51,7 +51,7 @@ print(fs)
 plot(fs)
 }
 \author{
-Nan Xiao <\url{http://nanx.me}>
+Nan Xiao <\url{https://nanx.me}>
 }
 \seealso{
 See \code{\link{enpls.od}} for outlier detection with

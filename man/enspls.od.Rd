@@ -61,7 +61,7 @@ plot(od, prob = 0.1)
 plot(od, criterion = "sd", sdtimes = 1)
 }
 \author{
-Nan Xiao <\url{http://nanx.me}>
+Nan Xiao <\url{https://nanx.me}>
 }
 \seealso{
 See \code{\link{enspls.fs}} for measuring feature importance

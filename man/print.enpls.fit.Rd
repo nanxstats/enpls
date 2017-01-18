@@ -24,7 +24,7 @@ fit = enpls.fit(x, y, reptimes = 50)
 print(fit)
 }
 \author{
-Nan Xiao <\url{http://nanx.me}>
+Nan Xiao <\url{https://nanx.me}>
 }
 \seealso{
 See \code{\link{enpls.fit}} for fitting ensemble

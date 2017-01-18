@@ -29,7 +29,7 @@ fs = enspls.fs(x, y, reptimes = 5, maxcomp = 3,
 print(fs, nvar = 10L)
 }
 \author{
-Nan Xiao <\url{http://nanx.me}>
+Nan Xiao <\url{https://nanx.me}>
 }
 \seealso{
 See \code{\link{enspls.fs}} for measuring feature importance with

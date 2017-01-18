@@ -25,7 +25,7 @@
 #' \item \code{predict.error.matrix} - the original prediction error matrix
 #' }
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @note To maximize the probablity that each observation can
 #' be selected in the test set (thus the prediction uncertainty

@@ -19,7 +19,7 @@
 #'
 #' @return A list containing all partial least squares model objects.
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @seealso See \code{\link{enpls.fs}} for measuring feature importance
 #' with ensemble partial least squares regressions.

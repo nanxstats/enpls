@@ -7,7 +7,7 @@
 #'
 #' @return RMSE
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @export enpls.rmse
 enpls.rmse = function(yreal, ypred) {
@@ -25,7 +25,7 @@ enpls.rmse = function(yreal, ypred) {
 #'
 #' @return MAE
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @export enpls.mae
 enpls.mae = function(yreal, ypred) {
@@ -43,7 +43,7 @@ enpls.mae = function(yreal, ypred) {
 #'
 #' @return RMSLE
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @export enpls.rmsle
 enpls.rmsle = function(yreal, ypred) {

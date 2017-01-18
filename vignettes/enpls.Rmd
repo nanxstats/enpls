@@ -1,6 +1,6 @@
 ---
 title: "A Brief Introduction to enpls"
-author: "Nan Xiao <<http://nanx.me>>"
+author: "Nan Xiao <<https://nanx.me>>"
 date: "`r Sys.Date()`"
 bibliography: enpls.bib
 output:
@@ -213,6 +213,6 @@ relevant topics and further facilitate the predictive modeling tasks.
 If you used `enpls` in your research, please feel free
 to cite our paper [@xiao2016enpls] in your publications.
 We will be more than happy to listen to your feedbacks.
-The enpls project website: [http://enpls.org](http://enpls.org)
+The enpls project website: [https://enpls.org](https://enpls.org)
 
 # References

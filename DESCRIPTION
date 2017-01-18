@@ -14,7 +14,7 @@ Description: An algorithmic framework for measuring feature importance,
     and ensemble predictive modeling with (sparse)
     partial least squares regressions.
 License: GPL-3 | file LICENSE
-URL: http://enpls.org, https://github.com/road2stat/enpls
+URL: https://enpls.org, https://github.com/road2stat/enpls
 BugReports: https://github.com/road2stat/enpls/issues
 Depends:
     R (>= 3.0.2)

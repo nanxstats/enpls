@@ -35,7 +35,7 @@ plot(fs, nvar = 10)
 plot(fs, type = "boxplot", limits = c(0.05, 0.95), nvar = 10)
 }
 \author{
-Nan Xiao <\url{http://nanx.me}>
+Nan Xiao <\url{https://nanx.me}>
 }
 \seealso{
 See \code{\link{enspls.fs}} for measuring feature importance with

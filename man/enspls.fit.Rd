@@ -50,7 +50,7 @@ print(fit)
 predict(fit, newx = x)
 }
 \author{
-Nan Xiao <\url{http://nanx.me}>
+Nan Xiao <\url{https://nanx.me}>
 }
 \seealso{
 See \code{\link{enspls.fs}} for measuring feature importance

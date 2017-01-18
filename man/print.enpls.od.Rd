@@ -24,7 +24,7 @@ od = enpls.od(x, y, reptimes = 40)
 print(od)
 }
 \author{
-Nan Xiao <\url{http://nanx.me}>
+Nan Xiao <\url{https://nanx.me}>
 }
 \seealso{
 See \code{\link{enpls.od}} for outlier detection with

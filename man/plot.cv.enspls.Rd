@@ -35,7 +35,7 @@ cvfit = cv.enspls(x, y, reptimes = 10)
 plot(cvfit)}
 }
 \author{
-Nan Xiao <\url{http://nanx.me}>
+Nan Xiao <\url{https://nanx.me}>
 }
 \seealso{
 See \code{\link{cv.enspls}} for cross-validation of

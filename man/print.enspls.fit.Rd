@@ -25,7 +25,7 @@ fit = enspls.fit(x, y, reptimes = 5, maxcomp = 3,
 print(fit)
 }
 \author{
-Nan Xiao <\url{http://nanx.me}>
+Nan Xiao <\url{https://nanx.me}>
 }
 \seealso{
 See \code{\link{enspls.fit}} for fitting ensemble sparse

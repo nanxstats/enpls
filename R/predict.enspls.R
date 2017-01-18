@@ -10,7 +10,7 @@
 #'
 #' @return A numeric vector containing the predicted values.
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @seealso See \code{\link{enspls.fit}} for fitting ensemble sparse
 #' partial least squares regression models.

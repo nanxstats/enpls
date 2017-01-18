@@ -29,7 +29,7 @@ print(fs)
 print(fs, nvar = 10L)
 }
 \author{
-Nan Xiao <\url{http://nanx.me}>
+Nan Xiao <\url{https://nanx.me}>
 }
 \seealso{
 See \code{\link{enpls.fs}} for measuring feature importance with

@@ -26,7 +26,7 @@ rgb2alpha = function(raw_col, alpha) {
 #' @param main Plot title, not used currently.
 #' @param ... Additional graphical parameters, not used currently.
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @seealso See \code{\link{cv.enpls}} for cross-validation of
 #' ensemble partial least squares regression models.
@@ -86,7 +86,7 @@ plot.cv.enpls = function(x, xlim = NULL, ylim = NULL, alpha = 0.8,
 #' @param main Plot title, not used currently.
 #' @param ... Additional graphical parameters, not used currently.
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @seealso See \code{\link{enpls.fs}} for measuring feature importance with
 #' ensemble partial least squares regressions.
@@ -171,7 +171,7 @@ plot.enpls.fs = function(x, nvar = NULL,
 #' @param main Plot title.
 #' @param ... Additional graphical parameters for \code{\link{plot}}.
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @seealso See \code{\link{enpls.od}} for outlier detection with
 #' ensemble partial least squares regressions.
@@ -278,7 +278,7 @@ plot.enpls.od = function(x,
 #' @param main Plot title, not used currently.
 #' @param ... Additional graphical parameters, not used currently.
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @seealso See \code{\link{enpls.ad}} for model applicability domain
 #' evaluation with ensemble partial least squares regressions.

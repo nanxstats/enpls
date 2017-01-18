@@ -25,7 +25,7 @@ od = enspls.od(x, y, reptimes = 5, maxcomp = 3,
 print(od)
 }
 \author{
-Nan Xiao <\url{http://nanx.me}>
+Nan Xiao <\url{https://nanx.me}>
 }
 \seealso{
 See \code{\link{enspls.od}} for outlier detection with

@@ -24,7 +24,7 @@ cvfit = cv.enpls(x, y, reptimes = 10)
 print(cvfit)
 }
 \author{
-Nan Xiao <\url{http://nanx.me}>
+Nan Xiao <\url{https://nanx.me}>
 }
 \seealso{
 See \code{\link{cv.enpls}} for cross-validation of ensemble

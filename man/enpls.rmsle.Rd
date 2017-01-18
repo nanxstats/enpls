@@ -18,6 +18,6 @@ RMSLE
 Root Mean Squared Logarithmic Error (RMSLE)
 }
 \author{
-Nan Xiao <\url{http://nanx.me}>
+Nan Xiao <\url{https://nanx.me}>
 }
 

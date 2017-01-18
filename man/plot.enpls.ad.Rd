@@ -44,7 +44,7 @@ plot(ad)
 plot(ad, type = "interactive")}
 }
 \author{
-Nan Xiao <\url{http://nanx.me}>
+Nan Xiao <\url{https://nanx.me}>
 }
 \seealso{
 See \code{\link{enpls.ad}} for model applicability domain

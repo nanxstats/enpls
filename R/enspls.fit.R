@@ -20,7 +20,7 @@
 #'
 #' @return A list containing all sparse partial least squares model objects.
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @seealso See \code{\link{enspls.fs}} for measuring feature importance
 #' with ensemble sparse partial least squares regressions.

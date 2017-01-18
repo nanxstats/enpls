@@ -5,7 +5,7 @@
 #' @param x An object of class \code{cv.enspls}.
 #' @param ... Additional parameters for \code{\link{print}}.
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @seealso See \code{\link{cv.enspls}} for cross-validation of
 #' ensemble sparse partial least squares regression models.
@@ -46,7 +46,7 @@ print.cv.enspls = function(x, ...) {
 #' @param x An object of class \code{enspls.fit}.
 #' @param ... Additional parameters for \code{\link{print}}.
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @seealso See \code{\link{enspls.fit}} for fitting ensemble sparse
 #' partial least squares regression models.
@@ -94,7 +94,7 @@ print.enspls.fit = function(x, ...) {
 #' @param nvar Number of top variables to show. Ignored if \code{sort = FALSE}.
 #' @param ... Additional parameters for \code{\link{print}}.
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @seealso See \code{\link{enspls.fs}} for measuring feature importance with
 #' ensemble sparse partial least squares regressions.
@@ -138,7 +138,7 @@ print.enspls.fs = function(x, sort = TRUE, nvar = NULL, ...) {
 #' @param x An object of class \code{enspls.od}.
 #' @param ... Additional parameters for \code{\link{print}}.
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @seealso See \code{\link{enspls.od}} for outlier detection with
 #' ensemble sparse partial least squares regressions.
@@ -179,7 +179,7 @@ print.enspls.od = function(x, ...) {
 #' @param x An object of class \code{enspls.ad}.
 #' @param ... Additional parameters for \code{\link{print}}.
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @seealso See \code{\link{enspls.ad}} for model applicability domain
 #' evaluation with ensemble sparse partial least squares regressions.

@@ -37,7 +37,7 @@ plot(y, y.pred.med, xlim = range(y), ylim = range(y))
 abline(a = 0L, b = 1L)
 }
 \author{
-Nan Xiao <\url{http://nanx.me}>
+Nan Xiao <\url{https://nanx.me}>
 }
 \seealso{
 See \code{\link{enspls.fit}} for fitting ensemble sparse

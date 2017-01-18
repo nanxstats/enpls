@@ -9,7 +9,7 @@
 #' @param main Plot title, not used currently.
 #' @param ... Additional graphical parameters, not used currently.
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @seealso See \code{\link{cv.enspls}} for cross-validation of
 #' ensemble sparse partial least squares regression models.
@@ -71,7 +71,7 @@ plot.cv.enspls = function(x, xlim = NULL, ylim = NULL, alpha = 0.8,
 #' @param main Plot title, not used currently.
 #' @param ... Additional graphical parameters, not used currently.
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @seealso See \code{\link{enspls.fs}} for measuring feature importance with
 #' ensemble sparse partial least squares regressions.
@@ -154,7 +154,7 @@ plot.enspls.fs = function(x, nvar = NULL,
 #' @param main Plot title.
 #' @param ... Additional graphical parameters for \code{\link{plot}}.
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @seealso See \code{\link{enspls.od}} for outlier detection with
 #' ensemble sparse partial least squares regressions.
@@ -261,7 +261,7 @@ plot.enspls.od = function(x,
 #' @param main Plot title.
 #' @param ... Additional graphical parameters for \code{\link{plot}}.
 #'
-#' @author Nan Xiao <\url{http://nanx.me}>
+#' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @seealso See \code{\link{enspls.ad}} for model applicability domain
 #' evaluation with ensemble sparse partial least squares regressions.

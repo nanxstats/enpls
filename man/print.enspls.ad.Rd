@@ -38,7 +38,7 @@ ad = enspls.ad(x.tr, y.tr, x.te, y.te,
 print(ad)
 }
 \author{
-Nan Xiao <\url{http://nanx.me}>
+Nan Xiao <\url{https://nanx.me}>
 }
 \seealso{
 See \code{\link{enspls.ad}} for model applicability domain
