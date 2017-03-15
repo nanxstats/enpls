@@ -28,15 +28,15 @@ See [the vignette](https://enpls.org/doc/) (or open with `vignette("enpls")` in 
 
 ### Measuring Feature Importance
 
-<img src="https://enpls.org/img/enpls-fs.png" width="100%" alt="enpls-fs">
+<img src="https://enpls.org/img/enpls-featimp.png" width="100%" alt="enpls-fs">
 
 ### Outlier Detection
 
-<img src="https://enpls.org/img/enpls-od.png" width="100%" alt="enpls-od">
+<img src="https://enpls.org/img/enpls-outlier.png" width="100%" alt="enpls-od">
 
 ### Model Applicability Domain Evaluation / Ensemble Predictive Modeling
 
-<img src="https://enpls.org/img/enpls-fit.png" width="100%" alt="enpls-fit">
+<img src="https://enpls.org/img/enpls-model.png" width="100%" alt="enpls-fit">
 
 ## Links
 
