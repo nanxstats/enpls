@@ -15,4 +15,3 @@ then use them to fit the complete training set,
 and predict on the test set. scale = TRUE
 }
 \keyword{internal}
-

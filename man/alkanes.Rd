@@ -36,4 +36,3 @@ Yi-Zeng Liang, Da-Lin Yuan, Qing-Song Xu, and Olav Martin Kvalheim.
 "Modeling based on subspace orthogonal projections for QSAR and
 QSPR research." \emph{Journal of Chemometrics} 22, no. 1 (2008): 23--35.
 }
-

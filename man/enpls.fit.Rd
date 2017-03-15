@@ -46,13 +46,12 @@ fit = enpls.fit(x, y, reptimes = 50)
 print(fit)
 predict(fit, newx = x)
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
 \seealso{
 See \code{\link{enpls.fs}} for measuring feature importance
 with ensemble partial least squares regressions.
 See \code{\link{enpls.od}} for outlier detection with ensemble
 partial least squares regressions.
 }
-
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}

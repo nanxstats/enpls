@@ -35,11 +35,10 @@ ad = enpls.ad(x.tr, y.tr, x.te, y.te,
               ratio = 0.9, reptimes = 50)
 print(ad)
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
 \seealso{
 See \code{\link{enpls.ad}} for model applicability domain
 evaluation with ensemble partial least squares regressions.
 }
-
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}

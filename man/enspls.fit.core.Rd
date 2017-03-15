@@ -15,4 +15,3 @@ the complete training set.
 scale = TRUE
 }
 \keyword{internal}
-

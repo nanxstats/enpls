@@ -60,13 +60,12 @@ od = enspls.od(x, y, reptimes = 5, maxcomp = 3,
 plot(od, prob = 0.1)
 plot(od, criterion = "sd", sdtimes = 1)
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
 \seealso{
 See \code{\link{enspls.fs}} for measuring feature importance
 with ensemble sparse partial least squares regressions.
 See \code{\link{enspls.fit}} for fitting ensemble sparse
 partial least squares regression models.
 }
-
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}

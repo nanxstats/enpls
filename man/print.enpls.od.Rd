@@ -23,11 +23,10 @@ set.seed(42)
 od = enpls.od(x, y, reptimes = 40)
 print(od)
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
 \seealso{
 See \code{\link{enpls.od}} for outlier detection with
 ensemble partial least squares regressions.
 }
-
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}

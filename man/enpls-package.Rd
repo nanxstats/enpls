@@ -17,4 +17,3 @@ Browse the package vignette via \code{vignette("enpls")}.
 Type: \tab Package\cr
 License: \tab GPL-3\cr }
 }
-
