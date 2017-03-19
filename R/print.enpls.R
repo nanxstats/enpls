@@ -30,10 +30,11 @@ print.cv.enpls = function(x, ...) {
 
   cat('Cross Validation Result for Ensemble Partial Least Squares\n')
   cat('---\n')
-  cat(paste('RMSE = ', sprintf("%.4f", x$'RMSE'), '\n',
-            'MAE = ', sprintf("%.6f", x$'MAE'), '\n',
-            'Rsquare = ', sprintf("%.6f", x$'Rsquare'), '\n',
-            sep = ''))
+  cat(paste(
+    'RMSE = ', sprintf("%.4f", x$'RMSE'), '\n',
+    'MAE = ', sprintf("%.6f", x$'MAE'), '\n',
+    'Rsquare = ', sprintf("%.6f", x$'Rsquare'), '\n',
+    sep = ''))
 
 }
 
@@ -192,15 +193,18 @@ print.enpls.od = function(x, ...) {
 #' y.tr = y[1:100]
 #'
 #' # two test sets
-#' x.te = list("test.1" = x[101:150, ],
-#'             "test.2" = x[151:207, ])
-#' y.te = list("test.1" = y[101:150],
-#'             "test.2" = y[151:207])
+#' x.te = list(
+#'   "test.1" = x[101:150, ],
+#'   "test.2" = x[151:207, ])
+#' y.te = list(
+#'   "test.1" = y[101:150],
+#'   "test.2" = y[151:207])
 #'
 #' set.seed(42)
-#' ad = enpls.ad(x.tr, y.tr, x.te, y.te,
-#'               space = "variable", method = "mc",
-#'               ratio = 0.9, reptimes = 50)
+#' ad = enpls.ad(
+#'   x.tr, y.tr, x.te, y.te,
+#'   space = "variable", method = "mc",
+#'   ratio = 0.9, reptimes = 50)
 #' print(ad)
 
 print.enpls.ad = function(x, ...) {

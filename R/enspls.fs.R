@@ -47,14 +47,15 @@
 #' plot(fs, nvar = 10)
 #' plot(fs, type = 'boxplot', limits = c(0.05, 0.95), nvar = 10)
 
-enspls.fs = function(x, y,
-                     maxcomp  = 5L,
-                     cvfolds  = 5L,
-                     alpha    = seq(0.2, 0.8, 0.2),
-                     reptimes = 500L,
-                     method   = c('mc', 'boot'),
-                     ratio    = 0.8,
-                     parallel = 1L) {
+enspls.fs = function(
+  x, y,
+  maxcomp  = 5L,
+  cvfolds  = 5L,
+  alpha    = seq(0.2, 0.8, 0.2),
+  reptimes = 500L,
+  method   = c('mc', 'boot'),
+  ratio    = 0.8,
+  parallel = 1L) {
 
   if (missing(x) | missing(y)) stop('Please specify both x and y')
 
@@ -64,11 +65,13 @@ enspls.fs = function(x, y,
   samp.idx = vector('list', reptimes)
 
   if (method == 'mc') {
-    for (i in 1L:reptimes) samp.idx[[i]] = sample(1L:x.row, round(x.row * ratio))
+    for (i in 1L:reptimes)
+      samp.idx[[i]] = sample(1L:x.row, round(x.row * ratio))
   }
 
   if (method == 'boot') {
-    for (i in 1L:reptimes) samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
+    for (i in 1L:reptimes)
+      samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
   }
 
   if (parallel < 1.5) {
@@ -100,10 +103,12 @@ enspls.fs = function(x, y,
   # let variables with all zero coefficients have 0 importance
   varimp[which(!is.finite(varimp))] = 0
 
-  object = list('variable.importance' = varimp,
-                'coefficient.matrix'  = coefmat)
-  class(object) = 'enspls.fs'
-  return(object)
+  res = list(
+    'variable.importance' = varimp,
+    'coefficient.matrix'  = coefmat)
+  class(res) = 'enspls.fs'
+
+  res
 
 }
 
@@ -121,32 +126,33 @@ enspls.fs = function(x, y,
 
 enspls.fs.core = function(xtmp, ytmp, maxcomp, cvfolds, alpha) {
 
-  invisible(
-    capture.output(
-      spls.cvfit <- cv.spls(xtmp,
-                            ytmp,
-                            fold    = cvfolds,
-                            K       = maxcomp,
-                            eta     = alpha,
-                            scale.x = TRUE,
-                            scale.y = FALSE,
-                            plot.it = FALSE)))
+  invisible(capture.output(
+    spls.cvfit <- cv.spls(
+      xtmp,
+      ytmp,
+      fold    = cvfolds,
+      K       = maxcomp,
+      eta     = alpha,
+      scale.x = TRUE,
+      scale.y = FALSE,
+      plot.it = FALSE)))
 
   # select best component number and alpha using adjusted CV
   cv.bestcomp  = spls.cvfit$'K.opt'
   cv.bestalpha = spls.cvfit$'eta.opt'
 
-  spls.fit = spls(xtmp,
-                  ytmp,
-                  K       = cv.bestcomp,
-                  eta     = cv.bestalpha,
-                  scale.x = TRUE,
-                  scale.y = FALSE)
+  spls.fit = spls(
+    xtmp,
+    ytmp,
+    K       = cv.bestcomp,
+    eta     = cv.bestalpha,
+    scale.x = TRUE,
+    scale.y = FALSE)
 
   spls.coef = coef(spls.fit)
   spls.coef.vec = as.vector(spls.coef)
   names(spls.coef.vec) = rownames(spls.coef)
 
-  return(spls.coef.vec)
+  spls.coef.vec
 
 }

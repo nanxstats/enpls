@@ -52,13 +52,14 @@
 #' plot(od)
 #' plot(od, criterion = 'sd')
 
-enpls.od = function(x, y,
-                    maxcomp  = NULL,
-                    cvfolds  = 5L,
-                    reptimes = 500L,
-                    method   = c('mc', 'boot'),
-                    ratio    = 0.8,
-                    parallel = 1L) {
+enpls.od = function(
+  x, y,
+  maxcomp  = NULL,
+  cvfolds  = 5L,
+  reptimes = 500L,
+  method   = c('mc', 'boot'),
+  ratio    = 0.8,
+  parallel = 1L) {
 
   if (missing(x) | missing(y)) stop('Please specify both x and y')
 
@@ -116,12 +117,14 @@ enpls.od = function(x, y,
   errmedian = apply(prederrmat, 2L, median, na.rm = TRUE)
   errsd     = apply(prederrmat, 2L, sd, na.rm = TRUE)
 
-  object = list('error.mean'    = errmean,
-                'error.median'  = errmedian,
-                'error.sd'      = errsd,
-                'predict.error.matrix' = prederrmat)
-  class(object) = 'enpls.od'
-  return(object)
+  res = list(
+    'error.mean'    = errmean,
+    'error.median'  = errmedian,
+    'error.sd'      = errsd,
+    'predict.error.matrix' = prederrmat)
+  class(res) = 'enpls.od'
+
+  res
 
 }
 
@@ -139,41 +142,45 @@ enpls.od.core = function(plsdf.sample, plsdf.remain, maxcomp, cvfolds) {
 
   if (is.null(maxcomp)) {
 
-    plsr.cvfit = plsr(y ~ .,
-                      data       = plsdf.sample,
-                      scale      = TRUE,
-                      method     = 'simpls',
-                      validation = 'CV',
-                      segments   = cvfolds)
+    plsr.cvfit = plsr(
+      y ~ .,
+      data       = plsdf.sample,
+      scale      = TRUE,
+      method     = 'simpls',
+      validation = 'CV',
+      segments   = cvfolds)
 
   } else {
 
-    plsr.cvfit = plsr(y ~ .,
-                      data       = plsdf.sample,
-                      ncomp      = maxcomp,
-                      scale      = TRUE,
-                      method     = 'simpls',
-                      validation = 'CV',
-                      segments   = cvfolds)
+    plsr.cvfit = plsr(
+      y ~ .,
+      data       = plsdf.sample,
+      ncomp      = maxcomp,
+      scale      = TRUE,
+      method     = 'simpls',
+      validation = 'CV',
+      segments   = cvfolds)
 
   }
 
   # select best component number using adjusted CV
   cv.bestcomp = which.min(RMSEP(plsr.cvfit)[['val']][2L, 1L, -1L])
 
-  plsr.fit = plsr(y ~ .,
-                  data       = plsdf.sample,
-                  ncomp      = cv.bestcomp,
-                  scale      = TRUE,
-                  method     = 'simpls',
-                  validation = 'none')
+  plsr.fit = plsr(
+    y ~ .,
+    data       = plsdf.sample,
+    ncomp      = cv.bestcomp,
+    scale      = TRUE,
+    method     = 'simpls',
+    validation = 'none')
 
-  pred = predict(plsr.fit, ncomp = cv.bestcomp,
-                 newdata = plsdf.remain[, !(colnames(plsdf.remain) %in% c('y'))])[, 1L, 1L]
+  pred = predict(
+    plsr.fit, ncomp = cv.bestcomp,
+    newdata = plsdf.remain[, !(colnames(plsdf.remain) %in% c('y'))])[, 1L, 1L]
 
   error = plsdf.remain[, 'y'] - pred
   names(error) = NULL
 
-  return(error)
+  error
 
 }

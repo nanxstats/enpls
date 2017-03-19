@@ -48,19 +48,21 @@
 #' y = logd1k$y
 #'
 #' set.seed(42)
-#' od = enspls.od(x, y, reptimes = 5, maxcomp = 3,
-#'                alpha = c(0.3, 0.6, 0.9))
+#' od = enspls.od(
+#'   x, y, reptimes = 5, maxcomp = 3,
+#'   alpha = c(0.3, 0.6, 0.9))
 #' plot(od, prob = 0.1)
 #' plot(od, criterion = "sd", sdtimes = 1)
 
-enspls.od = function(x, y,
-                     maxcomp  = 5L,
-                     cvfolds  = 5L,
-                     alpha    = seq(0.2, 0.8, 0.2),
-                     reptimes = 500L,
-                     method   = c('mc', 'boot'),
-                     ratio    = 0.8,
-                     parallel = 1L) {
+enspls.od = function(
+  x, y,
+  maxcomp  = 5L,
+  cvfolds  = 5L,
+  alpha    = seq(0.2, 0.8, 0.2),
+  reptimes = 500L,
+  method   = c('mc', 'boot'),
+  ratio    = 0.8,
+  parallel = 1L) {
 
   if (missing(x) | missing(y)) stop('Please specify both x and y')
 
@@ -92,9 +94,9 @@ enspls.od = function(x, y,
       x.remain = x[samp.idx.remain[[i]], ]
       y.sample = y[samp.idx[[i]]]
       y.remain = y[samp.idx.remain[[i]]]
-      errorlist[[i]] =
-        enspls.od.core(x.sample, y.sample, x.remain, y.remain,
-                       maxcomp, cvfolds, alpha)
+      errorlist[[i]] = enspls.od.core(
+        x.sample, y.sample, x.remain, y.remain,
+        maxcomp, cvfolds, alpha)
     }
 
   } else {
@@ -105,8 +107,9 @@ enspls.od = function(x, y,
       x.remain = x[samp.idx.remain[[i]], ]
       y.sample = y[samp.idx[[i]]]
       y.remain = y[samp.idx.remain[[i]]]
-      enspls.od.core(x.sample, y.sample, x.remain, y.remain,
-                     maxcomp, cvfolds, alpha)
+      enspls.od.core(
+        x.sample, y.sample, x.remain, y.remain,
+        maxcomp, cvfolds, alpha)
     }
 
   }
@@ -122,12 +125,14 @@ enspls.od = function(x, y,
   errmedian = apply(prederrmat, 2L, median, na.rm = TRUE)
   errsd     = apply(prederrmat, 2L, sd, na.rm = TRUE)
 
-  object = list('error.mean'    = errmean,
-                'error.median'  = errmedian,
-                'error.sd'      = errsd,
-                'predict.error.matrix' = prederrmat)
-  class(object) = 'enspls.od'
-  return(object)
+  res = list(
+    'error.mean'    = errmean,
+    'error.median'  = errmedian,
+    'error.sd'      = errsd,
+    'predict.error.matrix' = prederrmat)
+  class(res) = 'enspls.od'
+
+  res
 
 }
 
@@ -143,36 +148,38 @@ enspls.od = function(x, y,
 #'
 #' @keywords internal
 
-enspls.od.core = function(x.sample, y.sample, x.remain, y.remain,
-                          maxcomp, cvfolds, alpha) {
+enspls.od.core = function(
+  x.sample, y.sample, x.remain, y.remain,
+  maxcomp, cvfolds, alpha) {
 
-  invisible(
-    capture.output(
-      spls.cvfit <- cv.spls(x.sample,
-                            y.sample,
-                            fold    = cvfolds,
-                            K       = maxcomp,
-                            eta     = alpha,
-                            scale.x = TRUE,
-                            scale.y = FALSE,
-                            plot.it = FALSE)))
+  invisible(capture.output(
+    spls.cvfit <- cv.spls(
+      x.sample,
+      y.sample,
+      fold    = cvfolds,
+      K       = maxcomp,
+      eta     = alpha,
+      scale.x = TRUE,
+      scale.y = FALSE,
+      plot.it = FALSE)))
 
   # select best component number and alpha using adjusted CV
   cv.bestcomp  = spls.cvfit$'K.opt'
   cv.bestalpha = spls.cvfit$'eta.opt'
 
-  spls.fit = spls(x.sample,
-                  y.sample,
-                  K       = cv.bestcomp,
-                  eta     = cv.bestalpha,
-                  scale.x = TRUE,
-                  scale.y = FALSE)
+  spls.fit = spls(
+    x.sample,
+    y.sample,
+    K       = cv.bestcomp,
+    eta     = cv.bestalpha,
+    scale.x = TRUE,
+    scale.y = FALSE)
 
   pred = predict(spls.fit, newx = x.remain)
 
   error = y.remain - pred
   names(error) = NULL
 
-  return(error)
+  error
 
 }

@@ -38,19 +38,21 @@
 #' y = logd1k$y
 #'
 #' set.seed(42)
-#' fit = enspls.fit(x, y, reptimes = 5, maxcomp = 3,
-#'                  alpha = c(0.3, 0.6, 0.9))
+#' fit = enspls.fit(
+#'   x, y, reptimes = 5, maxcomp = 3,
+#'   alpha = c(0.3, 0.6, 0.9))
 #' print(fit)
 #' predict(fit, newx = x)
 
-enspls.fit = function(x, y,
-                      maxcomp  = 5L,
-                      cvfolds  = 5L,
-                      alpha    = seq(0.2, 0.8, 0.2),
-                      reptimes = 500L,
-                      method   = c('mc', 'boot'),
-                      ratio    = 0.8,
-                      parallel = 1L) {
+enspls.fit = function(
+  x, y,
+  maxcomp  = 5L,
+  cvfolds  = 5L,
+  alpha    = seq(0.2, 0.8, 0.2),
+  reptimes = 500L,
+  method   = c('mc', 'boot'),
+  ratio    = 0.8,
+  parallel = 1L) {
 
   if (missing(x) | missing(y)) stop('Please specify both x and y')
 
@@ -60,11 +62,13 @@ enspls.fit = function(x, y,
   samp.idx = vector('list', reptimes)
 
   if (method == 'mc') {
-    for (i in 1L:reptimes) samp.idx[[i]] = sample(1L:x.row, round(x.row * ratio))
+    for (i in 1L:reptimes)
+      samp.idx[[i]] = sample(1L:x.row, round(x.row * ratio))
   }
 
   if (method == 'boot') {
-    for (i in 1L:reptimes) samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
+    for (i in 1L:reptimes)
+      samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
   }
 
   if (parallel < 1.5) {
@@ -73,7 +77,8 @@ enspls.fit = function(x, y,
     for (i in 1L:reptimes) {
       xtmp = x[samp.idx[[i]], ]
       ytmp = y[samp.idx[[i]]]
-      modellist[[i]] = enspls.fit.core(xtmp, ytmp, maxcomp, cvfolds, alpha)
+      modellist[[i]] = enspls.fit.core(
+        xtmp, ytmp, maxcomp, cvfolds, alpha)
     }
 
   } else {
@@ -88,9 +93,9 @@ enspls.fit = function(x, y,
   }
 
   names(modellist) = paste0('spls_model_', 1L:length(modellist))
-
   class(modellist) = 'enspls.fit'
-  return(modellist)
+
+  modellist
 
 }
 
@@ -109,16 +114,16 @@ enspls.fit = function(x, y,
 
 enspls.fit.core = function(xtmp, ytmp, maxcomp, cvfolds, alpha) {
 
-  invisible(
-    capture.output(
-      spls.cvfit <- cv.spls(xtmp,
-                            ytmp,
-                            fold    = cvfolds,
-                            K       = maxcomp,
-                            eta     = alpha,
-                            scale.x = TRUE,
-                            scale.y = FALSE,
-                            plot.it = FALSE)))
+  invisible(capture.output(
+    spls.cvfit <- cv.spls(
+      xtmp,
+      ytmp,
+      fold    = cvfolds,
+      K       = maxcomp,
+      eta     = alpha,
+      scale.x = TRUE,
+      scale.y = FALSE,
+      plot.it = FALSE)))
 
   # select best component number and alpha using adjusted CV
   cv.bestcomp  = spls.cvfit$'K.opt'
@@ -127,21 +132,23 @@ enspls.fit.core = function(xtmp, ytmp, maxcomp, cvfolds, alpha) {
   # clean up spls.cvfit object
   rm(spls.cvfit)
 
-  spls.fit = spls(xtmp,
-                  ytmp,
-                  K       = cv.bestcomp,
-                  eta     = cv.bestalpha,
-                  scale.x = TRUE,
-                  scale.y = FALSE)
+  spls.fit = spls(
+    xtmp,
+    ytmp,
+    K       = cv.bestcomp,
+    eta     = cv.bestalpha,
+    scale.x = TRUE,
+    scale.y = FALSE)
 
   # save cv.bestcomp and cv.bestalpha for predict.enspls
-  enspls.core.fit = list('spls.fit' = spls.fit,
-                         'cv.bestcomp' = cv.bestcomp,
-                         'cv.bestalpha' = cv.bestalpha)
+  enspls.core.fit = list(
+    'spls.fit' = spls.fit,
+    'cv.bestcomp' = cv.bestcomp,
+    'cv.bestalpha' = cv.bestalpha)
 
   # clean up spls.fit object
   rm(spls.fit)
 
-  return(enspls.core.fit)
+  enspls.core.fit
 
 }

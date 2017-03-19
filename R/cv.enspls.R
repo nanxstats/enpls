@@ -71,12 +71,14 @@ cv.enspls = function(x, y, nfolds = 5L, verbose = TRUE, ...) {
   MAE      = mean(abs(residual), na.rm = TRUE)
   Rsquare  = 1L - (sum((residual)^2, na.rm = TRUE)/sum((y - mean(y))^2))
 
-  object = list('ypred'    = ypred,
-                'residual' = residual,
-                'RMSE'     = RMSE,
-                'MAE'      = MAE,
-                'Rsquare'  = Rsquare)
-  class(object) = 'cv.enspls'
-  return(object)
+  res = list(
+    'ypred'    = ypred,
+    'residual' = residual,
+    'RMSE'     = RMSE,
+    'MAE'      = MAE,
+    'Rsquare'  = Rsquare)
+  class(res) = 'cv.enspls'
+
+  res
 
 }

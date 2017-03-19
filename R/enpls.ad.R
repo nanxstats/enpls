@@ -65,30 +65,34 @@
 #' y.tr = y[1:100]
 #'
 #' # two test sets
-#' x.te = list("test.1" = x[101:150, ],
-#'             "test.2" = x[151:207, ])
-#' y.te = list("test.1" = y[101:150],
-#'             "test.2" = y[151:207])
+#' x.te = list(
+#'   "test.1" = x[101:150, ],
+#'   "test.2" = x[151:207, ])
+#' y.te = list(
+#'   "test.1" = y[101:150],
+#'   "test.2" = y[151:207])
 #'
 #' set.seed(42)
-#' ad = enpls.ad(x.tr, y.tr, x.te, y.te,
-#'               space = "variable", method = "mc",
-#'               ratio = 0.9, reptimes = 50)
+#' ad = enpls.ad(
+#'   x.tr, y.tr, x.te, y.te,
+#'   space = "variable", method = "mc",
+#'   ratio = 0.9, reptimes = 50)
 #' print(ad)
 #' plot(ad)
-#' # The interactive plot requires a HTML viewer
+#' # the interactive plot requires a HTML viewer
 #' \dontrun{
 #' plot(ad, type = "interactive")}
 
-enpls.ad = function(x, y,
-                    xtest, ytest,
-                    maxcomp  = NULL,
-                    cvfolds  = 5L,
-                    space    = c('sample', 'variable'),
-                    method   = c('mc', 'boot'),
-                    reptimes = 500L,
-                    ratio    = 0.8,
-                    parallel = 1L) {
+enpls.ad = function(
+  x, y,
+  xtest, ytest,
+  maxcomp  = NULL,
+  cvfolds  = 5L,
+  space    = c('sample', 'variable'),
+  method   = c('mc', 'boot'),
+  reptimes = 500L,
+  ratio    = 0.8,
+  parallel = 1L) {
 
   if (missing(x) | missing(y) | missing(xtest) | missing(ytest))
     stop('Please specify x, y, xtest, and ytest')
@@ -145,8 +149,7 @@ enpls.ad = function(x, y,
 
       registerDoParallel(parallel)
       fit.list = foreach(i = 1L:reptimes) %dopar% {
-        plsdf.tr = as.data.frame(cbind(x[idx.row[[i]], ],
-                                       'y' = y[idx.row[[i]]]))
+        plsdf.tr = as.data.frame(cbind(x[idx.row[[i]], ], 'y' = y[idx.row[[i]]]))
         enpls.ad.core.fit(plsdf.tr, maxcomp, cvfolds)
       }
 
@@ -156,8 +159,7 @@ enpls.ad = function(x, y,
         for (j in 1L:n.testset) {
           errorlist.te[[j]][[i]] =
             suppressWarnings(enpls.ad.core.pred(
-              fit.list[[i]], as.data.frame(cbind(xtest[[j]],
-                                                 'y' = ytest[[j]]))))
+              fit.list[[i]], as.data.frame(cbind(xtest[[j]], 'y' = ytest[[j]]))))
         }
       }
 
@@ -189,8 +191,7 @@ enpls.ad = function(x, y,
           for (j in 1L:n.testset) {
             errorlist.te[[j]][[i]] =
               suppressWarnings(enpls.ad.core.pred(
-                fit, as.data.frame(cbind(xtest[[j]][, idx.col[[i]]],
-                                         'y' = ytest[[j]]))))
+                fit, as.data.frame(cbind(xtest[[j]][, idx.col[[i]]], 'y' = ytest[[j]]))))
           }
         }
 
@@ -208,8 +209,7 @@ enpls.ad = function(x, y,
           for (j in 1L:n.testset) {
             errorlist.te[[j]][[i]] =
               suppressWarnings(enpls.ad.core.pred(
-                fit.list[[i]], as.data.frame(cbind(xtest[[j]][, idx.col[[i]]],
-                                                   'y' = ytest[[j]]))))
+                fit.list[[i]], as.data.frame(cbind(xtest[[j]][, idx.col[[i]]], 'y' = ytest[[j]]))))
           }
         }
 
@@ -243,17 +243,18 @@ enpls.ad = function(x, y,
   te.error.median = lapply(errormat.te, tiny.median)
   te.error.sd     = lapply(errormat.te, tiny.sd)
 
-  object = list('tr.error.mean'    = tr.error.mean,
-                'tr.error.median'  = tr.error.median,
-                'tr.error.sd'      = tr.error.sd,
-                'tr.error.matrix'  = errormat.tr,
-                'te.error.mean'    = te.error.mean,
-                'te.error.median'  = te.error.median,
-                'te.error.sd'      = te.error.sd,
-                'te.error.matrix'  = errormat.te)
+  res = list(
+    'tr.error.mean'    = tr.error.mean,
+    'tr.error.median'  = tr.error.median,
+    'tr.error.sd'      = tr.error.sd,
+    'tr.error.matrix'  = errormat.tr,
+    'te.error.mean'    = te.error.mean,
+    'te.error.median'  = te.error.median,
+    'te.error.sd'      = te.error.sd,
+    'te.error.matrix'  = errormat.te)
+  class(res) = 'enpls.ad'
 
-  class(object) = 'enpls.ad'
-  return(object)
+  res
 
 }
 
@@ -270,36 +271,39 @@ enpls.ad.core.fit = function(trainingset, maxcomp, cvfolds) {
 
   if (is.null(maxcomp)) {
 
-    plsr.cvfit = plsr(y ~ .,
-                      data       = trainingset,
-                      scale      = TRUE,
-                      method     = 'simpls',
-                      validation = 'CV',
-                      segments   = cvfolds)
+    plsr.cvfit = plsr(
+      y ~ .,
+      data       = trainingset,
+      scale      = TRUE,
+      method     = 'simpls',
+      validation = 'CV',
+      segments   = cvfolds)
 
   } else {
 
-    plsr.cvfit = plsr(y ~ .,
-                      data       = trainingset,
-                      ncomp      = maxcomp,
-                      scale      = TRUE,
-                      method     = 'simpls',
-                      validation = 'CV',
-                      segments   = cvfolds)
+    plsr.cvfit = plsr(
+      y ~ .,
+      data       = trainingset,
+      ncomp      = maxcomp,
+      scale      = TRUE,
+      method     = 'simpls',
+      validation = 'CV',
+      segments   = cvfolds)
 
   }
 
   # select best component number using adjusted CV
   cv.bestcomp = which.min(RMSEP(plsr.cvfit)[['val']][2L, 1L, -1L])
 
-  plsr.fit = plsr(y ~ .,
-                  data       = trainingset,
-                  ncomp      = cv.bestcomp,
-                  scale      = TRUE,
-                  method     = 'simpls',
-                  validation = 'none')
+  plsr.fit = plsr(
+    y ~ .,
+    data       = trainingset,
+    ncomp      = cv.bestcomp,
+    scale      = TRUE,
+    method     = 'simpls',
+    validation = 'none')
 
-  return(list('plsr.fit' = plsr.fit, 'cv.bestcomp' = cv.bestcomp))
+  list('plsr.fit' = plsr.fit, 'cv.bestcomp' = cv.bestcomp)
 
 }
 
@@ -311,11 +315,13 @@ enpls.ad.core.fit = function(trainingset, maxcomp, cvfolds) {
 
 enpls.ad.core.pred = function(model, testset) {
 
-  pred = predict(model$'plsr.fit', ncomp = model$'cv.bestcomp',
-                 newdata = testset[, !(colnames(testset) %in% c('y'))])[, 1L, 1L]
+  pred = predict(
+    model$'plsr.fit', ncomp = model$'cv.bestcomp',
+    newdata = testset[, !(colnames(testset) %in% c('y'))])[, 1L, 1L]
 
   errorvec = testset[, 'y'] - pred
   names(errorvec) = NULL
-  return(errorvec)
+
+  errorvec
 
 }

@@ -69,32 +69,36 @@
 #' y.tr = y[1:300]
 #'
 #' # two test sets
-#' x.te = list("test.1" = x[301:400, ],
-#'             "test.2" = x[401:500, ])
-#' y.te = list("test.1" = y[301:400],
-#'             "test.2" = y[401:500])
+#' x.te = list(
+#'   "test.1" = x[301:400, ],
+#'   "test.2" = x[401:500, ])
+#' y.te = list(
+#'   "test.1" = y[301:400],
+#'   "test.2" = y[401:500])
 #'
 #' set.seed(42)
-#' ad = enspls.ad(x.tr, y.tr, x.te, y.te,
-#'                maxcomp = 3, alpha = c(0.3, 0.6, 0.9),
-#'                space = "variable", method = "mc",
-#'                ratio = 0.8, reptimes = 10)
+#' ad = enspls.ad(
+#'   x.tr, y.tr, x.te, y.te,
+#'   maxcomp = 3, alpha = c(0.3, 0.6, 0.9),
+#'   space = "variable", method = "mc",
+#'   ratio = 0.8, reptimes = 10)
 #' print(ad)
 #' plot(ad)
-#' # The interactive plot requires a HTML viewer
+#' # the interactive plot requires a HTML viewer
 #' \dontrun{
 #' plot(ad, type = "interactive")}
 
-enspls.ad = function(x, y,
-                     xtest, ytest,
-                     maxcomp  = 5L,
-                     cvfolds  = 5L,
-                     alpha    = seq(0.2, 0.8, 0.2),
-                     space    = c('sample', 'variable'),
-                     method   = c('mc', 'boot'),
-                     reptimes = 500L,
-                     ratio    = 0.8,
-                     parallel = 1L) {
+enspls.ad = function(
+  x, y,
+  xtest, ytest,
+  maxcomp  = 5L,
+  cvfolds  = 5L,
+  alpha    = seq(0.2, 0.8, 0.2),
+  space    = c('sample', 'variable'),
+  method   = c('mc', 'boot'),
+  reptimes = 500L,
+  ratio    = 0.8,
+  parallel = 1L) {
 
   if (missing(x) | missing(y) | missing(xtest) | missing(ytest))
     stop('Please specify x, y, xtest, and ytest')
@@ -135,8 +139,9 @@ enspls.ad = function(x, y,
     if (parallel < 1.5) {
 
       for (i in 1L:reptimes) {
-        fit = enspls.ad.core.fit(x[idx.row[[i]], ], y[idx.row[[i]]],
-                                 maxcomp, cvfolds, alpha)
+        fit = enspls.ad.core.fit(
+          x[idx.row[[i]], ], y[idx.row[[i]]],
+          maxcomp, cvfolds, alpha)
         errorlist.tr[[i]] = enspls.ad.core.pred(fit, x, y)
         for (j in 1L:n.testset) {
           errorlist.te[[j]][[i]] =
@@ -148,8 +153,9 @@ enspls.ad = function(x, y,
 
       registerDoParallel(parallel)
       fit.list = foreach(i = 1L:reptimes) %dopar% {
-        enspls.ad.core.fit(x[idx.row[[i]], ], y[idx.row[[i]]],
-                           maxcomp, cvfolds, alpha)
+        enspls.ad.core.fit(
+          x[idx.row[[i]], ], y[idx.row[[i]]],
+          maxcomp, cvfolds, alpha)
       }
 
       for (i in 1L:reptimes) {
@@ -182,8 +188,9 @@ enspls.ad = function(x, y,
       if (parallel < 1.5) {
 
         for (i in 1L:reptimes) {
-          fit = enspls.ad.core.fit(x[, idx.col[[i]]], y,
-                                   maxcomp, cvfolds, alpha)
+          fit = enspls.ad.core.fit(
+            x[, idx.col[[i]]], y,
+            maxcomp, cvfolds, alpha)
           errorlist.tr[[i]] = enspls.ad.core.pred(fit, x[, idx.col[[i]]], y)
           for (j in 1L:n.testset) {
             errorlist.te[[j]][[i]] =
@@ -199,10 +206,12 @@ enspls.ad = function(x, y,
         }
 
         for (i in 1L:reptimes) {
-          errorlist.tr[[i]] = enspls.ad.core.pred(fit.list[[i]], x[, idx.col[[i]]], y)
+          errorlist.tr[[i]] = enspls.ad.core.pred(
+            fit.list[[i]], x[, idx.col[[i]]], y)
           for (j in 1L:n.testset) {
             errorlist.te[[j]][[i]] =
-              enspls.ad.core.pred(fit.list[[i]], xtest[[j]][, idx.col[[i]]], ytest[[j]])
+              enspls.ad.core.pred(
+                fit.list[[i]], xtest[[j]][, idx.col[[i]]], ytest[[j]])
           }
         }
 
@@ -236,17 +245,18 @@ enspls.ad = function(x, y,
   te.error.median = lapply(errormat.te, tiny.median)
   te.error.sd     = lapply(errormat.te, tiny.sd)
 
-  object = list('tr.error.mean'    = tr.error.mean,
-                'tr.error.median'  = tr.error.median,
-                'tr.error.sd'      = tr.error.sd,
-                'tr.error.matrix'  = errormat.tr,
-                'te.error.mean'    = te.error.mean,
-                'te.error.median'  = te.error.median,
-                'te.error.sd'      = te.error.sd,
-                'te.error.matrix'  = errormat.te)
+  res = list(
+    'tr.error.mean'    = tr.error.mean,
+    'tr.error.median'  = tr.error.median,
+    'tr.error.sd'      = tr.error.sd,
+    'tr.error.matrix'  = errormat.tr,
+    'te.error.mean'    = te.error.mean,
+    'te.error.median'  = te.error.median,
+    'te.error.sd'      = te.error.sd,
+    'te.error.matrix'  = errormat.te)
+  class(res) = 'enspls.ad'
 
-  class(object) = 'enspls.ad'
-  return(object)
+  res
 
 }
 
@@ -263,29 +273,30 @@ enspls.ad = function(x, y,
 
 enspls.ad.core.fit = function(x.tr, y.tr, maxcomp, cvfolds, alpha) {
 
-  invisible(
-    capture.output(
-      spls.cvfit <- cv.spls(x.tr,
-                            y.tr,
-                            fold    = cvfolds,
-                            K       = maxcomp,
-                            eta     = alpha,
-                            scale.x = TRUE,
-                            scale.y = FALSE,
-                            plot.it = FALSE)))
+  invisible(capture.output(
+    spls.cvfit <- cv.spls(
+      x.tr,
+      y.tr,
+      fold    = cvfolds,
+      K       = maxcomp,
+      eta     = alpha,
+      scale.x = TRUE,
+      scale.y = FALSE,
+      plot.it = FALSE)))
 
   # select best component number and alpha using adjusted CV
   cv.bestcomp  = spls.cvfit$'K.opt'
   cv.bestalpha = spls.cvfit$'eta.opt'
 
-  spls.fit = spls(x.tr,
-                  y.tr,
-                  K       = cv.bestcomp,
-                  eta     = cv.bestalpha,
-                  scale.x = TRUE,
-                  scale.y = FALSE)
+  spls.fit = spls(
+    x.tr,
+    y.tr,
+    K       = cv.bestcomp,
+    eta     = cv.bestalpha,
+    scale.x = TRUE,
+    scale.y = FALSE)
 
-  return(spls.fit)
+  spls.fit
 
 }
 
@@ -303,6 +314,7 @@ enspls.ad.core.pred = function(model, x.te, y.te) {
 
   errorvec = y.te - pred
   names(errorvec) = NULL
-  return(errorvec)
+
+  errorvec
 
 }

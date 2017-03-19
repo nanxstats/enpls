@@ -45,13 +45,14 @@
 #' print(fs)
 #' plot(fs)
 
-enpls.fs = function(x, y,
-                    maxcomp  = NULL,
-                    cvfolds  = 5L,
-                    reptimes = 500L,
-                    method   = c('mc', 'boot'),
-                    ratio    = 0.8,
-                    parallel = 1L) {
+enpls.fs = function(
+  x, y,
+  maxcomp  = NULL,
+  cvfolds  = 5L,
+  reptimes = 500L,
+  method   = c('mc', 'boot'),
+  ratio    = 0.8,
+  parallel = 1L) {
 
   if (missing(x) | missing(y)) stop('Please specify both x and y')
 
@@ -61,11 +62,13 @@ enpls.fs = function(x, y,
   samp.idx = vector('list', reptimes)
 
   if (method == 'mc') {
-    for (i in 1L:reptimes) samp.idx[[i]] = sample(1L:x.row, round(x.row * ratio))
+    for (i in 1L:reptimes)
+      samp.idx[[i]] = sample(1L:x.row, round(x.row * ratio))
   }
 
   if (method == 'boot') {
-    for (i in 1L:reptimes) samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
+    for (i in 1L:reptimes)
+      samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
   }
 
   if (parallel < 1.5) {
@@ -76,7 +79,8 @@ enpls.fs = function(x, y,
       xtmp = scale(xtmp, center = TRUE, scale = TRUE)
       ytmp = y[samp.idx[[i]]]
       plsdf = as.data.frame(cbind(xtmp, 'y' = ytmp))
-      coeflist[[i]] = suppressWarnings(enpls.fs.core(plsdf, maxcomp, cvfolds))
+      coeflist[[i]] = suppressWarnings(
+        enpls.fs.core(plsdf, maxcomp, cvfolds))
     }
 
   } else {
@@ -96,10 +100,12 @@ enpls.fs = function(x, y,
 
   varimp = abs(colMeans(coefmat))/apply(coefmat, 2L, sd)
 
-  object = list('variable.importance' = varimp,
-                'coefficient.matrix'  = coefmat)
-  class(object) = 'enpls.fs'
-  return(object)
+  res = list(
+    'variable.importance' = varimp,
+    'coefficient.matrix'  = coefmat)
+  class(res) = 'enpls.fs'
+
+  res
 
 }
 
@@ -117,37 +123,40 @@ enpls.fs.core = function(plsdf, maxcomp, cvfolds) {
 
   if (is.null(maxcomp)) {
 
-    plsr.cvfit = plsr(y ~ .,
-                      data       = plsdf,
-                      scale      = FALSE,
-                      method     = 'simpls',
-                      validation = 'CV',
-                      segments   = cvfolds)
+    plsr.cvfit = plsr(
+      y ~ .,
+      data       = plsdf,
+      scale      = FALSE,
+      method     = 'simpls',
+      validation = 'CV',
+      segments   = cvfolds)
 
   } else {
 
-    plsr.cvfit = plsr(y ~ .,
-                      data       = plsdf,
-                      ncomp      = maxcomp,
-                      scale      = FALSE,
-                      method     = 'simpls',
-                      validation = 'CV',
-                      segments   = cvfolds)
+    plsr.cvfit = plsr(
+      y ~ .,
+      data       = plsdf,
+      ncomp      = maxcomp,
+      scale      = FALSE,
+      method     = 'simpls',
+      validation = 'CV',
+      segments   = cvfolds)
 
   }
 
   # select best component number using adjusted CV
   cv.bestcomp = which.min(RMSEP(plsr.cvfit)[['val']][2L, 1L, -1L])
 
-  plsr.fit = plsr(y ~ .,
-                  data       = plsdf,
-                  ncomp      = cv.bestcomp,
-                  scale      = FALSE,
-                  method     = 'simpls',
-                  validation = 'none')
+  plsr.fit = plsr(
+    y ~ .,
+    data       = plsdf,
+    ncomp      = cv.bestcomp,
+    scale      = FALSE,
+    method     = 'simpls',
+    validation = 'none')
 
   plsr.coef = drop(coef(plsr.fit))
 
-  return(plsr.coef)
+  plsr.coef
 
 }

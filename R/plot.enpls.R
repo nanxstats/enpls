@@ -8,8 +8,9 @@
 rgb2alpha = function(raw_col, alpha) {
 
   raw_col_rgb = col2rgb(raw_col)
-  alpha_col = rgb(raw_col_rgb[1L, ], raw_col_rgb[2L, ], raw_col_rgb[3L, ],
-                  alpha = alpha * 255L, maxColorValue = 255L)
+  alpha_col = rgb(
+    raw_col_rgb[1L, ], raw_col_rgb[2L, ], raw_col_rgb[3L, ],
+    alpha = alpha * 255L, maxColorValue = 255L)
 
   alpha_col
 
@@ -47,8 +48,9 @@ rgb2alpha = function(raw_col, alpha) {
 #' cvfit = cv.enpls(x, y, reptimes = 10)
 #' plot(cvfit)
 
-plot.cv.enpls = function(x, xlim = NULL, ylim = NULL, alpha = 0.8,
-                         main = NULL, ...) {
+plot.cv.enpls = function(
+  x, xlim = NULL, ylim = NULL, alpha = 0.8,
+  main = NULL, ...) {
 
   if (!inherits(x, 'cv.enpls'))
     stop('This function only works for objects of class "cv.enpls"')
@@ -63,9 +65,12 @@ plot.cv.enpls = function(x, xlim = NULL, ylim = NULL, alpha = 0.8,
   if (is.null(xlim)) xlim = fixrange
   if (is.null(ylim)) ylim = fixrange
 
-  ggplot(df, aes_string(x = 'y.real', y = 'y.pred',
-                        xmin = xlim[1L], xmax = xlim[2L],
-                        ymin = ylim[1L], ymax = ylim[2L])) +
+  ggplot(
+    df,
+    aes_string(
+      x = 'y.real', y = 'y.pred',
+      xmin = xlim[1L], xmax = xlim[2L],
+      ymin = ylim[1L], ymax = ylim[2L])) +
     geom_abline(slope = 1, intercept = 0, colour = 'darkgrey') +
     geom_point(size = 3, shape = 1, alpha = alpha) +
     coord_fixed(ratio = 1) +
@@ -111,10 +116,11 @@ plot.cv.enpls = function(x, xlim = NULL, ylim = NULL, alpha = 0.8,
 #' plot(fs, type = "boxplot")
 #' plot(fs, type = "boxplot", limits = c(0.05, 0.95))
 
-plot.enpls.fs = function(x, nvar = NULL,
-                         type = c('dotplot', 'boxplot'),
-                         limits = c(0, 1),
-                         main = NULL, ...) {
+plot.enpls.fs = function(
+  x, nvar = NULL,
+  type = c('dotplot', 'boxplot'),
+  limits = c(0, 1),
+  main = NULL, ...) {
 
   if (!inherits(x, 'enpls.fs'))
     stop('This function only works for objects of class "enpls.fs"')
@@ -192,10 +198,11 @@ plot.enpls.fs = function(x, nvar = NULL,
 #' plot(od, criterion = "quantile")
 #' plot(od, criterion = "sd")
 
-plot.enpls.od = function(x,
-                         criterion = c('quantile', 'sd'),
-                         prob = 0.05, sdtimes = 3L,
-                         alpha = 1, main = NULL, ...) {
+plot.enpls.od = function(
+  x,
+  criterion = c('quantile', 'sd'),
+  prob = 0.05, sdtimes = 3L,
+  alpha = 1, main = NULL, ...) {
 
   if (!inherits(x, 'enpls.od'))
     stop('This function only works for objects of class "enpls.od"')
@@ -300,23 +307,25 @@ plot.enpls.od = function(x,
 #' y.tr = y[1:100]
 #'
 #' # two test sets
-#' x.te = list("test.1" = x[101:150, ],
-#'             "test.2" = x[151:207, ])
-#' y.te = list("test.1" = y[101:150],
-#'             "test.2" = y[151:207])
+#' x.te = list(
+#'   "test.1" = x[101:150, ],
+#'   "test.2" = x[151:207, ])
+#' y.te = list(
+#'   "test.1" = y[101:150],
+#'   "test.2" = y[151:207])
 #'
 #' set.seed(42)
-#' ad = enpls.ad(x.tr, y.tr, x.te, y.te,
-#'               space = "variable", method = "mc",
-#'               ratio = 0.9, reptimes = 50)
+#' ad = enpls.ad(
+#'   x.tr, y.tr, x.te, y.te,
+#'   space = "variable", method = "mc",
+#'   ratio = 0.9, reptimes = 50)
 #' plot(ad)
-#' # The interactive plot requires a HTML viewer
+#' # the interactive plot requires a HTML viewer
 #' \dontrun{
 #' plot(ad, type = "interactive")}
 
-plot.enpls.ad = function(x,
-                         type = c('static', 'interactive'),
-                         main = NULL, ...) {
+plot.enpls.ad = function(
+  x, type = c('static', 'interactive'), main = NULL, ...) {
 
   if (!inherits(x, 'enpls.ad'))
     stop('This function only works for objects of class "enpls.ad"')
@@ -327,15 +336,17 @@ plot.enpls.ad = function(x,
   nsamp.tr  = length(x$'tr.error.mean')
   nsamp.te  = sapply(x$'te.error.mean', length)
 
-  tr.df = data.frame('Mean' = x$'tr.error.mean',
-                     'SD'   = x$'tr.error.sd',
-                     'Set'  = 'Train')
+  tr.df = data.frame(
+    'Mean' = x$'tr.error.mean',
+    'SD'   = x$'tr.error.sd',
+    'Set'  = 'Train')
 
   te.list = vector('list', n.testset)
   for (i in 1L:n.testset) {
-    te.list[[i]] = data.frame('Mean' = x[['te.error.mean']][[i]],
-                              'SD'   = x[['te.error.sd']][[i]],
-                              'Set'  = paste0('Test.', i))
+    te.list[[i]] = data.frame(
+      'Mean' = x[['te.error.mean']][[i]],
+      'SD'   = x[['te.error.sd']][[i]],
+      'Set'  = paste0('Test.', i))
   }
 
   df = rbind(tr.df, Reduce(rbind, te.list))
@@ -343,8 +354,9 @@ plot.enpls.ad = function(x,
   if (type == 'static') {  # static plot with ggplot2
 
     p = ggplot(df) +
-      geom_point(aes_string(x = 'Mean', y = 'SD',
-                            color = 'Set', shape = 'Set')) +
+      geom_point(aes_string(
+        x = 'Mean', y = 'SD',
+        color = 'Set', shape = 'Set')) +
       scale_shape(solid = FALSE) +  # hollow shapes
       scale_colour_brewer(palette = 'Set1') +
       xlab('Absolute Mean Prediction Error') +
@@ -356,8 +368,9 @@ plot.enpls.ad = function(x,
     df = data.frame(df, 'hovertext' = hovertext)
 
     g = ggplot(df) +
-      geom_point(aes_string(x = 'Mean', y = 'SD',
-                            color = 'Set', text = 'hovertext')) +
+      geom_point(aes_string(
+        x = 'Mean', y = 'SD',
+        color = 'Set', text = 'hovertext')) +
       scale_colour_brewer(palette = 'Set1') +
       xlab('Absolute Mean Prediction Error') +
       ylab('Prediction Error SD')

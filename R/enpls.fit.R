@@ -41,13 +41,14 @@
 #' print(fit)
 #' predict(fit, newx = x)
 
-enpls.fit = function(x, y,
-                     maxcomp  = NULL,
-                     cvfolds  = 5L,
-                     reptimes = 500L,
-                     method   = c('mc', 'boot'),
-                     ratio    = 0.8,
-                     parallel = 1L) {
+enpls.fit = function(
+  x, y,
+  maxcomp  = NULL,
+  cvfolds  = 5L,
+  reptimes = 500L,
+  method   = c('mc', 'boot'),
+  ratio    = 0.8,
+  parallel = 1L) {
 
   if (missing(x) | missing(y)) stop('Please specify both x and y')
 
@@ -57,11 +58,13 @@ enpls.fit = function(x, y,
   samp.idx = vector('list', reptimes)
 
   if (method == 'mc') {
-    for (i in 1L:reptimes) samp.idx[[i]] = sample(1L:x.row, round(x.row * ratio))
+    for (i in 1L:reptimes)
+      samp.idx[[i]] = sample(1L:x.row, round(x.row * ratio))
   }
 
   if (method == 'boot') {
-    for (i in 1L:reptimes) samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
+    for (i in 1L:reptimes)
+      samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
   }
 
   if (parallel < 1.5) {
@@ -71,7 +74,8 @@ enpls.fit = function(x, y,
       xtmp = x[samp.idx[[i]], ]
       ytmp = y[samp.idx[[i]]]
       plsdf = as.data.frame(cbind(xtmp, 'y' = ytmp))
-      modellist[[i]] = suppressWarnings(enpls.fit.core(plsdf, maxcomp, cvfolds))
+      modellist[[i]] = suppressWarnings(
+        enpls.fit.core(plsdf, maxcomp, cvfolds))
     }
 
   } else {
@@ -87,9 +91,9 @@ enpls.fit = function(x, y,
   }
 
   names(modellist) = paste0('pls_model_', 1L:length(modellist))
-
   class(modellist) = 'enpls.fit'
-  return(modellist)
+
+  modellist
 
 }
 
@@ -107,22 +111,24 @@ enpls.fit.core = function(plsdf, maxcomp, cvfolds) {
 
   if (is.null(maxcomp)) {
 
-    plsr.cvfit = plsr(y ~ .,
-                      data       = plsdf,
-                      scale      = TRUE,
-                      method     = 'simpls',
-                      validation = 'CV',
-                      segments   = cvfolds)
+    plsr.cvfit = plsr(
+      y ~ .,
+      data       = plsdf,
+      scale      = TRUE,
+      method     = 'simpls',
+      validation = 'CV',
+      segments   = cvfolds)
 
   } else {
 
-    plsr.cvfit = plsr(y ~ .,
-                      data       = plsdf,
-                      ncomp      = maxcomp,
-                      scale      = TRUE,
-                      method     = 'simpls',
-                      validation = 'CV',
-                      segments   = cvfolds)
+    plsr.cvfit = plsr(
+      y ~ .,
+      data       = plsdf,
+      ncomp      = maxcomp,
+      scale      = TRUE,
+      method     = 'simpls',
+      validation = 'CV',
+      segments   = cvfolds)
 
   }
 
@@ -132,12 +138,13 @@ enpls.fit.core = function(plsdf, maxcomp, cvfolds) {
   # remove plsr.cvfit object
   rm(plsr.cvfit)
 
-  plsr.fit = plsr(y ~ .,
-                  data       = plsdf,
-                  ncomp      = cv.bestcomp,
-                  scale      = TRUE,
-                  method     = 'simpls',
-                  validation = 'none')
+  plsr.fit = plsr(
+    y ~ .,
+    data       = plsdf,
+    ncomp      = cv.bestcomp,
+    scale      = TRUE,
+    method     = 'simpls',
+    validation = 'none')
 
   # minify plsr.fit object to reduce memory footprint
   plsr.fit[['model']] = NULL
@@ -148,6 +155,6 @@ enpls.fit.core = function(plsdf, maxcomp, cvfolds) {
   # remove plsr.fit object
   rm(plsr.fit)
 
-  return(enpls.core.fit)
+  enpls.core.fit
 
 }
