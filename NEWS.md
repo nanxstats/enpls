@@ -1,3 +1,11 @@
+# enpls 5.8 (2017-03-24)
+
+## Improvements
+
+- Updated gallery images in `README.md`.
+- Better code indentation style.
+- HTTPS enabled for website.
+
 # enpls 5.7 (2017-01-05)
 
 ## Improvements

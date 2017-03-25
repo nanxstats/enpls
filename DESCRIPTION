@@ -1,7 +1,7 @@
 Package: enpls
 Type: Package
 Title: Ensemble Partial Least Squares Regression
-Version: 5.7.9001
+Version: 5.8
 Authors@R: c(
     person("Nan", "Xiao", email = "me@nanx.me", role = c("aut", "cre")),
     person("Dongsheng", "Cao", role = c("aut")),
