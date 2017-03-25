@@ -4,7 +4,7 @@
 
 - Updated gallery images in `README.md`.
 - Better code indentation style.
-- HTTPS enabled for website.
+- HTTPS enabled for the website.
 
 # enpls 5.7 (2017-01-05)
 
