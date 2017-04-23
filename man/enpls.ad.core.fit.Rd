@@ -14,3 +14,4 @@ select the best ncomp with cross-validation and
 use it to fit the complete training set. scale = TRUE
 }
 \keyword{internal}
+

@@ -34,10 +34,11 @@ fs = enspls.fs(x, y, reptimes = 5, maxcomp = 2)
 plot(fs, nvar = 10)
 plot(fs, type = "boxplot", limits = c(0.05, 0.95), nvar = 10)
 }
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}
 \seealso{
 See \code{\link{enspls.fs}} for measuring feature importance with
 ensemble sparse partial least squares regressions.
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
+

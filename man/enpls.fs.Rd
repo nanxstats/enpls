@@ -50,12 +50,13 @@ fs = enpls.fs(x, y, reptimes = 50)
 print(fs)
 plot(fs)
 }
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}
 \seealso{
 See \code{\link{enpls.od}} for outlier detection with
 ensemble partial least squares regressions.
 See \code{\link{enpls.fit}} for fitting ensemble partial least
 squares regression models.
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
+

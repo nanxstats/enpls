@@ -13,3 +13,4 @@ the error vector between predicted and real response
 core prediction function for enspls.ad
 }
 \keyword{internal}
+

@@ -25,10 +25,11 @@ fit = enspls.fit(
   alpha = c(0.3, 0.6, 0.9))
 print(fit)
 }
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}
 \seealso{
 See \code{\link{enspls.fit}} for fitting ensemble sparse
 partial least squares regression models.
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
+

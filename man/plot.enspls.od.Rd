@@ -36,10 +36,11 @@ od = enspls.od(x, y, reptimes = 4, maxcomp = 2)
 plot(od, criterion = "quantile", prob = 0.1)
 plot(od, criterion = "sd", sdtimes = 1)
 }
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}
 \seealso{
 See \code{\link{enspls.od}} for outlier detection with
 ensemble sparse partial least squares regressions.
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
+

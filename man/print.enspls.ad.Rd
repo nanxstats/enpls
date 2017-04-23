@@ -40,10 +40,11 @@ ad = enspls.ad(
   ratio = 0.8, reptimes = 10)
 print(ad)
 }
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}
 \seealso{
 See \code{\link{enspls.ad}} for model applicability domain
 evaluation with ensemble sparse partial least squares regressions.
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
+

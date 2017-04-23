@@ -13,3 +13,4 @@ Color hex value (with transparency)
 Add transparency level to hex colors
 }
 \keyword{internal}
+

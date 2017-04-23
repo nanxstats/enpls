@@ -46,10 +46,11 @@ plot(ad)
 \dontrun{
 plot(ad, type = "interactive")}
 }
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}
 \seealso{
 See \code{\link{enpls.ad}} for model applicability domain
 evaluation with ensemble partial least squares regressions.
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
+

@@ -36,10 +36,11 @@ od = enpls.od(x, y, reptimes = 50)
 plot(od, criterion = "quantile")
 plot(od, criterion = "sd")
 }
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}
 \seealso{
 See \code{\link{enpls.od}} for outlier detection with
 ensemble partial least squares regressions.
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
+

@@ -23,10 +23,11 @@ set.seed(42)
 fit = enpls.fit(x, y, reptimes = 50)
 print(fit)
 }
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}
 \seealso{
 See \code{\link{enpls.fit}} for fitting ensemble
 partial least squares regression models.
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
+
