@@ -1,6 +1,7 @@
-templates:
+template:
   params:
     bootswatch: united
+    ganalytics: UA-83197262-1
 
 reference:
   - title: "Model Fitting"
