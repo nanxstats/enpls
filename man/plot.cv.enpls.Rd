@@ -32,11 +32,10 @@ set.seed(42)
 cvfit = cv.enpls(x, y, reptimes = 10)
 plot(cvfit)
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
 \seealso{
 See \code{\link{cv.enpls}} for cross-validation of
 ensemble partial least squares regression models.
 }
-
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}

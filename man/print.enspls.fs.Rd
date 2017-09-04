@@ -29,11 +29,10 @@ fs = enspls.fs(
   alpha = c(0.3, 0.6, 0.9))
 print(fs, nvar = 10L)
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
 \seealso{
 See \code{\link{enspls.fs}} for measuring feature importance with
 ensemble sparse partial least squares regressions.
 }
-
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}

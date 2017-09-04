@@ -48,11 +48,10 @@ cvfit = cv.enpls(x, y, reptimes = 10)
 print(cvfit)
 plot(cvfit)
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
 \seealso{
 See \code{\link{enpls.fit}} for ensemble
 partial least squares regressions.
 }
-
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}

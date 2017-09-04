@@ -30,4 +30,3 @@ and Yi-Zeng Liang. "In silico evaluation of logD7.4 and comparison with
 other prediction methods."
 \emph{Journal of Chemometrics} 29, no. 7 (2015): 389--398.
 }
-

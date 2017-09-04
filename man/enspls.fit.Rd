@@ -50,13 +50,12 @@ fit = enspls.fit(
 print(fit)
 predict(fit, newx = x)
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
 \seealso{
 See \code{\link{enspls.fs}} for measuring feature importance
 with ensemble sparse partial least squares regressions.
 See \code{\link{enspls.od}} for outlier detection with ensemble
 sparse partial least squares regressions.
 }
-
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}

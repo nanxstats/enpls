@@ -53,13 +53,12 @@ print(fs, nvar = 10)
 plot(fs, nvar = 10)
 plot(fs, type = 'boxplot', limits = c(0.05, 0.95), nvar = 10)
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
 \seealso{
 See \code{\link{enspls.od}} for outlier detection with
 ensemble sparse partial least squares regressions.
 See \code{\link{enspls.fit}} for fitting ensemble sparse
 partial least squares regression models.
 }
-
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}

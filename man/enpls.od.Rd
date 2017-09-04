@@ -58,13 +58,12 @@ print(od)
 plot(od)
 plot(od, criterion = 'sd')
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
 \seealso{
 See \code{\link{enpls.fs}} for measuring feature importance with
 ensemble partial least squares regressions.
 See \code{\link{enpls.fit}} for fitting ensemble partial least
 squares regression models.
 }
-
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}

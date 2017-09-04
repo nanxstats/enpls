@@ -25,11 +25,10 @@ set.seed(42)
 cvfit = cv.enspls(x, y, reptimes = 10)
 print(cvfit)}
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
 \seealso{
 See \code{\link{cv.enspls}} for cross-validation of
 ensemble sparse partial least squares regression models.
 }
-
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}

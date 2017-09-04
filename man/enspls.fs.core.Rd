@@ -15,4 +15,3 @@ use it to fit the complete training set.
 scale = FALSE
 }
 \keyword{internal}
-

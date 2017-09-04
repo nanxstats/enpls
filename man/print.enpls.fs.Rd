@@ -28,11 +28,10 @@ fs = enpls.fs(x, y, reptimes = 100)
 print(fs)
 print(fs, nvar = 10L)
 }
-\author{
-Nan Xiao <\url{https://nanx.me}>
-}
 \seealso{
 See \code{\link{enpls.fs}} for measuring feature importance with
 ensemble partial least squares regressions.
 }
-
+\author{
+Nan Xiao <\url{https://nanx.me}>
+}
