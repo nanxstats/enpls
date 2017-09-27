@@ -1,3 +1,9 @@
+# enpls 5.9 (2017-09-27)
+
+## Improvements
+
+- Use system font stack instead of Google Fonts in vignettes to avoid pandoc SSL issue.
+
 # enpls 5.8 (2017-03-24)
 
 ## Improvements

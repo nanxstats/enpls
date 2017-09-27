@@ -1,12 +1,12 @@
 Package: enpls
 Type: Package
 Title: Ensemble Partial Least Squares Regression
-Version: 5.8.9001
+Version: 5.9
 Authors@R: c(
     person("Nan", "Xiao", email = "me@nanx.me", role = c("aut", "cre")),
-    person("Dongsheng", "Cao", role = c("aut")),
-    person("Miaozhu", "Li", email = "miaozhu.li@duke.edu", role = c("aut")),
-    person("Qingsong", "Xu", email = "qsxu@csu.edu.cn", role = c("aut"))
+    person("Dong-Sheng", "Cao", role = c("aut")),
+    person("Miao-Zhu", "Li", email = "miaozhu.li@duke.edu", role = c("aut")),
+    person("Qing-Song", "Xu", email = "qsxu@csu.edu.cn", role = c("aut"))
     )
 Maintainer: Nan Xiao <me@nanx.me>
 Description: An algorithmic framework for measuring feature importance,
@@ -31,4 +31,5 @@ Imports:
 Suggests:
     knitr,
     rmarkdown
-RoxygenNote: 6.0.1
+Encoding: UTF-8
+RoxygenNote: 6.0.1.9000
