@@ -8,8 +8,6 @@ output:
     toc: true
     number_sections: true
     css: enpls.css
-    includes:
-      in_header: header.html
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteIndexEntry{A Brief Introduction to enpls}
@@ -36,10 +34,7 @@ The key functions included in the package are listed in the table below.
 | Evaluate applicability domain  | `enpls.ad()`          | `enspls.ad()`                |
 +--------------------------------+-----------------------+------------------------------+
 
-Please refer to our paper [@xiao2016enpls] for details on the intuition
-and mathematical details of the ensemble learning approaches used here.
-
-In the next, we will use the data from [@wang2015silico] to demonstrate
+Next, we will use the data from [@wang2015silico] to demonstrate
 the general workflow of `enpls`. The dataset contains 1,000 compounds,
 each characterized by 80 molecular descriptors. The response is the
 octanol/water partition coefficient at pH 7.4 (logD7.4).
@@ -152,7 +147,7 @@ plot(od, criterion = "sd", sdtimes = 2)
 The two plots showed that several samples in our dataset might be
 outlier candidates, based on two different criterions.
 The samples in each area of the plots represent different types
-of outliers, as defined in [@xiao2016enpls].
+of outliers.
 
 # Applicability Domain Evaluation
 
@@ -210,9 +205,6 @@ diagnostic tasks, such as measuring the importance of features.
 It would be interesting to see if such ideas could be applied to more
 relevant topics and further facilitate the predictive modeling tasks.
 
-If you used `enpls` in your research, please feel free
-to cite our paper [@xiao2016enpls] in your publications.
-We will be more than happy to listen to your feedbacks.
 The enpls project website: [https://enpls.org](https://enpls.org)
 
 # References
