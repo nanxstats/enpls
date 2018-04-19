@@ -46,4 +46,4 @@ See [the vignette](https://enpls.org/doc/) (or open with `vignette("enpls")` in 
 
 ## Contribute
 
-To contribute to this project, please take a look at the [Contributing Guidelines](https://github.com/road2stat/enpls/blob/master/CONTRIBUTING.md) first. Please note that this project is released with a [Contributor Code of Conduct](https://github.com/road2stat/enpls/blob/master/CONDUCT.md). By participating in this project you agree to abide by its terms.
+To contribute to this project, please take a look at the [Contributing Guidelines](CONTRIBUTING.md) first. Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
