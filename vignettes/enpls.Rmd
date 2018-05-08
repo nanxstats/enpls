@@ -205,6 +205,4 @@ diagnostic tasks, such as measuring the importance of features.
 It would be interesting to see if such ideas could be applied to more
 relevant topics and further facilitate the predictive modeling tasks.
 
-The enpls project website: [https://enpls.org](https://enpls.org)
-
 # References
