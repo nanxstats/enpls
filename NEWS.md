@@ -1,6 +1,6 @@
 # enpls 5.9.9000 (2018-05-07)
 
-## Imprvements
+## Improvements
 
 - New URL for the documentation website: https://nanx.me/enpls/.
 
