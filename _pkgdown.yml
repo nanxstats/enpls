@@ -1,6 +1,6 @@
 template:
   params:
-    bootswatch: united
+    bootswatch: flatly
     ganalytics: UA-66394392-1
 
 reference:
