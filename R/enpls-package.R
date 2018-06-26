@@ -7,9 +7,10 @@
 #'
 #' Browse the package vignette via \code{vignette("enpls")}.
 #'
-#' \tabular{ll}{ Package: \tab enpls\cr
+#' \tabular{ll}{
+#' Package: \tab enpls\cr
 #' Type: \tab Package\cr
-#' License: \tab GPL-3\cr }
+#' License: \tab GPL-3}
 #'
 #' @name enpls-package
 #' @docType package
