@@ -4,8 +4,8 @@
 \alias{plot.enpls.od}
 \title{Plot enpls.od object}
 \usage{
-\method{plot}{enpls.od}(x, criterion = c("quantile", "sd"), prob = 0.05,
-  sdtimes = 3L, alpha = 1, main = NULL, ...)
+\method{plot}{enpls.od}(x, criterion = c("quantile", "sd"),
+  prob = 0.05, sdtimes = 3L, alpha = 1, main = NULL, ...)
 }
 \arguments{
 \item{x}{An object of class \code{enpls.od}.}

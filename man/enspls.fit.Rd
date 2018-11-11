@@ -4,8 +4,9 @@
 \alias{enspls.fit}
 \title{Ensemble Sparse Partial Least Squares Regression}
 \usage{
-enspls.fit(x, y, maxcomp = 5L, cvfolds = 5L, alpha = seq(0.2, 0.8, 0.2),
-  reptimes = 500L, method = c("mc", "boot"), ratio = 0.8, parallel = 1L)
+enspls.fit(x, y, maxcomp = 5L, cvfolds = 5L, alpha = seq(0.2, 0.8,
+  0.2), reptimes = 500L, method = c("mc", "boot"), ratio = 0.8,
+  parallel = 1L)
 }
 \arguments{
 \item{x}{Predictor matrix.}
