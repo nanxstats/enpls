@@ -1,7 +1,3 @@
-template:
-  params:
-    bootswatch: flatly
-
 reference:
   - title: "Model Fitting"
     desc: "Functions for fitting ensemble (spase) partial least sqaures regression models."
