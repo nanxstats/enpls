@@ -15,8 +15,8 @@ An algorithmic framework for measuring feature importance,
 Useful links:
 \itemize{
   \item \url{https://nanx.me/enpls/}
-  \item \url{https://github.com/road2stat/enpls}
-  \item Report bugs at \url{https://github.com/road2stat/enpls/issues}
+  \item \url{https://github.com/nanxstats/enpls}
+  \item Report bugs at \url{https://github.com/nanxstats/enpls/issues}
 }
 
 }

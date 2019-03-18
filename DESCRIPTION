@@ -15,8 +15,8 @@ Description: An algorithmic framework for measuring feature importance,
     and ensemble predictive modeling with (sparse)
     partial least squares regressions.
 License: GPL-3 | file LICENSE
-URL: https://nanx.me/enpls/, https://github.com/road2stat/enpls
-BugReports: https://github.com/road2stat/enpls/issues
+URL: https://nanx.me/enpls/, https://github.com/nanxstats/enpls
+BugReports: https://github.com/nanxstats/enpls/issues
 Depends:
     R (>= 3.0.2)
 LazyData: TRUE

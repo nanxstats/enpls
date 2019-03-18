@@ -1,7 +1,7 @@
 # enpls  <a href="https://nanx.me/enpls/"><img src="https://i.imgur.com/HfRaoeK.png" align="right" alt="logo" height="180" width="180" /></a>
 
-[![Build Status](https://travis-ci.org/road2stat/enpls.svg?branch=master)](https://travis-ci.org/road2stat/enpls)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/road2stat/enpls?branch=master&svg=true)](https://ci.appveyor.com/project/road2stat/enpls)
+[![Build Status](https://travis-ci.org/nanxstats/enpls.svg?branch=master)](https://travis-ci.org/nanxstats/enpls)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/nanxstats/enpls?branch=master&svg=true)](https://ci.appveyor.com/project/nanxstats/enpls)
 [![CRAN Version](https://www.r-pkg.org/badges/version/enpls)](https://cran.r-project.org/package=enpls)
 [![Downloads from the RStudio CRAN mirror](https://cranlogs.r-pkg.org/badges/enpls)](https://cranlogs.r-pkg.org/badges/enpls)
 
@@ -19,7 +19,7 @@ Or try the development version on GitHub:
 
 ```r
 # install.packages("devtools")
-devtools::install_github("road2stat/enpls")
+devtools::install_github("nanxstats/enpls")
 ```
 
 See [the vignette](https://nanx.me/enpls/articles/enpls.html) (or open with `vignette("enpls")` in R) for a quick-start guide.
@@ -42,7 +42,7 @@ See [the vignette](https://nanx.me/enpls/articles/enpls.html) (or open with `vig
 
 * Web: [https://nanx.me/enpls/](https://nanx.me/enpls/)
 * CRAN: [https://cran.r-project.org/package=enpls](https://cran.r-project.org/package=enpls)
-* GitHub: [https://github.com/road2stat/enpls](https://github.com/road2stat/enpls)
+* GitHub: [https://github.com/nanxstats/enpls](https://github.com/nanxstats/enpls)
 
 ## Contribute
 
