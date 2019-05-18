@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">enpls</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">6.1</span>
       </span>
     </div>
 
@@ -150,47 +150,47 @@ ensemble partial least squares regressions.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>"alkanes"</span>)
-<span class='no'>x</span> <span class='kw'>=</span> <span class='no'>alkanes</span>$<span class='no'>x</span>
-<span class='no'>y</span> <span class='kw'>=</span> <span class='no'>alkanes</span>$<span class='no'>y</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>alkanes</span>$<span class='no'>x</span>
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='no'>alkanes</span>$<span class='no'>y</span>
 
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>42</span>)
-<span class='no'>fs</span> <span class='kw'>=</span> <span class='fu'><a href='enpls.fs.html'>enpls.fs</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>reptimes</span> <span class='kw'>=</span> <span class='fl'>100</span>)
+<span class='no'>fs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='enpls.fs.html'>enpls.fs</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>reptimes</span> <span class='kw'>=</span> <span class='fl'>100</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>fs</span>)</div><div class='output co'>#&gt; Variable Importance by Ensemble Partial Least Squares
 #&gt; ---
 #&gt;          Importance
-#&gt; MEDV.33  2.15366276
-#&gt; MEDV.23  1.53823610
-#&gt; Chi.P.4  1.52059051
-#&gt; Estate.1 1.36514098
-#&gt; MEDV.22  0.97212041
-#&gt; Estate.2 0.81096260
-#&gt; MEDV.12  0.71379529
-#&gt; MEDV.11  0.61648353
-#&gt; Chi.C.3  0.56297851
-#&gt; Chi.P.5  0.40124484
-#&gt; Chi.PC.4 0.33905820
-#&gt; Kappa.3  0.25072870
-#&gt; Estate.3 0.24096606
-#&gt; Chi.P.3  0.23899684
-#&gt; Kappa.4  0.10479882
-#&gt; Chi.P.0  0.10416484
-#&gt; Chi.P.1  0.10402557
-#&gt; Kappa.2  0.10397382
-#&gt; MEDV.13  0.08504129
-#&gt; Chi.P.2  0.04174372
-#&gt; Kappa.1  0.01065804</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>fs</span>, <span class='kw'>nvar</span> <span class='kw'>=</span> <span class='fl'>10L</span>)</div><div class='output co'>#&gt; Variable Importance by Ensemble Partial Least Squares
+#&gt; Chi.C.3   2.3709543
+#&gt; MEDV.23   2.0805190
+#&gt; MEDV.33   2.0263261
+#&gt; Chi.P.4   1.9926551
+#&gt; Chi.P.5   1.5626623
+#&gt; Estate.1  1.4482609
+#&gt; MEDV.13   1.3793226
+#&gt; MEDV.22   1.2299934
+#&gt; Chi.P.3   1.1104510
+#&gt; MEDV.12   1.0635508
+#&gt; MEDV.11   0.9492159
+#&gt; Estate.2  0.8926518
+#&gt; Chi.P.2   0.8470757
+#&gt; Chi.PC.4  0.7459319
+#&gt; Kappa.1   0.7190082
+#&gt; Kappa.3   0.7063439
+#&gt; Chi.P.1   0.4901006
+#&gt; Kappa.2   0.4518056
+#&gt; Kappa.4   0.3671246
+#&gt; Chi.P.0   0.3355310
+#&gt; Estate.3  0.2590686</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>fs</span>, <span class='kw'>nvar</span> <span class='kw'>=</span> <span class='fl'>10L</span>)</div><div class='output co'>#&gt; Variable Importance by Ensemble Partial Least Squares
 #&gt; ---
 #&gt;          Importance
-#&gt; MEDV.33   2.1536628
-#&gt; MEDV.23   1.5382361
-#&gt; Chi.P.4   1.5205905
-#&gt; Estate.1  1.3651410
-#&gt; MEDV.22   0.9721204
-#&gt; Estate.2  0.8109626
-#&gt; MEDV.12   0.7137953
-#&gt; MEDV.11   0.6164835
-#&gt; Chi.C.3   0.5629785
-#&gt; Chi.P.5   0.4012448</div></pre>
+#&gt; Chi.C.3    2.370954
+#&gt; MEDV.23    2.080519
+#&gt; MEDV.33    2.026326
+#&gt; Chi.P.4    1.992655
+#&gt; Chi.P.5    1.562662
+#&gt; Estate.1   1.448261
+#&gt; MEDV.13    1.379323
+#&gt; MEDV.22    1.229993
+#&gt; Chi.P.3    1.110451
+#&gt; MEDV.12    1.063551</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

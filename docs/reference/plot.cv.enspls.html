@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">enpls</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">6.1</span>
       </span>
     </div>
 
@@ -161,11 +161,11 @@ ensemble sparse partial least squares regression models.</p></div>
     <pre class="examples"><div class='input'># This example takes one minute to run
 </div><span class='co'># NOT RUN {</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>"logd1k"</span>)
-<span class='no'>x</span> <span class='kw'>=</span> <span class='no'>logd1k</span>$<span class='no'>x</span>
-<span class='no'>y</span> <span class='kw'>=</span> <span class='no'>logd1k</span>$<span class='no'>y</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>logd1k</span>$<span class='no'>x</span>
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='no'>logd1k</span>$<span class='no'>y</span>
 
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>42</span>)
-<span class='no'>cvfit</span> <span class='kw'>=</span> <span class='fu'><a href='cv.enspls.html'>cv.enspls</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>reptimes</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+<span class='no'>cvfit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='cv.enspls.html'>cv.enspls</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>reptimes</span> <span class='kw'>=</span> <span class='fl'>10</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>cvfit</span>)
 <span class='co'># }</span></pre>
   </div>

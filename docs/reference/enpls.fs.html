@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">enpls</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">6.1</span>
       </span>
     </div>
 
@@ -182,35 +182,35 @@ squares regression models.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>"alkanes"</span>)
-<span class='no'>x</span> <span class='kw'>=</span> <span class='no'>alkanes</span>$<span class='no'>x</span>
-<span class='no'>y</span> <span class='kw'>=</span> <span class='no'>alkanes</span>$<span class='no'>y</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>alkanes</span>$<span class='no'>x</span>
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='no'>alkanes</span>$<span class='no'>y</span>
 
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>42</span>)
-<span class='no'>fs</span> <span class='kw'>=</span> <span class='fu'>enpls.fs</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>reptimes</span> <span class='kw'>=</span> <span class='fl'>50</span>)
+<span class='no'>fs</span> <span class='kw'>&lt;-</span> <span class='fu'>enpls.fs</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>reptimes</span> <span class='kw'>=</span> <span class='fl'>50</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>fs</span>)</div><div class='output co'>#&gt; Variable Importance by Ensemble Partial Least Squares
 #&gt; ---
 #&gt;          Importance
-#&gt; Chi.P.4  2.04653852
-#&gt; MEDV.33  1.91355017
-#&gt; MEDV.23  1.21761808
-#&gt; Chi.C.3  1.20013282
-#&gt; Estate.1 1.13893004
-#&gt; Chi.P.5  0.99203115
-#&gt; Estate.2 0.80534323
-#&gt; MEDV.22  0.75077759
-#&gt; Chi.P.3  0.73948040
-#&gt; Chi.PC.4 0.52832107
-#&gt; MEDV.12  0.48493823
-#&gt; Kappa.3  0.46410188
-#&gt; MEDV.11  0.39972725
-#&gt; MEDV.13  0.30463372
-#&gt; Chi.P.2  0.19470911
-#&gt; Kappa.2  0.16309783
-#&gt; Chi.P.1  0.15096169
-#&gt; Chi.P.0  0.13750114
-#&gt; Kappa.4  0.13412470
-#&gt; Estate.3 0.08209627
-#&gt; Kappa.1  0.02816213</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>fs</span>)</div><div class='img'><img src='enpls.fs-1.png' alt='' width='700' height='433' /></div></pre>
+#&gt; MEDV.23   2.3438355
+#&gt; MEDV.33   2.1624571
+#&gt; Chi.P.4   2.1475160
+#&gt; Chi.C.3   2.0521822
+#&gt; Chi.P.5   1.4142498
+#&gt; Estate.1  1.2850053
+#&gt; MEDV.22   1.2822210
+#&gt; Chi.P.3   1.0533900
+#&gt; MEDV.12   1.0532281
+#&gt; MEDV.11   0.9379795
+#&gt; MEDV.13   0.8904436
+#&gt; Chi.PC.4  0.7798934
+#&gt; Estate.2  0.7473758
+#&gt; Chi.P.2   0.7221879
+#&gt; Kappa.3   0.7076264
+#&gt; Kappa.1   0.7043556
+#&gt; Kappa.2   0.4590357
+#&gt; Chi.P.1   0.4193437
+#&gt; Estate.3  0.3400528
+#&gt; Chi.P.0   0.2904166
+#&gt; Kappa.4   0.2455370</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>fs</span>)</div><div class='img'><img src='enpls.fs-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

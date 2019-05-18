@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">enpls</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">6.1</span>
       </span>
     </div>
 
@@ -150,26 +150,28 @@ ensemble sparse partial least squares regressions.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>"logd1k"</span>)
-<span class='no'>x</span> <span class='kw'>=</span> <span class='no'>logd1k</span>$<span class='no'>x</span>
-<span class='no'>y</span> <span class='kw'>=</span> <span class='no'>logd1k</span>$<span class='no'>y</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>logd1k</span>$<span class='no'>x</span>
+<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='no'>logd1k</span>$<span class='no'>y</span>
 
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>42</span>)
-<span class='no'>fs</span> <span class='kw'>=</span> <span class='fu'><a href='enspls.fs.html'>enspls.fs</a></span>(
-  <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>reptimes</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>maxcomp</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.3</span>, <span class='fl'>0.6</span>, <span class='fl'>0.9</span>))
+<span class='no'>fs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='enspls.fs.html'>enspls.fs</a></span>(
+  <span class='no'>x</span>, <span class='no'>y</span>,
+  <span class='kw'>reptimes</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>maxcomp</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.3</span>, <span class='fl'>0.6</span>, <span class='fl'>0.9</span>)
+)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>fs</span>, <span class='kw'>nvar</span> <span class='kw'>=</span> <span class='fl'>10L</span>)</div><div class='output co'>#&gt; Variable Importance by Ensemble Sparse Partial Least Squares
 #&gt; ---
 #&gt;                     Importance
-#&gt; Chi1                  83.02669
-#&gt; MolMR                 57.90854
-#&gt; Chi1n                 54.74231
-#&gt; Chi2n                 50.28567
-#&gt; SMR_VSA3              45.16167
-#&gt; NumValenceElectrons   45.06667
-#&gt; HeavyAtomCount        45.03873
-#&gt; Chi0n                 44.33584
-#&gt; Chi0v                 40.14875
-#&gt; LabuteASA             40.03086</div></pre>
+#&gt; SlogP_VSA2            70.23155
+#&gt; Chi0n                 43.24274
+#&gt; Chi1n                 42.86634
+#&gt; LabuteASA             42.44808
+#&gt; Chi1                  37.99326
+#&gt; HeavyAtomCount        36.06243
+#&gt; EState_VSA7           34.00841
+#&gt; NumValenceElectrons   32.67029
+#&gt; MolMR                 31.76546
+#&gt; Chi0v                 30.18469</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
