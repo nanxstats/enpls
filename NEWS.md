@@ -1,3 +1,11 @@
+# enpls 6.1 (2019-05-17)
+
+## Improvements
+
+- Switched to the tidyverse code style.
+- Updated the vignette style.
+- Updated GitHub repository links due to the handle change.
+
 # enpls 6.0 (2018-05-13)
 
 ## Improvements
