@@ -16,12 +16,12 @@ Print cv.enpls object.
 }
 \examples{
 data("alkanes")
-x = alkanes$x
-y = alkanes$y
+x <- alkanes$x
+y <- alkanes$y
 
 set.seed(42)
-cvfit = cv.enpls(x, y, reptimes = 10)
-print(cvfit)
+cvfit <- cv.enpls(x, y, reptimes = 10)
+cvfit
 }
 \seealso{
 See \code{\link{cv.enpls}} for cross-validation of ensemble

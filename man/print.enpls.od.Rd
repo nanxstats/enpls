@@ -16,12 +16,12 @@ Print enpls.od object.
 }
 \examples{
 data("alkanes")
-x = alkanes$x
-y = alkanes$y
+x <- alkanes$x
+y <- alkanes$y
 
 set.seed(42)
-od = enpls.od(x, y, reptimes = 40)
-print(od)
+od <- enpls.od(x, y, reptimes = 40)
+od
 }
 \seealso{
 See \code{\link{enpls.od}} for outlier detection with

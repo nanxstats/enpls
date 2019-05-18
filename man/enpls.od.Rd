@@ -49,14 +49,14 @@ can be measured), please try setting a large \code{reptimes}.
 }
 \examples{
 data("alkanes")
-x = alkanes$x
-y = alkanes$y
+x <- alkanes$x
+y <- alkanes$y
 
 set.seed(42)
-od = enpls.od(x, y, reptimes = 50)
+od <- enpls.od(x, y, reptimes = 50)
 print(od)
 plot(od)
-plot(od, criterion = 'sd')
+plot(od, criterion = "sd")
 }
 \seealso{
 See \code{\link{enpls.fs}} for measuring feature importance with

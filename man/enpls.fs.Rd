@@ -42,11 +42,11 @@ Measuring feature importance with ensemble partial least squares.
 }
 \examples{
 data("alkanes")
-x = alkanes$x
-y = alkanes$y
+x <- alkanes$x
+y <- alkanes$y
 
 set.seed(42)
-fs = enpls.fs(x, y, reptimes = 50)
+fs <- enpls.fs(x, y, reptimes = 50)
 print(fs)
 plot(fs)
 }

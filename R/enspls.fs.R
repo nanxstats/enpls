@@ -38,78 +38,74 @@
 #'
 #' @examples
 #' data("logd1k")
-#' x = logd1k$x
-#' y = logd1k$y
+#' x <- logd1k$x
+#' y <- logd1k$y
 #'
 #' set.seed(42)
-#' fs = enspls.fs(x, y, reptimes = 5, maxcomp = 2)
+#' fs <- enspls.fs(x, y, reptimes = 5, maxcomp = 2)
 #' print(fs, nvar = 10)
 #' plot(fs, nvar = 10)
-#' plot(fs, type = 'boxplot', limits = c(0.05, 0.95), nvar = 10)
-
-enspls.fs = function(
+#' plot(fs, type = "boxplot", limits = c(0.05, 0.95), nvar = 10)
+enspls.fs <- function(
   x, y,
-  maxcomp  = 5L,
-  cvfolds  = 5L,
-  alpha    = seq(0.2, 0.8, 0.2),
+  maxcomp = 5L,
+  cvfolds = 5L,
+  alpha = seq(0.2, 0.8, 0.2),
   reptimes = 500L,
-  method   = c('mc', 'boot'),
-  ratio    = 0.8,
+  method = c("mc", "boot"),
+  ratio = 0.8,
   parallel = 1L) {
+  if (missing(x) | missing(y)) stop("Please specify both x and y")
 
-  if (missing(x) | missing(y)) stop('Please specify both x and y')
+  method <- match.arg(method)
 
-  method = match.arg(method)
+  x.row <- nrow(x)
+  samp.idx <- vector("list", reptimes)
 
-  x.row = nrow(x)
-  samp.idx = vector('list', reptimes)
-
-  if (method == 'mc') {
-    for (i in 1L:reptimes)
-      samp.idx[[i]] = sample(1L:x.row, round(x.row * ratio))
+  if (method == "mc") {
+    for (i in 1L:reptimes) {
+      samp.idx[[i]] <- sample(1L:x.row, round(x.row * ratio))
+    }
   }
 
-  if (method == 'boot') {
-    for (i in 1L:reptimes)
-      samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
+  if (method == "boot") {
+    for (i in 1L:reptimes) {
+      samp.idx[[i]] <- sample(1L:x.row, x.row, replace = TRUE)
+    }
   }
 
   if (parallel < 1.5) {
-
-    coeflist = vector('list', reptimes)
+    coeflist <- vector("list", reptimes)
     for (i in 1L:reptimes) {
-      xtmp = x[samp.idx[[i]], ]
-      xtmp = scale(xtmp, center = TRUE, scale = TRUE)
-      ytmp = y[samp.idx[[i]]]
-      coeflist[[i]] = enspls.fs.core(xtmp, ytmp, maxcomp, cvfolds, alpha)
+      xtmp <- x[samp.idx[[i]], ]
+      xtmp <- scale(xtmp, center = TRUE, scale = TRUE)
+      ytmp <- y[samp.idx[[i]]]
+      coeflist[[i]] <- enspls.fs.core(xtmp, ytmp, maxcomp, cvfolds, alpha)
     }
-
   } else {
-
     registerDoParallel(parallel)
-    coeflist = foreach(i = 1L:reptimes) %dopar% {
-      xtmp = x[samp.idx[[i]], ]
-      xtmp = scale(xtmp, center = TRUE, scale = TRUE)
-      ytmp = y[samp.idx[[i]]]
+    coeflist <- foreach(i = 1L:reptimes) %dopar% {
+      xtmp <- x[samp.idx[[i]], ]
+      xtmp <- scale(xtmp, center = TRUE, scale = TRUE)
+      ytmp <- y[samp.idx[[i]]]
       enspls.fs.core(xtmp, ytmp, maxcomp, cvfolds, alpha)
     }
-
   }
 
-  coefmat = do.call(rbind, coeflist)
+  coefmat <- do.call(rbind, coeflist)
 
-  varimp = abs(colMeans(coefmat))/apply(coefmat, 2L, sd)
+  varimp <- abs(colMeans(coefmat)) / apply(coefmat, 2L, sd)
 
   # let variables with all zero coefficients have 0 importance
-  varimp[which(!is.finite(varimp))] = 0
+  varimp[which(!is.finite(varimp))] <- 0
 
-  res = list(
-    'variable.importance' = varimp,
-    'coefficient.matrix'  = coefmat)
-  class(res) = 'enspls.fs'
+  res <- list(
+    "variable.importance" = varimp,
+    "coefficient.matrix" = coefmat
+  )
+  class(res) <- "enspls.fs"
 
   res
-
 }
 
 #' core function for enspls.fs
@@ -124,35 +120,36 @@ enspls.fs = function(
 #'
 #' @keywords internal
 
-enspls.fs.core = function(xtmp, ytmp, maxcomp, cvfolds, alpha) {
-
+enspls.fs.core <- function(xtmp, ytmp, maxcomp, cvfolds, alpha) {
   invisible(capture.output(
     spls.cvfit <- cv.spls(
       xtmp,
       ytmp,
-      fold    = cvfolds,
-      K       = maxcomp,
-      eta     = alpha,
+      fold = cvfolds,
+      K = maxcomp,
+      eta = alpha,
       scale.x = TRUE,
       scale.y = FALSE,
-      plot.it = FALSE)))
+      plot.it = FALSE
+    )
+  ))
 
   # select best component number and alpha using adjusted CV
-  cv.bestcomp  = spls.cvfit$'K.opt'
-  cv.bestalpha = spls.cvfit$'eta.opt'
+  cv.bestcomp <- spls.cvfit$"K.opt"
+  cv.bestalpha <- spls.cvfit$"eta.opt"
 
-  spls.fit = spls(
+  spls.fit <- spls(
     xtmp,
     ytmp,
-    K       = cv.bestcomp,
-    eta     = cv.bestalpha,
+    K = cv.bestcomp,
+    eta = cv.bestalpha,
     scale.x = TRUE,
-    scale.y = FALSE)
+    scale.y = FALSE
+  )
 
-  spls.coef = coef(spls.fit)
-  spls.coef.vec = as.vector(spls.coef)
-  names(spls.coef.vec) = rownames(spls.coef)
+  spls.coef <- coef(spls.fit)
+  spls.coef.vec <- as.vector(spls.coef)
+  names(spls.coef.vec) <- rownames(spls.coef)
 
   spls.coef.vec
-
 }

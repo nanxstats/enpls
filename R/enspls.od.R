@@ -44,96 +44,94 @@
 #'
 #' @examples
 #' data("logd1k")
-#' x = logd1k$x
-#' y = logd1k$y
+#' x <- logd1k$x
+#' y <- logd1k$y
 #'
 #' set.seed(42)
-#' od = enspls.od(
-#'   x, y, reptimes = 5, maxcomp = 3,
-#'   alpha = c(0.3, 0.6, 0.9))
+#' od <- enspls.od(
+#'   x, y,
+#'   reptimes = 5, maxcomp = 3,
+#'   alpha = c(0.3, 0.6, 0.9)
+#' )
 #' plot(od, prob = 0.1)
 #' plot(od, criterion = "sd", sdtimes = 1)
-
-enspls.od = function(
+enspls.od <- function(
   x, y,
-  maxcomp  = 5L,
-  cvfolds  = 5L,
-  alpha    = seq(0.2, 0.8, 0.2),
+  maxcomp = 5L,
+  cvfolds = 5L,
+  alpha = seq(0.2, 0.8, 0.2),
   reptimes = 500L,
-  method   = c('mc', 'boot'),
-  ratio    = 0.8,
+  method = c("mc", "boot"),
+  ratio = 0.8,
   parallel = 1L) {
+  if (missing(x) | missing(y)) stop("Please specify both x and y")
 
-  if (missing(x) | missing(y)) stop('Please specify both x and y')
+  method <- match.arg(method)
 
-  method = match.arg(method)
+  x.row <- nrow(x)
+  samp.idx <- vector("list", reptimes)
+  samp.idx.remain <- vector("list", reptimes)
 
-  x.row = nrow(x)
-  samp.idx = vector('list', reptimes)
-  samp.idx.remain = vector('list', reptimes)
-
-  if (method == 'mc') {
+  if (method == "mc") {
     for (i in 1L:reptimes) {
-      samp.idx[[i]] = sample(1L:x.row, round(x.row * ratio))
-      samp.idx.remain[[i]] = setdiff(1L:x.row, samp.idx[[i]])
+      samp.idx[[i]] <- sample(1L:x.row, round(x.row * ratio))
+      samp.idx.remain[[i]] <- setdiff(1L:x.row, samp.idx[[i]])
     }
   }
 
-  if (method == 'boot') {
+  if (method == "boot") {
     for (i in 1L:reptimes) {
-      samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
-      samp.idx.remain[[i]] = setdiff(1L:x.row, unique(samp.idx[[i]]))
+      samp.idx[[i]] <- sample(1L:x.row, x.row, replace = TRUE)
+      samp.idx.remain[[i]] <- setdiff(1L:x.row, unique(samp.idx[[i]]))
     }
   }
 
   if (parallel < 1.5) {
-
-    errorlist = vector('list', reptimes)
+    errorlist <- vector("list", reptimes)
     for (i in 1L:reptimes) {
-      x.sample = x[samp.idx[[i]], ]
-      x.remain = x[samp.idx.remain[[i]], ]
-      y.sample = y[samp.idx[[i]]]
-      y.remain = y[samp.idx.remain[[i]]]
-      errorlist[[i]] = enspls.od.core(
+      x.sample <- x[samp.idx[[i]], ]
+      x.remain <- x[samp.idx.remain[[i]], ]
+      y.sample <- y[samp.idx[[i]]]
+      y.remain <- y[samp.idx.remain[[i]]]
+      errorlist[[i]] <- enspls.od.core(
         x.sample, y.sample, x.remain, y.remain,
-        maxcomp, cvfolds, alpha)
+        maxcomp, cvfolds, alpha
+      )
     }
-
   } else {
-
     registerDoParallel(parallel)
-    errorlist = foreach(i = 1L:reptimes) %dopar% {
-      x.sample = x[samp.idx[[i]], ]
-      x.remain = x[samp.idx.remain[[i]], ]
-      y.sample = y[samp.idx[[i]]]
-      y.remain = y[samp.idx.remain[[i]]]
+    errorlist <- foreach(i = 1L:reptimes) %dopar% {
+      x.sample <- x[samp.idx[[i]], ]
+      x.remain <- x[samp.idx.remain[[i]], ]
+      y.sample <- y[samp.idx[[i]]]
+      y.remain <- y[samp.idx.remain[[i]]]
       enspls.od.core(
         x.sample, y.sample, x.remain, y.remain,
-        maxcomp, cvfolds, alpha)
+        maxcomp, cvfolds, alpha
+      )
     }
-
   }
 
-  prederrmat = matrix(NA, ncol = x.row, nrow = reptimes)
+  prederrmat <- matrix(NA, ncol = x.row, nrow = reptimes)
   for (i in 1L:reptimes) {
     for (j in 1L:length(samp.idx.remain[[i]])) {
-      prederrmat[i, samp.idx.remain[[i]][j]] = errorlist[[i]][j]
+      prederrmat[i, samp.idx.remain[[i]][j]] <- errorlist[[i]][j]
     }
   }
 
-  errmean   = abs(colMeans(prederrmat, na.rm = TRUE))
-  errmedian = apply(prederrmat, 2L, median, na.rm = TRUE)
-  errsd     = apply(prederrmat, 2L, sd, na.rm = TRUE)
+  errmean <- abs(colMeans(prederrmat, na.rm = TRUE))
+  errmedian <- apply(prederrmat, 2L, median, na.rm = TRUE)
+  errsd <- apply(prederrmat, 2L, sd, na.rm = TRUE)
 
-  res = list(
-    'error.mean'    = errmean,
-    'error.median'  = errmedian,
-    'error.sd'      = errsd,
-    'predict.error.matrix' = prederrmat)
-  class(res) = 'enspls.od'
+  res <- list(
+    "error.mean" = errmean,
+    "error.median" = errmedian,
+    "error.sd" = errsd,
+    "predict.error.matrix" = prederrmat
+  )
+  class(res) <- "enspls.od"
 
   res
-
 }
 
 #' core function for enspls.od
@@ -148,38 +146,39 @@ enspls.od = function(
 #'
 #' @keywords internal
 
-enspls.od.core = function(
+enspls.od.core <- function(
   x.sample, y.sample, x.remain, y.remain,
   maxcomp, cvfolds, alpha) {
-
   invisible(capture.output(
     spls.cvfit <- cv.spls(
       x.sample,
       y.sample,
-      fold    = cvfolds,
-      K       = maxcomp,
-      eta     = alpha,
+      fold = cvfolds,
+      K = maxcomp,
+      eta = alpha,
       scale.x = TRUE,
       scale.y = FALSE,
-      plot.it = FALSE)))
+      plot.it = FALSE
+    )
+  ))
 
   # select best component number and alpha using adjusted CV
-  cv.bestcomp  = spls.cvfit$'K.opt'
-  cv.bestalpha = spls.cvfit$'eta.opt'
+  cv.bestcomp <- spls.cvfit$"K.opt"
+  cv.bestalpha <- spls.cvfit$"eta.opt"
 
-  spls.fit = spls(
+  spls.fit <- spls(
     x.sample,
     y.sample,
-    K       = cv.bestcomp,
-    eta     = cv.bestalpha,
+    K = cv.bestcomp,
+    eta = cv.bestalpha,
     scale.x = TRUE,
-    scale.y = FALSE)
+    scale.y = FALSE
+  )
 
-  pred = predict(spls.fit, newx = x.remain)
+  pred <- predict(spls.fit, newx = x.remain)
 
-  error = y.remain - pred
-  names(error) = NULL
+  error <- y.remain - pred
+  names(error) <- NULL
 
   error
-
 }

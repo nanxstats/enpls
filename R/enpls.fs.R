@@ -37,76 +37,73 @@
 #'
 #' @examples
 #' data("alkanes")
-#' x = alkanes$x
-#' y = alkanes$y
+#' x <- alkanes$x
+#' y <- alkanes$y
 #'
 #' set.seed(42)
-#' fs = enpls.fs(x, y, reptimes = 50)
+#' fs <- enpls.fs(x, y, reptimes = 50)
 #' print(fs)
 #' plot(fs)
-
-enpls.fs = function(
+enpls.fs <- function(
   x, y,
-  maxcomp  = NULL,
-  cvfolds  = 5L,
+  maxcomp = NULL,
+  cvfolds = 5L,
   reptimes = 500L,
-  method   = c('mc', 'boot'),
-  ratio    = 0.8,
+  method = c("mc", "boot"),
+  ratio = 0.8,
   parallel = 1L) {
+  if (missing(x) | missing(y)) stop("Please specify both x and y")
 
-  if (missing(x) | missing(y)) stop('Please specify both x and y')
+  method <- match.arg(method)
 
-  method = match.arg(method)
+  x.row <- nrow(x)
+  samp.idx <- vector("list", reptimes)
 
-  x.row = nrow(x)
-  samp.idx = vector('list', reptimes)
-
-  if (method == 'mc') {
-    for (i in 1L:reptimes)
-      samp.idx[[i]] = sample(1L:x.row, round(x.row * ratio))
+  if (method == "mc") {
+    for (i in 1L:reptimes) {
+      samp.idx[[i]] <- sample(1L:x.row, round(x.row * ratio))
+    }
   }
 
-  if (method == 'boot') {
-    for (i in 1L:reptimes)
-      samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
+  if (method == "boot") {
+    for (i in 1L:reptimes) {
+      samp.idx[[i]] <- sample(1L:x.row, x.row, replace = TRUE)
+    }
   }
 
   if (parallel < 1.5) {
-
-    coeflist = vector('list', reptimes)
+    coeflist <- vector("list", reptimes)
     for (i in 1L:reptimes) {
-      xtmp = x[samp.idx[[i]], ]
-      xtmp = scale(xtmp, center = TRUE, scale = TRUE)
-      ytmp = y[samp.idx[[i]]]
-      plsdf = as.data.frame(cbind(xtmp, 'y' = ytmp))
-      coeflist[[i]] = suppressWarnings(
-        enpls.fs.core(plsdf, maxcomp, cvfolds))
+      xtmp <- x[samp.idx[[i]], ]
+      xtmp <- scale(xtmp, center = TRUE, scale = TRUE)
+      ytmp <- y[samp.idx[[i]]]
+      plsdf <- as.data.frame(cbind(xtmp, "y" = ytmp))
+      coeflist[[i]] <- suppressWarnings(
+        enpls.fs.core(plsdf, maxcomp, cvfolds)
+      )
     }
-
   } else {
-
     registerDoParallel(parallel)
-    coeflist = foreach(i = 1L:reptimes) %dopar% {
-      xtmp = x[samp.idx[[i]], ]
-      xtmp = scale(xtmp, center = TRUE, scale = TRUE)
-      ytmp = y[samp.idx[[i]]]
-      plsdf = as.data.frame(cbind(xtmp, 'y' = ytmp))
+    coeflist <- foreach(i = 1L:reptimes) %dopar% {
+      xtmp <- x[samp.idx[[i]], ]
+      xtmp <- scale(xtmp, center = TRUE, scale = TRUE)
+      ytmp <- y[samp.idx[[i]]]
+      plsdf <- as.data.frame(cbind(xtmp, "y" = ytmp))
       enpls.fs.core(plsdf, maxcomp, cvfolds)
     }
-
   }
 
-  coefmat = do.call(rbind, coeflist)
+  coefmat <- do.call(rbind, coeflist)
 
-  varimp = abs(colMeans(coefmat))/apply(coefmat, 2L, sd)
+  varimp <- abs(colMeans(coefmat)) / apply(coefmat, 2L, sd)
 
-  res = list(
-    'variable.importance' = varimp,
-    'coefficient.matrix'  = coefmat)
-  class(res) = 'enpls.fs'
+  res <- list(
+    "variable.importance" = varimp,
+    "coefficient.matrix" = coefmat
+  )
+  class(res) <- "enpls.fs"
 
   res
-
 }
 
 #' core function for enpls.fs
@@ -119,44 +116,41 @@ enpls.fs = function(
 #'
 #' @keywords internal
 
-enpls.fs.core = function(plsdf, maxcomp, cvfolds) {
-
+enpls.fs.core <- function(plsdf, maxcomp, cvfolds) {
   if (is.null(maxcomp)) {
-
-    plsr.cvfit = plsr(
+    plsr.cvfit <- plsr(
       y ~ .,
-      data       = plsdf,
-      scale      = FALSE,
-      method     = 'simpls',
-      validation = 'CV',
-      segments   = cvfolds)
-
+      data = plsdf,
+      scale = FALSE,
+      method = "simpls",
+      validation = "CV",
+      segments = cvfolds
+    )
   } else {
-
-    plsr.cvfit = plsr(
+    plsr.cvfit <- plsr(
       y ~ .,
-      data       = plsdf,
-      ncomp      = maxcomp,
-      scale      = FALSE,
-      method     = 'simpls',
-      validation = 'CV',
-      segments   = cvfolds)
-
+      data = plsdf,
+      ncomp = maxcomp,
+      scale = FALSE,
+      method = "simpls",
+      validation = "CV",
+      segments = cvfolds
+    )
   }
 
   # select best component number using adjusted CV
-  cv.bestcomp = which.min(RMSEP(plsr.cvfit)[['val']][2L, 1L, -1L])
+  cv.bestcomp <- which.min(RMSEP(plsr.cvfit)[["val"]][2L, 1L, -1L])
 
-  plsr.fit = plsr(
+  plsr.fit <- plsr(
     y ~ .,
-    data       = plsdf,
-    ncomp      = cv.bestcomp,
-    scale      = FALSE,
-    method     = 'simpls',
-    validation = 'none')
+    data = plsdf,
+    ncomp = cv.bestcomp,
+    scale = FALSE,
+    method = "simpls",
+    validation = "none"
+  )
 
-  plsr.coef = drop(coef(plsr.fit))
+  plsr.coef <- drop(coef(plsr.fit))
 
   plsr.coef
-
 }

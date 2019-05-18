@@ -38,11 +38,11 @@ Ensemble partial least squares regression.
 }
 \examples{
 data("alkanes")
-x = alkanes$x
-y = alkanes$y
+x <- alkanes$x
+y <- alkanes$y
 
 set.seed(42)
-fit = enpls.fit(x, y, reptimes = 50)
+fit <- enpls.fit(x, y, reptimes = 50)
 print(fit)
 predict(fit, newx = x)
 }

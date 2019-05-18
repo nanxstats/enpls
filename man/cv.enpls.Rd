@@ -40,11 +40,11 @@ can be measured), please try setting a large \code{reptimes}.
 }
 \examples{
 data("alkanes")
-x = alkanes$x
-y = alkanes$y
+x <- alkanes$x
+y <- alkanes$y
 
 set.seed(42)
-cvfit = cv.enpls(x, y, reptimes = 10)
+cvfit <- cv.enpls(x, y, reptimes = 10)
 print(cvfit)
 plot(cvfit)
 }

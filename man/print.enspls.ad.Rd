@@ -17,27 +17,30 @@ Print enspls.ad object.
 \examples{
 data("logd1k")
 # remove low variance variables
-x = logd1k$x[, -c(17, 52, 59)]
-y = logd1k$y
+x <- logd1k$x[, -c(17, 52, 59)]
+y <- logd1k$y
 
 # training set
-x.tr = x[1:300, ]
-y.tr = y[1:300]
+x.tr <- x[1:300, ]
+y.tr <- y[1:300]
 
 # two test sets
-x.te = list(
+x.te <- list(
   "test.1" = x[301:400, ],
-  "test.2" = x[401:500, ])
-y.te = list(
+  "test.2" = x[401:500, ]
+)
+y.te <- list(
   "test.1" = y[301:400],
-  "test.2" = y[401:500])
+  "test.2" = y[401:500]
+)
 
 set.seed(42)
-ad = enspls.ad(
+ad <- enspls.ad(
   x.tr, y.tr, x.te, y.te,
   maxcomp = 3, alpha = c(0.3, 0.6, 0.9),
   space = "variable", method = "mc",
-  ratio = 0.8, reptimes = 10)
+  ratio = 0.8, reptimes = 10
+)
 print(ad)
 }
 \seealso{

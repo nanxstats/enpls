@@ -42,13 +42,15 @@ can be measured), please try setting a large \code{reptimes}.
 # This example takes one minute to run
 \dontrun{
 data("logd1k")
-x = logd1k$x
-y = logd1k$y
+x <- logd1k$x
+y <- logd1k$y
 
 set.seed(42)
-cvfit = cv.enspls(x, y, reptimes = 10)
+cvfit <- cv.enspls(x, y, reptimes = 10)
 print(cvfit)
-plot(cvfit)}
+plot(cvfit)
+}
+
 }
 \seealso{
 See \code{\link{enspls.fit}} for ensemble sparse

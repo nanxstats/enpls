@@ -27,12 +27,13 @@ Plot cv.enspls object
 # This example takes one minute to run
 \dontrun{
 data("logd1k")
-x = logd1k$x
-y = logd1k$y
+x <- logd1k$x
+y <- logd1k$y
 
 set.seed(42)
-cvfit = cv.enspls(x, y, reptimes = 10)
-plot(cvfit)}
+cvfit <- cv.enspls(x, y, reptimes = 10)
+plot(cvfit)
+}
 }
 \seealso{
 See \code{\link{cv.enspls}} for cross-validation of

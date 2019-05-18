@@ -35,50 +35,50 @@
 #' # This example takes one minute to run
 #' \dontrun{
 #' data("logd1k")
-#' x = logd1k$x
-#' y = logd1k$y
+#' x <- logd1k$x
+#' y <- logd1k$y
 #'
 #' set.seed(42)
-#' cvfit = cv.enspls(x, y, reptimes = 10)
+#' cvfit <- cv.enspls(x, y, reptimes = 10)
 #' print(cvfit)
-#' plot(cvfit)}
+#' plot(cvfit)
+#' }
+#'
+cv.enspls <- function(x, y, nfolds = 5L, verbose = TRUE, ...) {
+  if (missing(x) | missing(y)) stop("Please specify both x and y")
 
-cv.enspls = function(x, y, nfolds = 5L, verbose = TRUE, ...) {
+  x.row <- nrow(x)
+  index <- rep_len(1L:nfolds, x.row)
 
-  if (missing(x) | missing(y)) stop('Please specify both x and y')
-
-  x.row = nrow(x)
-  index = rep_len(1L:nfolds, x.row)
-
-  ypred = matrix(NA, ncol = 2L, nrow = x.row)
+  ypred <- matrix(NA, ncol = 2L, nrow = x.row)
 
   for (i in 1L:nfolds) {
-    if (verbose) cat('Beginning fold', i, '\n')
-    xtrain = x[index != i, ]
-    ytrain = y[index != i]
-    xtest  = x[index == i, ]
-    ytest  = y[index == i]
-    fit = enspls.fit(xtrain, ytrain, ...)
-    ypredvec = predict(fit, newx = xtest)
-    ypred[index == i, 1L] = ytest
-    ypred[index == i, 2L] = ypredvec
+    if (verbose) cat("Beginning fold", i, "\n")
+    xtrain <- x[index != i, ]
+    ytrain <- y[index != i]
+    xtest <- x[index == i, ]
+    ytest <- y[index == i]
+    fit <- enspls.fit(xtrain, ytrain, ...)
+    ypredvec <- predict(fit, newx = xtest)
+    ypred[index == i, 1L] <- ytest
+    ypred[index == i, 2L] <- ypredvec
   }
 
-  colnames(ypred) = c('y.real', 'y.pred')
+  colnames(ypred) <- c("y.real", "y.pred")
 
-  residual = ypred[, 1L] - ypred[, 2L]
-  RMSE     = sqrt(mean((residual)^2, na.rm = TRUE))
-  MAE      = mean(abs(residual), na.rm = TRUE)
-  Rsquare  = 1L - (sum((residual)^2, na.rm = TRUE)/sum((y - mean(y))^2))
+  residual <- ypred[, 1L] - ypred[, 2L]
+  RMSE <- sqrt(mean((residual)^2, na.rm = TRUE))
+  MAE <- mean(abs(residual), na.rm = TRUE)
+  Rsquare <- 1L - (sum((residual)^2, na.rm = TRUE) / sum((y - mean(y))^2))
 
-  res = list(
-    'ypred'    = ypred,
-    'residual' = residual,
-    'RMSE'     = RMSE,
-    'MAE'      = MAE,
-    'Rsquare'  = Rsquare)
-  class(res) = 'cv.enspls'
+  res <- list(
+    "ypred" = ypred,
+    "residual" = residual,
+    "RMSE" = RMSE,
+    "MAE" = MAE,
+    "Rsquare" = Rsquare
+  )
+  class(res) <- "cv.enspls"
 
   res
-
 }

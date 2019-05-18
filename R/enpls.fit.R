@@ -33,68 +33,64 @@
 #'
 #' @examples
 #' data("alkanes")
-#' x = alkanes$x
-#' y = alkanes$y
+#' x <- alkanes$x
+#' y <- alkanes$y
 #'
 #' set.seed(42)
-#' fit = enpls.fit(x, y, reptimes = 50)
+#' fit <- enpls.fit(x, y, reptimes = 50)
 #' print(fit)
 #' predict(fit, newx = x)
-
-enpls.fit = function(
+enpls.fit <- function(
   x, y,
-  maxcomp  = NULL,
-  cvfolds  = 5L,
+  maxcomp = NULL,
+  cvfolds = 5L,
   reptimes = 500L,
-  method   = c('mc', 'boot'),
-  ratio    = 0.8,
+  method = c("mc", "boot"),
+  ratio = 0.8,
   parallel = 1L) {
+  if (missing(x) | missing(y)) stop("Please specify both x and y")
 
-  if (missing(x) | missing(y)) stop('Please specify both x and y')
+  method <- match.arg(method)
 
-  method = match.arg(method)
+  x.row <- nrow(x)
+  samp.idx <- vector("list", reptimes)
 
-  x.row = nrow(x)
-  samp.idx = vector('list', reptimes)
-
-  if (method == 'mc') {
-    for (i in 1L:reptimes)
-      samp.idx[[i]] = sample(1L:x.row, round(x.row * ratio))
+  if (method == "mc") {
+    for (i in 1L:reptimes) {
+      samp.idx[[i]] <- sample(1L:x.row, round(x.row * ratio))
+    }
   }
 
-  if (method == 'boot') {
-    for (i in 1L:reptimes)
-      samp.idx[[i]] = sample(1L:x.row, x.row, replace = TRUE)
+  if (method == "boot") {
+    for (i in 1L:reptimes) {
+      samp.idx[[i]] <- sample(1L:x.row, x.row, replace = TRUE)
+    }
   }
 
   if (parallel < 1.5) {
-
-    modellist = vector('list', reptimes)
+    modellist <- vector("list", reptimes)
     for (i in 1L:reptimes) {
-      xtmp = x[samp.idx[[i]], ]
-      ytmp = y[samp.idx[[i]]]
-      plsdf = as.data.frame(cbind(xtmp, 'y' = ytmp))
-      modellist[[i]] = suppressWarnings(
-        enpls.fit.core(plsdf, maxcomp, cvfolds))
+      xtmp <- x[samp.idx[[i]], ]
+      ytmp <- y[samp.idx[[i]]]
+      plsdf <- as.data.frame(cbind(xtmp, "y" = ytmp))
+      modellist[[i]] <- suppressWarnings(
+        enpls.fit.core(plsdf, maxcomp, cvfolds)
+      )
     }
-
   } else {
-
     registerDoParallel(parallel)
-    modellist = foreach(i = 1L:reptimes) %dopar% {
-      xtmp = x[samp.idx[[i]], ]
-      ytmp = y[samp.idx[[i]]]
-      plsdf = as.data.frame(cbind(xtmp, 'y' = ytmp))
+    modellist <- foreach(i = 1L:reptimes) %dopar% {
+      xtmp <- x[samp.idx[[i]], ]
+      ytmp <- y[samp.idx[[i]]]
+      plsdf <- as.data.frame(cbind(xtmp, "y" = ytmp))
       enpls.fit.core(plsdf, maxcomp, cvfolds)
     }
-
   }
 
-  names(modellist) = paste0('pls_model_', 1L:length(modellist))
-  class(modellist) = 'enpls.fit'
+  names(modellist) <- paste0("pls_model_", 1L:length(modellist))
+  class(modellist) <- "enpls.fit"
 
   modellist
-
 }
 
 #' core function for enpls.fit
@@ -107,54 +103,51 @@ enpls.fit = function(
 #'
 #' @keywords internal
 
-enpls.fit.core = function(plsdf, maxcomp, cvfolds) {
-
+enpls.fit.core <- function(plsdf, maxcomp, cvfolds) {
   if (is.null(maxcomp)) {
-
-    plsr.cvfit = plsr(
+    plsr.cvfit <- plsr(
       y ~ .,
-      data       = plsdf,
-      scale      = TRUE,
-      method     = 'simpls',
-      validation = 'CV',
-      segments   = cvfolds)
-
+      data = plsdf,
+      scale = TRUE,
+      method = "simpls",
+      validation = "CV",
+      segments = cvfolds
+    )
   } else {
-
-    plsr.cvfit = plsr(
+    plsr.cvfit <- plsr(
       y ~ .,
-      data       = plsdf,
-      ncomp      = maxcomp,
-      scale      = TRUE,
-      method     = 'simpls',
-      validation = 'CV',
-      segments   = cvfolds)
-
+      data = plsdf,
+      ncomp = maxcomp,
+      scale = TRUE,
+      method = "simpls",
+      validation = "CV",
+      segments = cvfolds
+    )
   }
 
   # select best component number using adjusted CV
-  cv.bestcomp = which.min(RMSEP(plsr.cvfit)[['val']][2L, 1L, -1L])
+  cv.bestcomp <- which.min(RMSEP(plsr.cvfit)[["val"]][2L, 1L, -1L])
 
   # remove plsr.cvfit object
   rm(plsr.cvfit)
 
-  plsr.fit = plsr(
+  plsr.fit <- plsr(
     y ~ .,
-    data       = plsdf,
-    ncomp      = cv.bestcomp,
-    scale      = TRUE,
-    method     = 'simpls',
-    validation = 'none')
+    data = plsdf,
+    ncomp = cv.bestcomp,
+    scale = TRUE,
+    method = "simpls",
+    validation = "none"
+  )
 
   # minify plsr.fit object to reduce memory footprint
-  plsr.fit[['model']] = NULL
+  plsr.fit[["model"]] <- NULL
 
   # save cv.bestcomp for predict.enpls
-  enpls.core.fit = list('plsr.fit' = plsr.fit, 'cv.bestcomp' = cv.bestcomp)
+  enpls.core.fit <- list("plsr.fit" = plsr.fit, "cv.bestcomp" = cv.bestcomp)
 
   # remove plsr.fit object
   rm(plsr.fit)
 
   enpls.core.fit
-
 }

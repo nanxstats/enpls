@@ -10,13 +10,7 @@
 #' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @export enpls.rmse
-enpls.rmse = function(yreal, ypred) {
-
-  rmse = sqrt(mean((yreal - ypred)^2))
-
-  return(rmse)
-
-}
+enpls.rmse <- function(yreal, ypred) sqrt(mean((yreal - ypred)^2))
 
 #' Mean Absolute Error (MAE)
 #'
@@ -28,13 +22,7 @@ enpls.rmse = function(yreal, ypred) {
 #' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @export enpls.mae
-enpls.mae = function(yreal, ypred) {
-
-  mae = mean(abs(yreal - ypred))
-
-  return(mae)
-
-}
+enpls.mae <- function(yreal, ypred) mean(abs(yreal - ypred))
 
 #' Root Mean Squared Logarithmic Error (RMSLE)
 #'
@@ -46,10 +34,5 @@ enpls.mae = function(yreal, ypred) {
 #' @author Nan Xiao <\url{https://nanx.me}>
 #'
 #' @export enpls.rmsle
-enpls.rmsle = function(yreal, ypred) {
-
-  rmsle = sqrt(mean((log(ypred + 1) - log(yreal + 1))^2))
-
-  return(rmsle)
-
-}
+enpls.rmsle <- function(yreal, ypred)
+  sqrt(mean((log(ypred + 1) - log(yreal + 1))^2))

@@ -18,26 +18,26 @@
 #' # This example takes one minute to run
 #' \dontrun{
 #' data("logd1k")
-#' x = logd1k$x
-#' y = logd1k$y
+#' x <- logd1k$x
+#' y <- logd1k$y
 #'
 #' set.seed(42)
-#' cvfit = cv.enspls(x, y, reptimes = 10)
-#' print(cvfit)}
-
-print.cv.enspls = function(x, ...) {
-
-  if (!inherits(x, 'cv.enspls'))
+#' cvfit <- cv.enspls(x, y, reptimes = 10)
+#' print(cvfit)
+#' }
+print.cv.enspls <- function(x, ...) {
+  if (!inherits(x, "cv.enspls")) {
     stop('This function only works for objects of class "cv.enspls"')
+  }
 
-  cat('Cross Validation Result for Ensemble Sparse Partial Least Squares\n')
-  cat('---\n')
+  cat("Cross Validation Result for Ensemble Sparse Partial Least Squares\n")
+  cat("---\n")
   cat(paste(
-    'RMSE = ', sprintf("%.4f", x$'RMSE'), '\n',
-    'MAE = ', sprintf("%.6f", x$'MAE'), '\n',
-    'Rsquare = ', sprintf("%.6f", x$'Rsquare'), '\n',
-    sep = ''))
-
+    "RMSE = ", sprintf("%.4f", x$"RMSE"), "\n",
+    "MAE = ", sprintf("%.6f", x$"MAE"), "\n",
+    "Rsquare = ", sprintf("%.6f", x$"Rsquare"), "\n",
+    sep = ""
+  ))
 }
 
 #' Print Fitted Ensemble Sparse Partial Least Squares Object
@@ -60,31 +60,31 @@ print.cv.enspls = function(x, ...) {
 #'
 #' @examples
 #' data("logd1k")
-#' x = logd1k$x
-#' y = logd1k$y
+#' x <- logd1k$x
+#' y <- logd1k$y
 #'
 #' set.seed(42)
-#' fit = enspls.fit(
-#'   x, y, reptimes = 5, maxcomp = 3,
-#'   alpha = c(0.3, 0.6, 0.9))
+#' fit <- enspls.fit(
+#'   x, y,
+#'   reptimes = 5, maxcomp = 3,
+#'   alpha = c(0.3, 0.6, 0.9)
+#' )
 #' print(fit)
-
-print.enspls.fit = function(x, ...) {
-
-  if (!inherits(x, 'enspls.fit'))
+print.enspls.fit <- function(x, ...) {
+  if (!inherits(x, "enspls.fit")) {
     stop('This function only works for objects of class "enspls.fit"')
+  }
 
-  coefmeta = coef(x[[1]][[1]])
-  varcount = nrow(coefmeta)
-  reptimes  = length(x)
-  coefdf   = matrix(NA, ncol = reptimes, nrow = varcount)
-  for (i in 1:reptimes) coefdf[, i] = coef(x[[i]][[1]])
-  rownames(coefdf) = rownames(coefmeta)
+  coefmeta <- coef(x[[1]][[1]])
+  varcount <- nrow(coefmeta)
+  reptimes <- length(x)
+  coefdf <- matrix(NA, ncol = reptimes, nrow = varcount)
+  for (i in 1:reptimes) coefdf[, i] <- coef(x[[i]][[1]])
+  rownames(coefdf) <- rownames(coefmeta)
 
-  cat('Coefficients of the Models by Ensemble Sparse Partial Least Squares\n')
-  cat('---\n')
+  cat("Coefficients of the Models by Ensemble Sparse Partial Least Squares\n")
+  cat("---\n")
   print(coefdf)
-
 }
 
 #' Print enspls.fs Object
@@ -107,31 +107,31 @@ print.enspls.fit = function(x, ...) {
 #'
 #' @examples
 #' data("logd1k")
-#' x = logd1k$x
-#' y = logd1k$y
+#' x <- logd1k$x
+#' y <- logd1k$y
 #'
 #' set.seed(42)
-#' fs = enspls.fs(
-#'   x, y, reptimes = 5, maxcomp = 3,
-#'   alpha = c(0.3, 0.6, 0.9))
+#' fs <- enspls.fs(
+#'   x, y,
+#'   reptimes = 5, maxcomp = 3,
+#'   alpha = c(0.3, 0.6, 0.9)
+#' )
 #' print(fs, nvar = 10L)
-
-print.enspls.fs = function(x, sort = TRUE, nvar = NULL, ...) {
-
-  if (!inherits(x, 'enspls.fs'))
+print.enspls.fs <- function(x, sort = TRUE, nvar = NULL, ...) {
+  if (!inherits(x, "enspls.fs")) {
     stop('This function only works for objects of class "enspls.fs"')
-
-  varimp = x$'variable.importance'
-  if (is.null(nvar)) nvar = length(varimp)
-
-  cat('Variable Importance by Ensemble Sparse Partial Least Squares\n')
-  cat('---\n')
-  if (sort == TRUE) {
-    print(data.frame('Importance' = sort(varimp, TRUE)[1:nvar]))
-  } else {
-    print(data.frame('Importance' = varimp))
   }
 
+  varimp <- x$"variable.importance"
+  if (is.null(nvar)) nvar <- length(varimp)
+
+  cat("Variable Importance by Ensemble Sparse Partial Least Squares\n")
+  cat("---\n")
+  if (sort == TRUE) {
+    print(data.frame("Importance" = sort(varimp, TRUE)[1:nvar]))
+  } else {
+    print(data.frame("Importance" = varimp))
+  }
 }
 
 #' Print enspls.od Object
@@ -152,28 +152,28 @@ print.enspls.fs = function(x, sort = TRUE, nvar = NULL, ...) {
 #'
 #' @examples
 #' data("logd1k")
-#' x = logd1k$x
-#' y = logd1k$y
+#' x <- logd1k$x
+#' y <- logd1k$y
 #'
 #' set.seed(42)
-#' od = enspls.od(
-#'   x, y, reptimes = 5, maxcomp = 3,
-#'   alpha = c(0.3, 0.6, 0.9))
+#' od <- enspls.od(
+#'   x, y,
+#'   reptimes = 5, maxcomp = 3,
+#'   alpha = c(0.3, 0.6, 0.9)
+#' )
 #' print(od)
-
-print.enspls.od = function(x, ...) {
-
-  if (!inherits(x, 'enspls.od'))
+print.enspls.od <- function(x, ...) {
+  if (!inherits(x, "enspls.od")) {
     stop('This function only works for objects of class "enspls.od"')
+  }
 
-  cat('Outlier Detection by Ensemble Sparse Partial Least Squares\n')
-  cat('---\n')
-  cat('Mean residual for each sample:\n')
-  print(x$'error.mean')
-  cat('---\n')
-  cat('Residual SD for each sample:\n')
-  print(x$'error.sd')
-
+  cat("Outlier Detection by Ensemble Sparse Partial Least Squares\n")
+  cat("---\n")
+  cat("Mean residual for each sample:\n")
+  print(x$"error.mean")
+  cat("---\n")
+  cat("Residual SD for each sample:\n")
+  print(x$"error.sd")
 }
 
 #' Print enspls.ad Object
@@ -195,46 +195,47 @@ print.enspls.od = function(x, ...) {
 #' @examples
 #' data("logd1k")
 #' # remove low variance variables
-#' x = logd1k$x[, -c(17, 52, 59)]
-#' y = logd1k$y
+#' x <- logd1k$x[, -c(17, 52, 59)]
+#' y <- logd1k$y
 #'
 #' # training set
-#' x.tr = x[1:300, ]
-#' y.tr = y[1:300]
+#' x.tr <- x[1:300, ]
+#' y.tr <- y[1:300]
 #'
 #' # two test sets
-#' x.te = list(
+#' x.te <- list(
 #'   "test.1" = x[301:400, ],
-#'   "test.2" = x[401:500, ])
-#' y.te = list(
+#'   "test.2" = x[401:500, ]
+#' )
+#' y.te <- list(
 #'   "test.1" = y[301:400],
-#'   "test.2" = y[401:500])
+#'   "test.2" = y[401:500]
+#' )
 #'
 #' set.seed(42)
-#' ad = enspls.ad(
+#' ad <- enspls.ad(
 #'   x.tr, y.tr, x.te, y.te,
 #'   maxcomp = 3, alpha = c(0.3, 0.6, 0.9),
 #'   space = "variable", method = "mc",
-#'   ratio = 0.8, reptimes = 10)
+#'   ratio = 0.8, reptimes = 10
+#' )
 #' print(ad)
-
-print.enspls.ad = function(x, ...) {
-
-  if (!inherits(x, 'enspls.ad'))
+print.enspls.ad <- function(x, ...) {
+  if (!inherits(x, "enspls.ad")) {
     stop('This function only works for objects of class "enspls.ad"')
+  }
 
-  cat('Model Applicability Domain Evaluation by ENSPLS\n')
-  cat('---\n')
-  cat('Absolute mean prediction error for each training set sample:\n')
-  print(x$'tr.error.mean')
-  cat('---\n')
-  cat('Prediction error SD for each training set sample:\n')
-  print(x$'tr.error.sd')
-  cat('---\n')
-  cat('Absolute mean prediction error for each test set sample:\n')
-  print(x$'te.error.mean')
-  cat('---\n')
-  cat('Prediction error SD for each test set sample:\n')
-  print(x$'te.error.sd')
-
+  cat("Model Applicability Domain Evaluation by ENSPLS\n")
+  cat("---\n")
+  cat("Absolute mean prediction error for each training set sample:\n")
+  print(x$"tr.error.mean")
+  cat("---\n")
+  cat("Prediction error SD for each training set sample:\n")
+  print(x$"tr.error.sd")
+  cat("---\n")
+  cat("Absolute mean prediction error for each test set sample:\n")
+  print(x$"te.error.mean")
+  cat("---\n")
+  cat("Prediction error SD for each test set sample:\n")
+  print(x$"te.error.sd")
 }

@@ -16,12 +16,12 @@ Print coefficients of each model in the enpls.fit object.
 }
 \examples{
 data("alkanes")
-x = alkanes$x
-y = alkanes$y
+x <- alkanes$x
+y <- alkanes$y
 
 set.seed(42)
-fit = enpls.fit(x, y, reptimes = 50)
-print(fit)
+fit <- enpls.fit(x, y, reptimes = 50)
+fit
 }
 \seealso{
 See \code{\link{enpls.fit}} for fitting ensemble

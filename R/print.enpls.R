@@ -16,26 +16,25 @@
 #'
 #' @examples
 #' data("alkanes")
-#' x = alkanes$x
-#' y = alkanes$y
+#' x <- alkanes$x
+#' y <- alkanes$y
 #'
 #' set.seed(42)
-#' cvfit = cv.enpls(x, y, reptimes = 10)
-#' print(cvfit)
-
-print.cv.enpls = function(x, ...) {
-
-  if (!inherits(x, 'cv.enpls'))
+#' cvfit <- cv.enpls(x, y, reptimes = 10)
+#' cvfit
+print.cv.enpls <- function(x, ...) {
+  if (!inherits(x, "cv.enpls")) {
     stop('This function only works for objects of class "cv.enpls"')
+  }
 
-  cat('Cross Validation Result for Ensemble Partial Least Squares\n')
-  cat('---\n')
+  cat("Cross Validation Result for Ensemble Partial Least Squares\n")
+  cat("---\n")
   cat(paste(
-    'RMSE = ', sprintf("%.4f", x$'RMSE'), '\n',
-    'MAE = ', sprintf("%.6f", x$'MAE'), '\n',
-    'Rsquare = ', sprintf("%.6f", x$'Rsquare'), '\n',
-    sep = ''))
-
+    "RMSE = ", sprintf("%.4f", x$"RMSE"), "\n",
+    "MAE = ", sprintf("%.6f", x$"MAE"), "\n",
+    "Rsquare = ", sprintf("%.6f", x$"Rsquare"), "\n",
+    sep = ""
+  ))
 }
 
 #' Print Fitted Ensemble Partial Least Squares Object
@@ -56,29 +55,27 @@ print.cv.enpls = function(x, ...) {
 #'
 #' @examples
 #' data("alkanes")
-#' x = alkanes$x
-#' y = alkanes$y
+#' x <- alkanes$x
+#' y <- alkanes$y
 #'
 #' set.seed(42)
-#' fit = enpls.fit(x, y, reptimes = 50)
-#' print(fit)
-
-print.enpls.fit = function(x, ...) {
-
-  if (!inherits(x, 'enpls.fit'))
+#' fit <- enpls.fit(x, y, reptimes = 50)
+#' fit
+print.enpls.fit <- function(x, ...) {
+  if (!inherits(x, "enpls.fit")) {
     stop('This function only works for objects of class "enpls.fit"')
+  }
 
-  coefmeta = coef(x[[1]][[1]], intercept = TRUE)[, 1, 1]
-  varcount = length(coefmeta)
-  reptimes  = length(x)
-  coefdf   = matrix(NA, ncol = reptimes, nrow = varcount)
-  for (i in 1:reptimes) coefdf[, i] = coef(x[[i]][[1]], intercept = TRUE)[, 1, 1]
-  rownames(coefdf) = names(coefmeta)
+  coefmeta <- coef(x[[1]][[1]], intercept = TRUE)[, 1, 1]
+  varcount <- length(coefmeta)
+  reptimes <- length(x)
+  coefdf <- matrix(NA, ncol = reptimes, nrow = varcount)
+  for (i in 1:reptimes) coefdf[, i] <- coef(x[[i]][[1]], intercept = TRUE)[, 1, 1]
+  rownames(coefdf) <- names(coefmeta)
 
-  cat('Coefficients of the Models by Ensemble Partial Least Squares\n')
-  cat('---\n')
+  cat("Coefficients of the Models by Ensemble Partial Least Squares\n")
+  cat("---\n")
   print(coefdf)
-
 }
 
 #' Print enpls.fs Object
@@ -101,30 +98,28 @@ print.enpls.fit = function(x, ...) {
 #'
 #' @examples
 #' data("alkanes")
-#' x = alkanes$x
-#' y = alkanes$y
+#' x <- alkanes$x
+#' y <- alkanes$y
 #'
 #' set.seed(42)
-#' fs = enpls.fs(x, y, reptimes = 100)
+#' fs <- enpls.fs(x, y, reptimes = 100)
 #' print(fs)
 #' print(fs, nvar = 10L)
-
-print.enpls.fs = function(x, sort = TRUE, nvar = NULL, ...) {
-
-  if (!inherits(x, 'enpls.fs'))
+print.enpls.fs <- function(x, sort = TRUE, nvar = NULL, ...) {
+  if (!inherits(x, "enpls.fs")) {
     stop('This function only works for objects of class "enpls.fs"')
-
-  varimp = x$'variable.importance'
-  if (is.null(nvar)) nvar = length(varimp)
-
-  cat('Variable Importance by Ensemble Partial Least Squares\n')
-  cat('---\n')
-  if (sort == TRUE) {
-    print(data.frame('Importance' = sort(varimp, TRUE)[1:nvar]))
-  } else {
-    print(data.frame('Importance' = varimp))
   }
 
+  varimp <- x$"variable.importance"
+  if (is.null(nvar)) nvar <- length(varimp)
+
+  cat("Variable Importance by Ensemble Partial Least Squares\n")
+  cat("---\n")
+  if (sort == TRUE) {
+    print(data.frame("Importance" = sort(varimp, TRUE)[1:nvar]))
+  } else {
+    print(data.frame("Importance" = varimp))
+  }
 }
 
 #' Print enpls.od Object
@@ -145,26 +140,24 @@ print.enpls.fs = function(x, sort = TRUE, nvar = NULL, ...) {
 #'
 #' @examples
 #' data("alkanes")
-#' x = alkanes$x
-#' y = alkanes$y
+#' x <- alkanes$x
+#' y <- alkanes$y
 #'
 #' set.seed(42)
-#' od = enpls.od(x, y, reptimes = 40)
-#' print(od)
-
-print.enpls.od = function(x, ...) {
-
-  if (!inherits(x, 'enpls.od'))
+#' od <- enpls.od(x, y, reptimes = 40)
+#' od
+print.enpls.od <- function(x, ...) {
+  if (!inherits(x, "enpls.od")) {
     stop('This function only works for objects of class "enpls.od"')
+  }
 
-  cat('Outlier Detection by Ensemble Partial Least Squares\n')
-  cat('---\n')
-  cat('Mean residual for each sample:\n')
-  print(x$'error.mean')
-  cat('---\n')
-  cat('Residual SD for each sample:\n')
-  print(x$'error.sd')
-
+  cat("Outlier Detection by Ensemble Partial Least Squares\n")
+  cat("---\n")
+  cat("Mean residual for each sample:\n")
+  print(x$"error.mean")
+  cat("---\n")
+  cat("Residual SD for each sample:\n")
+  print(x$"error.sd")
 }
 
 #' Print enpls.ad Object
@@ -185,45 +178,46 @@ print.enpls.od = function(x, ...) {
 #'
 #' @examples
 #' data("alkanes")
-#' x = alkanes$x
-#' y = alkanes$y
+#' x <- alkanes$x
+#' y <- alkanes$y
 #'
 #' # training set
-#' x.tr = x[1:100, ]
-#' y.tr = y[1:100]
+#' x.tr <- x[1:100, ]
+#' y.tr <- y[1:100]
 #'
 #' # two test sets
-#' x.te = list(
+#' x.te <- list(
 #'   "test.1" = x[101:150, ],
-#'   "test.2" = x[151:207, ])
-#' y.te = list(
+#'   "test.2" = x[151:207, ]
+#' )
+#' y.te <- list(
 #'   "test.1" = y[101:150],
-#'   "test.2" = y[151:207])
+#'   "test.2" = y[151:207]
+#' )
 #'
 #' set.seed(42)
-#' ad = enpls.ad(
+#' ad <- enpls.ad(
 #'   x.tr, y.tr, x.te, y.te,
 #'   space = "variable", method = "mc",
-#'   ratio = 0.9, reptimes = 50)
-#' print(ad)
-
-print.enpls.ad = function(x, ...) {
-
-  if (!inherits(x, 'enpls.ad'))
+#'   ratio = 0.9, reptimes = 50
+#' )
+#' ad
+print.enpls.ad <- function(x, ...) {
+  if (!inherits(x, "enpls.ad")) {
     stop('This function only works for objects of class "enpls.ad"')
+  }
 
-  cat('Model Applicability Domain Evaluation by ENPLS\n')
-  cat('---\n')
-  cat('Absolute mean prediction error for each training set sample:\n')
-  print(x$'tr.error.mean')
-  cat('---\n')
-  cat('Prediction error SD for each training set sample:\n')
-  print(x$'tr.error.sd')
-  cat('---\n')
-  cat('Absolute mean prediction error for each test set sample:\n')
-  print(x$'te.error.mean')
-  cat('---\n')
-  cat('Prediction error SD for each test set sample:\n')
-  print(x$'te.error.sd')
-
+  cat("Model Applicability Domain Evaluation by ENPLS\n")
+  cat("---\n")
+  cat("Absolute mean prediction error for each training set sample:\n")
+  print(x$"tr.error.mean")
+  cat("---\n")
+  cat("Prediction error SD for each training set sample:\n")
+  print(x$"tr.error.sd")
+  cat("---\n")
+  cat("Absolute mean prediction error for each test set sample:\n")
+  print(x$"te.error.mean")
+  cat("---\n")
+  cat("Prediction error SD for each test set sample:\n")
+  print(x$"te.error.sd")
 }
