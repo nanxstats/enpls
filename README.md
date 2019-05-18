@@ -38,12 +38,6 @@ See [the vignette](https://nanx.me/enpls/articles/enpls.html) (or open with `vig
 
 <img src="https://nanx.me/enpls/img/enpls-model.png" width="100%" alt="enpls-fit">
 
-## Links
-
-* Web: [https://nanx.me/enpls/](https://nanx.me/enpls/)
-* CRAN: [https://cran.r-project.org/package=enpls](https://cran.r-project.org/package=enpls)
-* GitHub: [https://github.com/nanxstats/enpls](https://github.com/nanxstats/enpls)
-
 ## Contribute
 
 To contribute to this project, please take a look at the [Contributing Guidelines](CONTRIBUTING.md) first. Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
