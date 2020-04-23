@@ -4,8 +4,7 @@
 \alias{enspls.od.core}
 \title{core function for enspls.od}
 \usage{
-enspls.od.core(x.sample, y.sample, x.remain, y.remain, maxcomp, cvfolds,
-  alpha)
+enspls.od.core(x.sample, y.sample, x.remain, y.remain, maxcomp, cvfolds, alpha)
 }
 \value{
 the error vector between predicted y and real y

@@ -4,8 +4,16 @@
 \alias{enpls.od}
 \title{Ensemble Partial Least Squares for Outlier Detection}
 \usage{
-enpls.od(x, y, maxcomp = NULL, cvfolds = 5L, reptimes = 500L,
-  method = c("mc", "boot"), ratio = 0.8, parallel = 1L)
+enpls.od(
+  x,
+  y,
+  maxcomp = NULL,
+  cvfolds = 5L,
+  reptimes = 500L,
+  method = c("mc", "boot"),
+  ratio = 0.8,
+  parallel = 1L
+)
 }
 \arguments{
 \item{x}{Predictor matrix.}

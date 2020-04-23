@@ -4,11 +4,13 @@
 \name{alkanes}
 \alias{alkanes}
 \title{Methylalkanes Retention Index Dataset}
-\format{A list with 2 components:
+\format{
+A list with 2 components:
 \itemize{
 \item x - data frame with 207 rows (samples) and 21 columns (predictors)
 \item y - numeric vector of length 207 (response)
-}}
+}
+}
 \usage{
 data("alkanes")
 }

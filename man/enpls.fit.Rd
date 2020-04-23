@@ -4,8 +4,16 @@
 \alias{enpls.fit}
 \title{Ensemble Partial Least Squares Regression}
 \usage{
-enpls.fit(x, y, maxcomp = NULL, cvfolds = 5L, reptimes = 500L,
-  method = c("mc", "boot"), ratio = 0.8, parallel = 1L)
+enpls.fit(
+  x,
+  y,
+  maxcomp = NULL,
+  cvfolds = 5L,
+  reptimes = 500L,
+  method = c("mc", "boot"),
+  ratio = 0.8,
+  parallel = 1L
+)
 }
 \arguments{
 \item{x}{Predictor matrix.}

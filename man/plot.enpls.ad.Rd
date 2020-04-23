@@ -4,8 +4,7 @@
 \alias{plot.enpls.ad}
 \title{Plot enpls.ad object}
 \usage{
-\method{plot}{enpls.ad}(x, type = c("static", "interactive"),
-  main = NULL, ...)
+\method{plot}{enpls.ad}(x, type = c("static", "interactive"), main = NULL, ...)
 }
 \arguments{
 \item{x}{An object of class \code{enpls.ad}.}

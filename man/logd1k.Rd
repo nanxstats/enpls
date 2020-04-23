@@ -4,12 +4,14 @@
 \name{logd1k}
 \alias{logd1k}
 \title{logD7.4 Data for 1,000 Compounds}
-\format{A list with 2 components:
+\format{
+A list with 2 components:
 \itemize{
 \item x - data frame with 1,000 rows (samples) and 80 columns (predictors)
 \item y - numeric vector of length 1,000 (response)
 }
-The first 1000 compounds in the original dataset were selected.}
+The first 1000 compounds in the original dataset were selected.
+}
 \usage{
 data(logd1k)
 }

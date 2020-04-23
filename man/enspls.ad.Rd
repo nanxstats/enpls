@@ -5,10 +5,20 @@
 \title{Ensemble Sparse Partial Least Squares for
 Model Applicability Domain Evaluation}
 \usage{
-enspls.ad(x, y, xtest, ytest, maxcomp = 5L, cvfolds = 5L,
-  alpha = seq(0.2, 0.8, 0.2), space = c("sample", "variable"),
-  method = c("mc", "boot"), reptimes = 500L, ratio = 0.8,
-  parallel = 1L)
+enspls.ad(
+  x,
+  y,
+  xtest,
+  ytest,
+  maxcomp = 5L,
+  cvfolds = 5L,
+  alpha = seq(0.2, 0.8, 0.2),
+  space = c("sample", "variable"),
+  method = c("mc", "boot"),
+  reptimes = 500L,
+  ratio = 0.8,
+  parallel = 1L
+)
 }
 \arguments{
 \item{x}{Predictor matrix of the training set.}

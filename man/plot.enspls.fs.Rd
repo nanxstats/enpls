@@ -4,8 +4,14 @@
 \alias{plot.enspls.fs}
 \title{Plot enspls.fs object}
 \usage{
-\method{plot}{enspls.fs}(x, nvar = NULL, type = c("dotplot",
-  "boxplot"), limits = c(0, 1), main = NULL, ...)
+\method{plot}{enspls.fs}(
+  x,
+  nvar = NULL,
+  type = c("dotplot", "boxplot"),
+  limits = c(0, 1),
+  main = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{enspls.fs}.}

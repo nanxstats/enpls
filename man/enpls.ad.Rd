@@ -4,9 +4,19 @@
 \alias{enpls.ad}
 \title{Ensemble Partial Least Squares for Model Applicability Domain Evaluation}
 \usage{
-enpls.ad(x, y, xtest, ytest, maxcomp = NULL, cvfolds = 5L,
-  space = c("sample", "variable"), method = c("mc", "boot"),
-  reptimes = 500L, ratio = 0.8, parallel = 1L)
+enpls.ad(
+  x,
+  y,
+  xtest,
+  ytest,
+  maxcomp = NULL,
+  cvfolds = 5L,
+  space = c("sample", "variable"),
+  method = c("mc", "boot"),
+  reptimes = 500L,
+  ratio = 0.8,
+  parallel = 1L
+)
 }
 \arguments{
 \item{x}{Predictor matrix of the training set.}

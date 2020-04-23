@@ -4,8 +4,7 @@
 \alias{predict.enpls.fit}
 \title{Make Predictions from a Fitted Ensemble Partial Least Squares Model}
 \usage{
-\method{predict}{enpls.fit}(object, newx, method = c("mean", "median"),
-  ...)
+\method{predict}{enpls.fit}(object, newx, method = c("mean", "median"), ...)
 }
 \arguments{
 \item{object}{An object of class \code{enpls.fit}.}

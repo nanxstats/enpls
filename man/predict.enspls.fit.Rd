@@ -4,8 +4,7 @@
 \alias{predict.enspls.fit}
 \title{Make Predictions from a Fitted Sparse Ensemble Partial Least Squares Model}
 \usage{
-\method{predict}{enspls.fit}(object, newx, method = c("mean", "median"),
-  ...)
+\method{predict}{enspls.fit}(object, newx, method = c("mean", "median"), ...)
 }
 \arguments{
 \item{object}{An object of class \code{enspls.fit}.}

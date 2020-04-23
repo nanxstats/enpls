@@ -4,8 +4,7 @@
 \alias{plot.cv.enpls}
 \title{Plot cv.enpls object}
 \usage{
-\method{plot}{cv.enpls}(x, xlim = NULL, ylim = NULL, alpha = 0.8,
-  main = NULL, ...)
+\method{plot}{cv.enpls}(x, xlim = NULL, ylim = NULL, alpha = 0.8, main = NULL, ...)
 }
 \arguments{
 \item{x}{An object of class \code{cv.enpls}.}
