@@ -1,4 +1,4 @@
-# enpls  <a href="https://nanx.me/enpls/"><img src="https://i.imgur.com/HfRaoeK.png" align="right" alt="logo" height="180" width="180" /></a>
+# enpls  <a href="https://nanx.me/enpls/"><img src="man/figures/logo.png" align="right" height="180" /></a>
 
 [![Build Status](https://travis-ci.org/nanxstats/enpls.svg?branch=master)](https://travis-ci.org/nanxstats/enpls)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/nanxstats/enpls?branch=master&svg=true)](https://ci.appveyor.com/project/nanxstats/enpls)

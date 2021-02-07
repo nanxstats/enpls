@@ -1,7 +1,6 @@
 ---
 title: "A Brief Introduction to enpls"
 author: "Nan Xiao <<https://nanx.me>>"
-date: "`r Sys.Date()`"
 bibliography: enpls.bib
 output:
   rmarkdown::html_document:

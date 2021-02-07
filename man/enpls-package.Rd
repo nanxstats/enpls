@@ -6,6 +6,8 @@
 \alias{enpls-package}
 \title{enpls: Ensemble Partial Least Squares Regression}
 \description{
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+
 An algorithmic framework for measuring feature importance,
     outlier detection, model applicability domain evaluation,
     and ensemble predictive modeling with (sparse)
