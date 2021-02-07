@@ -8,6 +8,13 @@
 
 <title>Print enspls.ad Object — print.enspls.ad • enpls</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -43,6 +50,7 @@
 
 <meta property="og:title" content="Print enspls.ad Object — print.enspls.ad" />
 <meta property="og:description" content="Print enspls.ad object." />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -82,7 +90,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +107,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/nanxstats/enpls/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -126,7 +134,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for enspls.ad</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -145,35 +153,39 @@
 
     <div class='dont-index'><p>See <code><a href='enspls.ad.html'>enspls.ad</a></code> for model applicability domain
 evaluation with ensemble sparse partial least squares regressions.</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Nan Xiao &lt;<a href='https://nanx.me'>https://nanx.me</a>&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"logd1k"</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"logd1k"</span><span class='op'>)</span>
 <span class='co'># remove low variance variables</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>logd1k</span>$<span class='no'>x</span>[, -<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>17</span>, <span class='fl'>52</span>, <span class='fl'>59</span>)]
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='no'>logd1k</span>$<span class='no'>y</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>logd1k</span><span class='op'>$</span><span class='va'>x</span><span class='op'>[</span>, <span class='op'>-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>17</span>, <span class='fl'>52</span>, <span class='fl'>59</span><span class='op'>)</span><span class='op'>]</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='va'>logd1k</span><span class='op'>$</span><span class='va'>y</span>
 
 <span class='co'># training set</span>
-<span class='no'>x.tr</span> <span class='kw'>&lt;-</span> <span class='no'>x</span>[<span class='fl'>1</span>:<span class='fl'>300</span>, ]
-<span class='no'>y.tr</span> <span class='kw'>&lt;-</span> <span class='no'>y</span>[<span class='fl'>1</span>:<span class='fl'>300</span>]
+<span class='va'>x.tr</span> <span class='op'>&lt;-</span> <span class='va'>x</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>300</span>, <span class='op'>]</span>
+<span class='va'>y.tr</span> <span class='op'>&lt;-</span> <span class='va'>y</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>300</span><span class='op'>]</span>
 
 <span class='co'># two test sets</span>
-<span class='no'>x.te</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-  <span class='st'>"test.1"</span> <span class='kw'>=</span> <span class='no'>x</span>[<span class='fl'>301</span>:<span class='fl'>400</span>, ],
-  <span class='st'>"test.2"</span> <span class='kw'>=</span> <span class='no'>x</span>[<span class='fl'>401</span>:<span class='fl'>500</span>, ]
-)
-<span class='no'>y.te</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-  <span class='st'>"test.1"</span> <span class='kw'>=</span> <span class='no'>y</span>[<span class='fl'>301</span>:<span class='fl'>400</span>],
-  <span class='st'>"test.2"</span> <span class='kw'>=</span> <span class='no'>y</span>[<span class='fl'>401</span>:<span class='fl'>500</span>]
-)
+<span class='va'>x.te</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+  <span class='st'>"test.1"</span> <span class='op'>=</span> <span class='va'>x</span><span class='op'>[</span><span class='fl'>301</span><span class='op'>:</span><span class='fl'>400</span>, <span class='op'>]</span>,
+  <span class='st'>"test.2"</span> <span class='op'>=</span> <span class='va'>x</span><span class='op'>[</span><span class='fl'>401</span><span class='op'>:</span><span class='fl'>500</span>, <span class='op'>]</span>
+<span class='op'>)</span>
+<span class='va'>y.te</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+  <span class='st'>"test.1"</span> <span class='op'>=</span> <span class='va'>y</span><span class='op'>[</span><span class='fl'>301</span><span class='op'>:</span><span class='fl'>400</span><span class='op'>]</span>,
+  <span class='st'>"test.2"</span> <span class='op'>=</span> <span class='va'>y</span><span class='op'>[</span><span class='fl'>401</span><span class='op'>:</span><span class='fl'>500</span><span class='op'>]</span>
+<span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>42</span>)
-<span class='no'>ad</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='enspls.ad.html'>enspls.ad</a></span>(
-  <span class='no'>x.tr</span>, <span class='no'>y.tr</span>, <span class='no'>x.te</span>, <span class='no'>y.te</span>,
-  <span class='kw'>maxcomp</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.3</span>, <span class='fl'>0.6</span>, <span class='fl'>0.9</span>),
-  <span class='kw'>space</span> <span class='kw'>=</span> <span class='st'>"variable"</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"mc"</span>,
-  <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='fl'>0.8</span>, <span class='kw'>reptimes</span> <span class='kw'>=</span> <span class='fl'>10</span>
-)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>ad</span>)</div><div class='output co'>#&gt; Model Applicability Domain Evaluation by ENSPLS
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>42</span><span class='op'>)</span>
+<span class='va'>ad</span> <span class='op'>&lt;-</span> <span class='fu'><a href='enspls.ad.html'>enspls.ad</a></span><span class='op'>(</span>
+  <span class='va'>x.tr</span>, <span class='va'>y.tr</span>, <span class='va'>x.te</span>, <span class='va'>y.te</span>,
+  maxcomp <span class='op'>=</span> <span class='fl'>3</span>, alpha <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.3</span>, <span class='fl'>0.6</span>, <span class='fl'>0.9</span><span class='op'>)</span>,
+  space <span class='op'>=</span> <span class='st'>"variable"</span>, method <span class='op'>=</span> <span class='st'>"mc"</span>,
+  ratio <span class='op'>=</span> <span class='fl'>0.8</span>, reptimes <span class='op'>=</span> <span class='fl'>10</span>
+<span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>ad</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Model Applicability Domain Evaluation by ENSPLS
 #&gt; ---
 #&gt; Absolute mean prediction error for each training set sample:
 #&gt;   [1] 0.422632298 0.815523615 0.648213606 0.870831328 0.257203074 0.490832846
@@ -371,7 +383,7 @@ evaluation with ensemble sparse partial least squares regressions.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

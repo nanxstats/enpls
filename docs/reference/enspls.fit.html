@@ -8,6 +8,13 @@
 
 <title>Ensemble Sparse Partial Least Squares Regression — enspls.fit • enpls</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -43,6 +50,7 @@
 
 <meta property="og:title" content="Ensemble Sparse Partial Least Squares Regression — enspls.fit" />
 <meta property="og:description" content="Ensemble sparse partial least squares regression." />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -82,7 +90,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +107,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/nanxstats/enpls/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -125,17 +133,17 @@
     <p>Ensemble sparse partial least squares regression.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>enspls.fit</span>(
-  <span class='no'>x</span>,
-  <span class='no'>y</span>,
-  <span class='kw'>maxcomp</span> <span class='kw'>=</span> <span class='fl'>5L</span>,
-  <span class='kw'>cvfolds</span> <span class='kw'>=</span> <span class='fl'>5L</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0.2</span>, <span class='fl'>0.8</span>, <span class='fl'>0.2</span>),
-  <span class='kw'>reptimes</span> <span class='kw'>=</span> <span class='fl'>500L</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"mc"</span>, <span class='st'>"boot"</span>),
-  <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='fl'>0.8</span>,
-  <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>1L</span>
-)</pre>
+    <pre class="usage"><span class='fu'>enspls.fit</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>y</span>,
+  maxcomp <span class='op'>=</span> <span class='fl'>5L</span>,
+  cvfolds <span class='op'>=</span> <span class='fl'>5L</span>,
+  alpha <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0.2</span>, <span class='fl'>0.8</span>, <span class='fl'>0.2</span><span class='op'>)</span>,
+  reptimes <span class='op'>=</span> <span class='fl'>500L</span>,
+  method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"mc"</span>, <span class='st'>"boot"</span><span class='op'>)</span>,
+  ratio <span class='op'>=</span> <span class='fl'>0.8</span>,
+  parallel <span class='op'>=</span> <span class='fl'>1L</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -193,19 +201,23 @@ Default is <code>1</code> (not parallelized).</p></td>
 with ensemble sparse partial least squares regressions.
 See <code><a href='enspls.od.html'>enspls.od</a></code> for outlier detection with ensemble
 sparse partial least squares regressions.</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Nan Xiao &lt;<a href='https://nanx.me'>https://nanx.me</a>&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"logd1k"</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>logd1k</span>$<span class='no'>x</span>
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='no'>logd1k</span>$<span class='no'>y</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"logd1k"</span><span class='op'>)</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>logd1k</span><span class='op'>$</span><span class='va'>x</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='va'>logd1k</span><span class='op'>$</span><span class='va'>y</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>42</span>)
-<span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'>enspls.fit</span>(
-  <span class='no'>x</span>, <span class='no'>y</span>,
-  <span class='kw'>reptimes</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>maxcomp</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.3</span>, <span class='fl'>0.6</span>, <span class='fl'>0.9</span>)
-)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt; Coefficients of the Models by Ensemble Sparse Partial Least Squares
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>42</span><span class='op'>)</span>
+<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'>enspls.fit</span><span class='op'>(</span>
+  <span class='va'>x</span>, <span class='va'>y</span>,
+  reptimes <span class='op'>=</span> <span class='fl'>5</span>, maxcomp <span class='op'>=</span> <span class='fl'>3</span>,
+  alpha <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.3</span>, <span class='fl'>0.6</span>, <span class='fl'>0.9</span><span class='op'>)</span>
+<span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Coefficients of the Models by Ensemble Sparse Partial Least Squares
 #&gt; ---
 #&gt;                             [,1]         [,2]         [,3]          [,4]
 #&gt; BalabanJ            -0.043615048 -0.070476160 -0.061234111 -0.0641194287
@@ -368,7 +380,8 @@ sparse partial least squares regressions.</p></div>
 #&gt; TPSA                -0.214509241
 #&gt; VSA_EState10         0.084382079
 #&gt; VSA_EState8          0.077845374
-#&gt; VSA_EState9         -0.085217775</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='no'>fit</span>, <span class='kw'>newx</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='output co'>#&gt;    [1] -0.21812478  0.12954374 -0.22836445  0.72266012 -0.65113402 -0.67093505
+#&gt; VSA_EState9         -0.085217775</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>fit</span>, newx <span class='op'>=</span> <span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    [1] -0.21812478  0.12954374 -0.22836445  0.72266012 -0.65113402 -0.67093505
 #&gt;    [7]  0.61382930 -0.45282799  0.04079630 -0.06416978  0.79365384  0.12145376
 #&gt;   [13]  0.94735040 -0.31389461  0.71790961  0.86124578  0.11327756 -0.75816147
 #&gt;   [19] -0.14327956  0.50469871  1.13848250  0.13954518  1.82076630  1.01476461
@@ -550,7 +563,7 @@ sparse partial least squares regressions.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

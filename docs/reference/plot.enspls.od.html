@@ -8,6 +8,13 @@
 
 <title>Plot enspls.od object — plot.enspls.od • enpls</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -43,6 +50,7 @@
 
 <meta property="og:title" content="Plot enspls.od object — plot.enspls.od" />
 <meta property="og:description" content="Plot enspls.od object" />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -82,7 +90,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +107,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/nanxstats/enpls/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -126,15 +134,15 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for enspls.od</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(
-  <span class='no'>x</span>,
-  <span class='kw'>criterion</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"quantile"</span>, <span class='st'>"sd"</span>),
-  <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
-  <span class='kw'>sdtimes</span> <span class='kw'>=</span> <span class='fl'>3L</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>main</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>
-)</pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  criterion <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"quantile"</span>, <span class='st'>"sd"</span><span class='op'>)</span>,
+  prob <span class='op'>=</span> <span class='fl'>0.05</span>,
+  sdtimes <span class='op'>=</span> <span class='fl'>3L</span>,
+  alpha <span class='op'>=</span> <span class='fl'>1</span>,
+  main <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,7 +174,7 @@ can be <code>"quantile"</code> or <code>"sd"</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional graphical parameters for <code><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></code>.</p></td>
+      <td><p>Additional graphical parameters for <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></code>.</p></td>
     </tr>
     </table>
 
@@ -174,15 +182,20 @@ can be <code>"quantile"</code> or <code>"sd"</code>.</p></td>
 
     <div class='dont-index'><p>See <code><a href='enspls.od.html'>enspls.od</a></code> for outlier detection with
 ensemble sparse partial least squares regressions.</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Nan Xiao &lt;<a href='https://nanx.me'>https://nanx.me</a>&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"logd1k"</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>logd1k</span>$<span class='no'>x</span>
-<span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='no'>logd1k</span>$<span class='no'>y</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"logd1k"</span><span class='op'>)</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='va'>logd1k</span><span class='op'>$</span><span class='va'>x</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='va'>logd1k</span><span class='op'>$</span><span class='va'>y</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>42</span>)
-<span class='no'>od</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='enspls.od.html'>enspls.od</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>reptimes</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>maxcomp</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>od</span>, <span class='kw'>criterion</span> <span class='kw'>=</span> <span class='st'>"quantile"</span>, <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fl'>0.1</span>)</div><div class='img'><img src='plot.enspls.od-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>od</span>, <span class='kw'>criterion</span> <span class='kw'>=</span> <span class='st'>"sd"</span>, <span class='kw'>sdtimes</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='img'><img src='plot.enspls.od-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>42</span><span class='op'>)</span>
+<span class='va'>od</span> <span class='op'>&lt;-</span> <span class='fu'><a href='enspls.od.html'>enspls.od</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, reptimes <span class='op'>=</span> <span class='fl'>4</span>, maxcomp <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>od</span>, criterion <span class='op'>=</span> <span class='st'>"quantile"</span>, prob <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.enspls.od-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>od</span>, criterion <span class='op'>=</span> <span class='st'>"sd"</span>, sdtimes <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='img'><img src='plot.enspls.od-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -198,7 +211,7 @@ ensemble sparse partial least squares regressions.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
