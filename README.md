@@ -1,7 +1,10 @@
 # enpls  <a href="https://nanx.me/enpls/"><img src="man/figures/logo.png" align="right" height="180" /></a>
 
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/nanxstats/enpls/workflows/R-CMD-check/badge.svg)](https://github.com/nanxstats/enpls/actions)
 [![CRAN Version](https://www.r-pkg.org/badges/version/enpls)](https://cran.r-project.org/package=enpls)
 [![Downloads from the RStudio CRAN mirror](https://cranlogs.r-pkg.org/badges/enpls)](https://cranlogs.r-pkg.org/badges/enpls)
+<!-- badges: end -->
 
 `enpls` offers an algorithmic framework for measuring feature importance, outlier detection, model applicability domain evaluation, and ensemble predictive modeling with (sparse) partial least squares regressions.
 
