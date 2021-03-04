@@ -1,7 +1,5 @@
 # enpls  <a href="https://nanx.me/enpls/"><img src="man/figures/logo.png" align="right" height="180" /></a>
 
-[![Build Status](https://travis-ci.org/nanxstats/enpls.svg?branch=master)](https://travis-ci.org/nanxstats/enpls)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/nanxstats/enpls?branch=master&svg=true)](https://ci.appveyor.com/project/nanxstats/enpls)
 [![CRAN Version](https://www.r-pkg.org/badges/version/enpls)](https://cran.r-project.org/package=enpls)
 [![Downloads from the RStudio CRAN mirror](https://cranlogs.r-pkg.org/badges/enpls)](https://cranlogs.r-pkg.org/badges/enpls)
 
