@@ -1,7 +1,10 @@
-pandoc: 2.14.0.3
-pkgdown: 1.6.1
+pandoc: 2.16.2
+pkgdown: 2.0.1
 pkgdown_sha: ~
 articles:
   enpls: enpls.html
-last_built: 2021-07-19T05:57Z
+last_built: 2021-12-21T03:51Z
+urls:
+  reference: https://nanx.me/enpls/reference
+  article: https://nanx.me/enpls/articles
 
