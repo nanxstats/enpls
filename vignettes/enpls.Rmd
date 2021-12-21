@@ -6,7 +6,7 @@ output:
     toc: true
     toc_float: false
     toc_depth: 4
-    number_sections: true
+    number_sections: false
     highlight: "textmate"
     css: "custom.css"
 vignette: >
@@ -14,7 +14,14 @@ vignette: >
   %\VignetteIndexEntry{A Brief Introduction to enpls}
 ---
 
-# Introduction
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE
+)
+```
+
+## Introduction
 
 The `enpls` package offers an algorithmic framework for measuring
 feature importance, detecting outliers, and ensemble modeling
@@ -53,7 +60,7 @@ head(x)[, 1:5]
 head(y)
 ```
 
-# Model Fitting
+## Model fitting
 
 Here we fit the ensemble sparse partial least squares to the data,
 so that the model complexity could usually be further reduced than
@@ -85,7 +92,7 @@ One common parameter for all functions in `enpls` is `parallel`,
 it controls the number of CPU cores to use if you want to train
 the models in parallel.
 
-# Cross Validation
+## Cross validation
 
 K-fold cross validation is a traditional way to measure the empirical
 predictive performance of the model. We can use function `cv.enpls()`
@@ -111,7 +118,7 @@ The returned object gives three model performance evaluation metrics
 for the ensemble model: RMSE, MAE, and $R^2$. Here we also plotted the
 predicted values for each test fold against the true response.
 
-# Feature Importance
+## Feature importance
 
 To measure feature importance, simply use `enpls.fs()` or `enspls.fs()`:
 
@@ -130,7 +137,7 @@ but the effect sizes also have a large variance. This indicates
 that TPSA is important for predicting logD7.4. However,
 such importance may vary on different subsets of the samples.
 
-# Outlier Detection
+## Outlier detection
 
 By using information from the prediction error distribution for each
 sample produced by many models, we can measure if the responses
@@ -152,7 +159,7 @@ outlier candidates, based on two different criterions.
 The samples in each area of the plots represent different types
 of outliers.
 
-# Applicability Domain Evaluation
+## Applicability domain evaluation
 
 Model applicability domain measures how well the predictive
 model (PLS/Sparse PLS model) we built on the training set performs on
@@ -205,7 +212,7 @@ which sample each point represents interactively. The interactive plot
 is based on [plotly](https://cran.r-project.org/package=plotly),
 and it only requires an HTML viewer to be correctly rendered.
 
-# Conclusion
+## Conclusion
 
 Ensemble learning approaches are not only powerful for improving base
 learner's predictive performance but also capable of accomplishing model
@@ -213,4 +220,4 @@ diagnostic tasks, such as measuring the importance of features.
 It would be interesting to see if such ideas could be applied to more
 relevant topics and further facilitate the predictive modeling tasks.
 
-# References
+## References

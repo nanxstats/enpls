@@ -1,6 +1,11 @@
+url: https://nanx.me/enpls/
+
+template:
+  bootstrap: 5
+
 reference:
-  - title: "Model Fitting"
-    desc: "Functions for fitting ensemble (spase) partial least sqaures regression models."
+  - title: "Model fitting"
+    desc: "Functions for fitting ensemble (sparse) partial least sqaures regression models."
     contents:
       - enpls-package
       - enpls.fit
@@ -9,8 +14,8 @@ reference:
       - predict.enspls.fit
       - print.enpls.fit
       - print.enspls.fit
-  - title: "Cross-Validation"
-    desc: "Cross-validation routines for ensemble (spase) PLS/SPLS models."
+  - title: "Cross-validation"
+    desc: "Cross-validation routines for ensemble (sparse) PLS/SPLS models."
     contents:
       - cv.enpls
       - cv.enspls
@@ -18,7 +23,7 @@ reference:
       - plot.cv.enspls
       - print.cv.enpls
       - print.cv.enspls
-  - title: "Measuring Feature Importance"
+  - title: "Measuring feature importance"
     desc: >
       Functions for measuring feature importance using ensemble PLS/SPLS models.
     contents:
@@ -28,7 +33,7 @@ reference:
       - plot.enspls.fs
       - print.enpls.fs
       - print.enspls.fs
-  - title: "Outlier Detection"
+  - title: "Outlier detection"
     desc: >
       Functions for detecting "outliers" using ensemble PLS/SPLS models.
     contents:
@@ -38,7 +43,7 @@ reference:
       - plot.enspls.od
       - print.enpls.od
       - print.enspls.od
-  - title: "Model Applicability Domain Evaluation"
+  - title: "Model applicability domain evaluation"
     desc: >
       Functions for evaluating model applicability domain using ensemble PLS/SPLS models.
     contents:
@@ -48,7 +53,7 @@ reference:
       - plot.enspls.ad
       - print.enpls.ad
       - print.enspls.ad
-  - title: "Performance Evaluation Metrics"
+  - title: "Performance evaluation metrics"
     desc: >
       Functions for computing evaluation metrics for regression models.
     contents:
@@ -57,7 +62,7 @@ reference:
       - enpls.mae
   - title: "Datasets"
     desc: >
-      Example datasets
+      Example datasets.
     contents:
       - alkanes
       - logd1k

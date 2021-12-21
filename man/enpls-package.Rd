@@ -8,10 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-An algorithmic framework for measuring feature importance,
-    outlier detection, model applicability domain evaluation,
-    and ensemble predictive modeling with (sparse)
-    partial least squares regressions.
+An algorithmic framework for measuring feature importance, outlier detection, model applicability domain evaluation, and ensemble predictive modeling with (sparse) partial least squares regressions.
 }
 \seealso{
 Useful links:
