@@ -3,7 +3,7 @@
 
 ^README\.Rmd$
 ^LICENSE\.md$
-^CONDUCT\.md$
+^CODE_OF_CONDUCT\.md$
 ^CONTRIBUTING\.md$
 
 ^_pkgdown\.yml$
