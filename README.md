@@ -5,21 +5,20 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/nanxstats/enpls/workflows/R-CMD-check/badge.svg)](https://github.com/nanxstats/enpls/actions)
+[![R-CMD-check](https://github.com/nanxstats/enpls/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nanxstats/enpls/actions/workflows/R-CMD-check.yaml)
 [![CRAN
 Version](https://www.r-pkg.org/badges/version/enpls)](https://cran.r-project.org/package=enpls)
 [![Downloads from the RStudio CRAN
 mirror](https://cranlogs.r-pkg.org/badges/enpls)](https://cranlogs.r-pkg.org/badges/enpls)
 <!-- badges: end -->
 
-`enpls` offers an algorithmic framework for measuring feature
-importance, outlier detection, model applicability domain evaluation,
-and ensemble predictive modeling with (sparse) partial least squares
-regressions.
+enpls offers an algorithmic framework for measuring feature importance,
+outlier detection, model applicability domain evaluation, and ensemble
+predictive modeling with (sparse) partial least squares regressions.
 
 ## Installation
 
-You can install `enpls` from CRAN:
+You can install enpls from CRAN:
 
 ``` r
 install.packages("enpls")
@@ -50,6 +49,7 @@ See `vignette("enpls")` for a quick-start guide.
 ## Contribute
 
 To contribute to this project, please take a look at the [Contributing
-Guidelines](CONTRIBUTING.md) first. Please note that this project is
-released with a [Contributor Code of Conduct](CONDUCT.md). By
-participating in this project you agree to abide by its terms.
+Guidelines](https://nanx.me/enpls/CONTRIBUTING.html) first. Please note
+that the RECA project is released with a [Contributor Code of
+Conduct](https://nanx.me/enpls/CODE_OF_CONDUCT.html). By contributing to
+this project, you agree to abide by its terms.
