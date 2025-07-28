@@ -1,4 +1,11 @@
-# enpls 6.1 (2019-05-17)
+# enpls 6.1.1
+
+## Improvements
+
+- Use GitHub Actions workflow to build pkgdown website (#2).
+- Fix `R CMD check` notes for r-devel on the invalid file URIs in `README.md` (#2).
+
+# enpls 6.1
 
 ## Improvements
 
@@ -6,19 +13,19 @@
 - Updated the vignette style.
 - Updated GitHub repository links due to the handle change.
 
-# enpls 6.0 (2018-05-13)
+# enpls 6.0
 
 ## Improvements
 
 - New URL for the documentation website: https://nanx.me/enpls/.
 
-# enpls 5.9 (2017-09-27)
+# enpls 5.9
 
 ## Improvements
 
 - Use system font stack instead of Google Fonts in vignettes to avoid pandoc SSL issue.
 
-# enpls 5.8 (2017-03-24)
+# enpls 5.8
 
 ## Improvements
 
@@ -26,7 +33,7 @@
 - Better code indentation style.
 - HTTPS enabled for the website.
 
-# enpls 5.7 (2017-01-05)
+# enpls 5.7
 
 ## Improvements
 
@@ -34,7 +41,7 @@
   with a full set of function documentation and vignettes available.
 - Added Windows continuous integration support using AppVeyor.
 
-# enpls 5.6 (2016-11-25)
+# enpls 5.6
 
 ## New Features
 
@@ -44,7 +51,7 @@
 
 - Critical implementation improvements for processing the case where argument `maxcomp = NULL` (maximum number of components not specified explicitly) in `enpls.` functions. Now it should correctly determine the maximum number of components to use, considering both cross-validation and special cases such as n < p. Thanks to Dr. You-Wu Lin for the feedback.
 
-# enpls 5.0 (2016-10-20)
+# enpls 5.0
 
 ## New Features
 
@@ -52,7 +59,7 @@
 - New plot functions `plot.enpls.ad()` and `plot.enpls.ad()` for exploring model applicability domain evaluation results with traditional static plot support and interactive plot support.
 - New argument `alpha` available for setting transparency level (to reduce overplotting) in `plot.cv.enpls`, `plot.enpls.od`, `plot.cv.enspls`, and `plot.enspls.od`.
 
-# enpls 4.5 (2016-09-15)
+# enpls 4.5
 
 ## Improvements
 
@@ -62,7 +69,7 @@
 
 - New functions `enpls.rmse()`, `enpls.mae()`, and `enpls.rmsle()` for computing RMSE, MAE, and RMSLE.
 
-# enpls 4.0 (2016-08-28)
+# enpls 4.0
 
 ## Improvements
 
@@ -70,7 +77,7 @@
 - Changing the argument name `MCtimes` to `reptimes`.
 - Changing the option name `"bootstrap"` to `"boot"`.
 
-# enpls 3.0 (2016-06-22)
+# enpls 3.0
 
 ## New Features
 
@@ -80,7 +87,7 @@
 
 - Improvements on documentation; rewritten vignette.
 
-# enpls 2.0 (2016-06-19)
+# enpls 2.0
 
 ## New Features
 
@@ -95,7 +102,7 @@
 - Fixed major bugs in `cv.enpls` and plotting functions.
 - Many other bug fixes.
 
-# enpls 1.1 (2015-11-26)
+# enpls 1.1
 
 ##  Bug Fixes
 
@@ -103,7 +110,7 @@
 the intercept-only model rank best. Thanks for the test and patch from
 Max Kuhn <<max.kuhn@pfizer.com>>.
 
-# enpls 1.0 (2014-10-03)
+# enpls 1.0
 
 ## New Features
 
