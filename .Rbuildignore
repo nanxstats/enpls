@@ -1,9 +1,13 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+
+^README\.Rmd$
+^LICENSE\.md$
+^CONDUCT\.md$
+^CONTRIBUTING\.md$
+
 ^_pkgdown\.yml$
 ^pkgdown$
 ^docs$
-^CONDUCT\.md$
-^CONTRIBUTING\.md$
+
 ^\.github$
-^README\.Rmd$

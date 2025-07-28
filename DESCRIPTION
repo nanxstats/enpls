@@ -9,12 +9,11 @@ Authors@R: c(
     person("Miao-Zhu", "Li", email = "miaozhu.li@duke.edu", role = c("aut")),
     person("Qing-Song", "Xu", email = "qsxu@csu.edu.cn", role = c("aut"))
     )
-Maintainer: Nan Xiao <me@nanx.me>
 Description: An algorithmic framework for measuring feature importance,
     outlier detection, model applicability domain evaluation,
     and ensemble predictive modeling with (sparse)
     partial least squares regressions.
-License: GPL-3 | file LICENSE
+License: GPL (>= 3)
 URL: https://nanx.me/enpls/, https://github.com/nanxstats/enpls
 BugReports: https://github.com/nanxstats/enpls/issues
 Depends:
